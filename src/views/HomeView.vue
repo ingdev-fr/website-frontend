@@ -1,13 +1,11 @@
 <template>
-  <div class="home">
-    <NavigationSite/>
+  <section class="home">
     <HeroSection/>
-  </div>
+  </section>
 </template>
 
 <script>
 // @ is an alias to /src
-import NavigationSite from '@/components/NavigationSite.vue'
 import HeroSection from '@/components/HeroSection.vue'
 
 
@@ -15,8 +13,7 @@ export default {
   name: 'HomeView',
 
   components: {
-    NavigationSite,
-    HeroSection
+    HeroSection,
   }
 }
 </script>

@@ -12,16 +12,22 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 
 // Fontawesome
     /* import the fontawesome core */
-
+    import { library } from '@fortawesome/fontawesome-svg-core'
     /* import font awesome icon component */
-
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     /* import specific icons */
+    import { faHouseUser } from '@fortawesome/free-solid-svg-icons'
+    import { faStore } from '@fortawesome/free-solid-svg-icons'
+    import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
+    import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
     /* add icons to the library */
+    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket)
 
 
 createApp(App)
     .use(BootstrapVue3)
+    .component('font-awesome-icon', FontAwesomeIcon)
     .use(router)
     .use(store) // on exporte pour l'ensemble des composants un middleware utilisant vuex.
     .use(VueAxios, axios)
