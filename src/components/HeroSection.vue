@@ -1,137 +1,164 @@
 <template>
-  <section>
+  <section class="section">
+    <!-- NAVBAR TABS -->
+    <ul class="nav nav-tabs pt-3">
+      <!-- navlink-1 -->
+      <li class="nav-item me-1">
+        <a class="nav-link active" href="#">Mission</a>
+      </li>
+      <!-- navlink-2 -->
+      <li class="nav-item me-1">
+        <a class="nav-link" href="#">Sites web</a>
+      </li>
+      <!-- navlink-3 -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">Applications web</a>
+      </li>
+    </ul>
+    <!-- HERO 1 -->
     <div class="hero">
-      <div class="hero__action d-flex flex-column justify-content-center align-items-center">
-        <div class="hero__action__text">
-          <h1 class="hero__action__text__title mb-5">Le développement web au service de l'ingénierie de formation</h1>
-          <p class="hero__action__text__content fs-5">Au croisement de l'ingénierie de formation et du développement web, nous accompagnons les entreprises et les centres de formation dans la digitalisation de leurs services et de leurs formations.</p>
+        <div class="hero__action d-flex flex-column justify-content-center align-items-center">
+            <div class="hero__action__text">
+            <h1 class="hero__action__text__title mb-5">Le <span class="yellow">d</span>éveloppement <span class="pink">w</span>eb au <span class="blue">s</span>ervice des <span class="pink">f</span>ormations !</h1>
+            <p class="hero__action__text__content">Au croisement de l'ingénierie de formation et du développement web, nous accompagnons les entreprises et les organismes de formation dans la digitalisation de leurs services.</p>
+            </div>
         </div>
-        <div class="hero__action__features row g-4 py-5">
-          <div class="feature col">
-            <img class="hero__action__features__img mb-3" src="../assets/web-icon-transp-5.png" alt="">
-            <h2 class="hero__action__features__title mb-5">Sites web<br>optimisés</h2>
-            <button class="btn hero__action__button hero__action__button--1">Sites web</button>
-          </div>
-          <div class="feature col">
-            <img class="hero__action__features__img mb-3" src="../assets/web-icon-transp-6.png" alt="">
-            <h2 class="hero__action__features__title mb-5">Applications<br>web</h2>
-            <button class="btn hero__action__button hero__action__button--2">Applications</button>
-          </div>
-          <div class="feature col">
-            <img class="hero__action__features__img mb-3" src="../assets/web-icon-transp-7.png" alt="">
-            <h2 class="hero__action__features__title mb-5">LMS &<br>contenus</h2>
-            <button class="btn hero__action__button hero__action__button--3">LMS</button>
-          </div>
+        <div class="hero__picture">
+            <img class= "hero__picture__img" src="@/assets/increase-pink.png" alt="">
         </div>
       </div>
-      <div class="hero__picture">
-        <img class= "hero__picture__img" src="../assets/moodle-ingdev-transp.png" alt="">
-      </div>
-    </div>
-
   </section>
+    
 </template>
 
 <script>
+
 export default {
   name: 'HeroSection',
 
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
 // variables
 @import "../scss/utils/variables";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 40px 20px;
-  background-color: $third-color;
-  &__action{
-    &__text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    &__title {
-      margin: 7px;
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: $clear-color;
-      }
-    &__content {
-      color: $clear-color;
-    }
-    }
-    &__features {
-      width: 100%;
-      &__title {
-        font-size: 25px;
-        color: $clear-color;
-      }
-      &__img {
-        width: 100px;
-        height: auto;
-      }
-    }
-    &__button {
-      color: $clear-color;
-      font-weight: bold;
-      min-width: 100px;
-      &--1 {
-        background-color: $secondary-color;
-      }
-      &--2 {
-        background-color: $pink-color;
-      }
-      &--3 {
-        background-color: $yellow-color;
-      }
-    }
-  }
-  &__picture{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    &__img {
-      width: 90%;
-    }
-  }
+ul.nav-tabs{
+  background: $third-color;
 }
-
-// MEDIA QUERIES
-    // ----- 769px ------
-@media(min-width: 769px) {
-  .hero {
-    height: 88vh;
-  }
-}
-
-  // ----- 899px -----
-@media(max-width: 899px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media(min-width: 1599px) {
-  .hero__action{
-    &__text {
-      &__title {
-        font-size: 3rem;
-        width: 90%;
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 40px 20px;
+      background: rgb(226, 247, 253);
+      &__action{
+        &__text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $primary-color;
+        &__title {
+          margin: 7px;
+          font-size: 2.6rem;
+          font-weight: bold;
+          font-family: 'Poppins', Helvetica, Arial, sans-serif;
+          }
+        &__content {
+          font-weight: 400;
+          font-size: 1.2rem;
+          font-family: 'Poppins', Helvetica, Arial, sans-serif;
+          }
+        }
+        &__button {
+          color: $clear-color;
+          font-weight: bold;
+          min-width: 100px;
+          &--1 {
+            background-color: $secondary-color;
+          }
+          &--2 {
+            background-color: $pink-color;
+          }
+          &--3 {
+            background-color: $yellow-color;
+          }
+        }
       }
-      &__content {
-        width: 80%;
+      &__picture{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &__img {
+          height: 250px;
+        }
+      }
+    }
+    .nav-link{
+      color: $yellow-color;
+      background-color: $secondary-color;
+      border: 1px solid $yellow-color;
+      &.active {
+      color: $secondary-color;
       }
     }
 
-  }
-}
 
-
+    .yellow {
+      color: $yellow-color;
+    }
+    .pink {
+      color: $pink-color;
+    }
+    .blue {
+      color: $secondary-color;
+    }
+    
+    // MEDIA QUERIES
+        // ----- 769px ------
+    @media(min-width: 769px) {
+      .hero {
+      }
+    }
+    
+      // ----- 899px -----
+    @media(max-width: 899px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+      // ----- 1599px -----
+    @media(min-width: 1599px) {
+      .hero__action{
+        &__text {
+          &__title {
+            font-size: 2rem;
+            width: 90%;
+          }
+          &__content {
+            width: 80%;
+            font-size: 25px;
+          }
+        }
+    
+      }
+    }
+      // ----- 1999px -----
+    @media(min-width: 1999px) {
+      .hero__action{
+        &__text {
+          &__title {
+            font-size: 5rem;
+          }
+          &__content {
+            font-size: 35px;
+          }
+        }
+    
+      }
+    }
 
 </style>

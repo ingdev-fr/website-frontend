@@ -1,16 +1,19 @@
 <template>
-  <HeaderNav/>
+  <HeaderSection/>
   <router-view/>
+  <FooterSection/>
 </template>
 
 <script>
-import HeaderNav from '@/components/HeaderNav.vue'
+import HeaderSection from '@/components/HeaderSection.vue'
+import FooterSection from '@/components/FooterSection.vue'
 
 export default {
   name: 'App',
 
   components: {
-    HeaderNav
+    HeaderSection,
+    FooterSection
   }
 }
 
@@ -20,8 +23,7 @@ export default {
 #app {
 
   // Variables
-  
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
