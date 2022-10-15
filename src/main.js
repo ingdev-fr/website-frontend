@@ -16,13 +16,10 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
     /* import font awesome icon component */
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     /* import specific icons */
-    import { faHouseUser } from '@fortawesome/free-solid-svg-icons'
-    import { faStore } from '@fortawesome/free-solid-svg-icons'
-    import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
-    import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+    import { faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress } from '@fortawesome/free-solid-svg-icons'
 
     /* add icons to the library */
-    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket)
+    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress)
 
 
 createApp(App)

@@ -2,9 +2,9 @@
   <header class="header">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg my-0 py-0">
-          <div class="container-fluid my-0">
+          <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand ms-5" href="#"><img class="logo-img" src="../assets/Ingdev-Logo-color.png"/></a>
+            <a class="navbar-brand" href="#"><img class="logo-img" src="../assets/Ingdev-logo-final.png"/></a>
             <!-- Toggle button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -46,8 +46,12 @@ export default {
 // Variables
 @import "../scss/utils/variables";
 
+.header{
+  background-color: $primary-color;
+}
+
 .logo-img {
-  height: 9vh;
+  height: 8vh;
   &:hover {
     transform: scale(1.3);
   }
@@ -61,7 +65,7 @@ export default {
     display: block;
   }
   & .nav-link {
-    color: $third-color;
+    color: $yellow-color;
 
     &:hover {
       transform: scale(1.05);
@@ -72,7 +76,7 @@ export default {
     }
     &__contactButton{
       color: $clear-color;
-      background-color: $third-color;
+      background-color: $pink-color;
       &:hover {
       background-color:$secondary-color;
       }
@@ -99,5 +103,10 @@ export default {
   .logo-img {
   }
 }
-
+    // ----- 1200px ------
+@media(min-width: 1200px) {
+  .header {
+    height: 10vh;
+  }
+}
 </style>
