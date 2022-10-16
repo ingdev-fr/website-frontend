@@ -54,13 +54,14 @@
         </div>
     </section>
 
+
+
   
 </template>
 
 <script>
 export default {
     name: 'AddedValues',
-
 }
 </script>
 
@@ -163,3 +164,6 @@ export default {
     }
 }
 </style>
+
+
+
