@@ -10,29 +10,13 @@
         </div>
       </div>
       <!-- JUMBOTRON CARDS -->
-      <div class="row jumbotron__cards align-items-md-stretch">
+      <div class="row jumbotron__cards d-flex">
         <!-- CARD 1 -->
-        <div class="col-md-6 col-lg-4 mb-3">
-          <div class="jumbotron__cards--1 h-100 p-5 text-white rounded-3 d-flex flex-column">
-            <h2>{{ $store.state.homepage.hero.card1.title }}</h2>
-            <p>{{ $store.state.homepage.hero.card1.content }}</p>
-            <button class="btn btn-warning fw-bold mt-auto w-50 mx-auto" type="button">{{ $store.state.homepage.hero.card1.textButton }}</button>
-          </div>
-        </div>
-         <!-- CARD 2 -->
-        <div class="col-md-6 col-lg-4 mb-3">
-          <div class="jumbotron__cards--2 h-100 p-5  bg-light border rounded-3 d-flex flex-column">
-            <h2>{{ $store.state.homepage.hero.card2.title }}</h2>
-            <p>{{ $store.state.homepage.hero.card2.content }}</p>
-            <button class="btn btn-warning fw-bold mt-auto w-50 mx-auto" type="button">{{ $store.state.homepage.hero.card2.textButton }}</button>
-          </div>
-        </div>
-         <!-- CARD 3 -->
-        <div class="col-lg-4 mb-3">
-          <div class="jumbotron__cards--3 h-100 p-5 text-white  border rounded-3 d-flex flex-column">
-            <h2>{{ $store.state.homepage.hero.card3.title }}</h2>
-            <p>{{ $store.state.homepage.hero.card3.content }}</p>
-            <button class="btn btn-warning fw-bold mt-auto w-50 mx-auto" type="button">{{ $store.state.homepage.hero.card3.textButton }}</button>
+        <div class="col-md-6 col-lg-4 mb-3" v-for="(item, id) in $store.state.homepage.hero.cards"  v-bind:key="id"><!--Attention, l'élément que l'on choisit pour la boucle sera celui que l'on va dupliquer pour chaque item-->
+          <div class="jumbotron__cards h-100 p-5 text-white rounded-3 d-flex flex-column" :style="{'background-color': item.backgroundColor}">
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.content }}</p>
+            <button class="btn btn-warning jumbotron__button fw-bold mt-auto mx-auto" type="button">{{ item.button }}</button>
           </div>
         </div>
       </div>
@@ -61,25 +45,12 @@ export default {
   background-repeat: no-repeat;
 }
 
-.jumbotron {
-  &__cards {
-    &--1 {
-      background-color: $pink-color-transp;
-    }
-    &--2 {
-      background-color: $clear-color-transp;
-    }
-    &--3 {
-      background-color: $secondary-color-transp;
-    }
-  }
-
+.jumbotron__button {
+  min-width: 200px;
 }
 
 // --- MEDIA QUERIES ----
     // ----- 1200px ------
-@media(min-width: 1200px) {
 
-}
 
 </style>
