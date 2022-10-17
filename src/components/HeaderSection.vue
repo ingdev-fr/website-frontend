@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg my-0 py-0">
           <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand" href="#"><img class="logo-img" src="../assets/Ingdev-logo-final.png"/></a>
+            <a class="navbar-brand" href="#"><img class="logo-img" src="../assets/new-logo-ingdev.png"/></a>
             <!-- Toggle button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -15,8 +15,13 @@
                 <li class="nav-item mx-2">
                   <a class="nav-link active" href="#"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1"/>Accueil</a> 
                 </li>
-                <li class="nav-item mx-2">
-                  <a class="nav-link" href="#"><font-awesome-icon icon="fa-solid fa-store" class="nav-link__icon d-block mx-auto mb-1"/>Produits</a>
+                <li class="nav-item dropdown mx-2">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font-awesome-icon icon="fa-solid fa-store" class="nav-link__icon d-block mx-auto mb-1"/>Produits</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Sites Web</a></li>
+                    <li><a class="dropdown-item" href="#">Applications Web</a></li>
+                    <li><a class="dropdown-item" href="#">Learning System</a></li>
+                  </ul>
                 </li>
                 <li class="nav-item mx-2">
                   <a class="nav-link" href="#"><font-awesome-icon icon="fa-solid fa-lightbulb" class="nav-link__icon d-block mx-auto mb-1"/>Avantages</a>

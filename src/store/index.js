@@ -5,35 +5,57 @@ import axios from 'axios'
 const store = createStore({
     state: {
         homepage: {
-        // Je crée une data "titre" dans le store
-        titre: 'Hello man !',
+            hero: {
+                title: '',
+                content: '',
+                backgroundImage: '',
+                card1: {
+                    title: '',
+                    content:'',
+                    textButton: ''
+                },
+                card2: {
+                    title: '',
+                    content:'',
+                    textButton: ''
+                },
+                card3: {
+                    title: '',
+                    content:'',
+                    textButton: ''
+                }        
+            }
+        
         },
-        counter: 0,
     },
 
     // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments. 
     mutations: {
-        // la mutation permet d'augmenter d'une certaine valeur le counter défini dans le store. Ici le 2ème argument représentera un nombre que nous utiliserons pour incrémenter le counter. 
-        INCREASE(state, number){
-            state.counter += number;
-        },
-        // la mutation permet de diminuer d'une certaine valeur le counter défini dans le store. Ici le 2ème argument représentera un nombre que nous utiliserons pour incrémenter le counter. 
-        DECREASE(state, number) {
-            state.counter -= number;
-        }
+
         
     },
     // Les actions permettent de réaliser des actions asynchrones sur les datas comme la récupération d'une API. 
     actions: {
-        // Action de mise à jour du titre de la page avec la donnée reçue de l'API
-        changeTitle() {
+        // Fonction de mise à jour de la homepage-hero avec les données reçue de l'API
+        getHomepageHero() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/articles/2')
-            // Ensuite je récupère les données et j'attribue à la data du store "titre" la valeur de la donnée récupérée. 
+            .get('http://localhost:1337/api/homepage?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=hero.card1&populate[3]=hero.card2&populate[4]=hero.card3')
+            // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
-                store.state.homepage.titre = response.data.data.attributes.titre;
-
+                store.state.homepage.hero.backgroundImage = `http://localhost:1337${response.data.data.attributes.hero.backgroundImage.data.attributes.url}`;
+                store.state.homepage.hero.title = response.data.data.attributes.hero.title;
+                store.state.homepage.hero.content = response.data.data.attributes.hero.content;
+                store.state.homepage.hero.card1.title = response.data.data.attributes.hero.card1.title;
+                store.state.homepage.hero.card1.content = response.data.data.attributes.hero.card1.content;
+                store.state.homepage.hero.card1.textButton = response.data.data.attributes.hero.card1.button;
+                console.log(store.state.homepage.hero.card1.title);
+                store.state.homepage.hero.card2.title = response.data.data.attributes.hero.card2.title;
+                store.state.homepage.hero.card2.content = response.data.data.attributes.hero.card2.content;
+                store.state.homepage.hero.card2.textButton = response.data.data.attributes.hero.card2.button;
+                store.state.homepage.hero.card3.title = response.data.data.attributes.hero.card3.title;
+                store.state.homepage.hero.card3.content = response.data.data.attributes.hero.card3.content;
+                store.state.homepage.hero.card3.textButton = response.data.data.attributes.hero.card3.button;
             })
             .catch((error) =>{
                 console.log(error.message);

@@ -3,14 +3,14 @@
         <div class="container-grid values">
             <div class="values__img"></div>
             <div class="values__list p-4">
-                <h2 class="values__list__title mb-3 border-bottom pink-color">Pour mieux nous connaitre</h2>
+                <h2 class="values__list__title mb-3 border-bottom pink-color text-center">Pour mieux nous connaitre</h2>
                 <div class="values__list__features">
                             <!-- FEATURE 1-->
                             <div class="feature text-start pe-3">
                                 <div class="feature-icon  feature-icon--1">
                                     <font-awesome-icon icon="fa-solid fa-computer" class="fa-solid"/>
                                 </div>
-                                <h2 class="fs-3 pt-2">Maitrise du développement web</h2>
+                                <h3 class="pt-2">Maitrise du développement web</h3>
                                 <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                             </div>
                             <!-- FEATURE 2-->
@@ -18,7 +18,7 @@
                                 <div class="feature-icon feature-icon--2">
                                     <font-awesome-icon icon="fa-solid fa-book-open" class="fa-solid"/>
                                 </div>
-                                <h2 class="fs-3 pt-2">Expertise en ingénierie de formation</h2>
+                                <h3 class="pt-2">Expertise en ingénierie de formation</h3>
                                 <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                             </div>
                             <!-- FEATURE 3-->
@@ -26,7 +26,7 @@
                                 <div class="feature-icon feature-icon--3">
                                     <font-awesome-icon icon="fa-solid fa-certificate" class="fa-solid"/>
                                 </div>
-                                <h2 class="fs-3 pt-2">Certifications plateforme LMS Moodle</h2>
+                                <h3 class="pt-2">Certifications plateforme LMS Moodle</h3>
                                 <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                             </div>
                             <!-- FEATURE 4-->
@@ -34,13 +34,13 @@
                                 <div class="feature-icon feature-icon--4">
                                     <font-awesome-icon icon="fa-solid fa-bars-progress" class="fa-solid"/>
                                 </div>
-                                <h2 class="fs-3 pt-2">Expérience en gestion de projet</h2>
+                                <h3 class="pt-2">Expérience en gestion de projet</h3>
                                 <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                             </div>
                 </div>
                 <!-- TECHNOLOGIES -->
                 <div class="values__list__technologies">
-                    <h2 class="pb-3">Les technologies maitrisées</h2>
+                    <h3 class="pb-3">Les technologies maitrisées</h3>
                             <div class="technologies">
                                     <div class="me-2"><img src="../assets/logo-nodejs.jpeg" alt="logo nodejs" class="technologies__img rounded-1"></div>
                                     <div class="me-2"><img src="../assets/logo-MySQL.jpeg" alt="logo mysql" class="technologies__img rounded-1"></div>
@@ -67,7 +67,6 @@ export default {
 
 <style scoped lang="scss">
 @import "../scss/utils/variables";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 .section-values {
     background: $yellow-color;

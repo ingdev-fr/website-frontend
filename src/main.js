@@ -7,13 +7,10 @@ import VueAxios from 'vue-axios'
 
 // Tailwind
 
-
 // Bootstrap
 
 import "bootstrap/dist/css/bootstrap.min.css"
-
-
-
+import "bootstrap"
 
 // Fontawesome
     /* import the fontawesome core */
