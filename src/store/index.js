@@ -4,13 +4,27 @@ import axios from 'axios'
 // On crée le store de l'application (le container des données de l'appli). Les données sont à l'intérieur du "state".   
 const store = createStore({
     state: {
+        urlUploads: "http://localhost:1337",
+        urlEndpoints: "http://localhost:1337/api",
+        header: {
+            logo: '',
+        },
         homepage: {
             hero: {
                 title: '',
                 content: '',
                 backgroundImage: '',
                 cards: [],
-                }        
+                },
+            about: {
+                title: '',
+                image: '',
+                aboutContent: [],
+                technologies: {
+                    title: '',
+                    logos: []
+                }
+            }        
         }
     },
 
@@ -21,7 +35,20 @@ const store = createStore({
     },
     // Les actions permettent de réaliser des actions asynchrones sur les datas comme la récupération d'une API. 
     actions: {
-        // Fonction de mise à jour de la homepage-hero avec les données reçue de l'API
+        // Fonction de récupération du header avec les données reçue de l'API
+        getHeader() {
+            // Je fais un appel à l'API
+            axios
+            .get('http://localhost:1337/api/header?populate=*')
+            // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
+            .then((response) => {
+                store.state.header.logo = `http://localhost:1337${response.data.data.attributes.logo.data.attributes.url}`;
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        // Fonction de récupération de la homepage-hero avec les données reçue de l'API
         getHomepageHero() {
             // Je fais un appel à l'API
             axios
@@ -33,6 +60,23 @@ const store = createStore({
                 store.state.homepage.hero.content = response.data.data.attributes.hero.content;
                 store.state.homepage.hero.cards = response.data.data.attributes.hero.card;
                 console.log(response.data.data.attributes.hero.card);
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        // Fonction de mise à jour de la homepage-hero avec les données reçue de l'API
+        getHomepageAbout() {
+            // Je fais un appel à l'API
+            axios
+            .get('http://localhost:1337/api/homepage?populate[0]=about&populate[1]=about.image&populate[2]=about.aboutContent&populate[3]=about&populate[4]=about.technologies&populate[5]=about.technologies.logos')
+            // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
+            .then((response) => {
+                store.state.homepage.about.title = response.data.data.attributes.about.title;
+                store.state.homepage.about.image = `http://localhost:1337${response.data.data.attributes.about.image.data.attributes.url}`;
+                store.state.homepage.about.aboutContent = response.data.data.attributes.about.aboutContent;
+                store.state.homepage.about.technologies.title = response.data.data.attributes.about.technologies.title;
+                store.state.homepage.about.technologies.logos = response.data.data.attributes.about.technologies.logos.data;
             })
             .catch((error) =>{
                 console.log(error.message);

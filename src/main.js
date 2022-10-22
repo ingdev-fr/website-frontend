@@ -12,16 +12,18 @@ import VueAxios from 'vue-axios'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 
+
+
 // Fontawesome
     /* import the fontawesome core */
     import { library } from '@fortawesome/fontawesome-svg-core'
     /* import font awesome icon component */
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     /* import specific icons */
-    import { faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress } from '@fortawesome/free-solid-svg-icons'
+    import { faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 
     /* add icons to the library */
-    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress)
+    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress, faMicrochip)
 
 
 createApp(App)

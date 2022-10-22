@@ -1,90 +1,56 @@
 <template>
-    <section class="section-values p-4">
-        <div class="container-grid values">
-            <div class="values__img"></div>
+    <section class="section-values p-4" :style="{'background-image': `url(${this.$store.state.homepage.about.image})`}">
+        <div class="container-grid values d-flex col-lg-8 mx-auto">
+
             <div class="values__list p-4">
-                <h2 class="values__list__title mb-3 border-bottom pink-color text-center">Pour mieux nous connaitre</h2>
+                <h2 class="values__list__title feature__title mb-3 pb-3 text-center">{{ $store.state.homepage.about.title }}</h2>
                 <div class="values__list__features">
-                            <!-- FEATURE 1-->
-                            <div class="feature text-start pe-3">
-                                <div class="feature-icon  feature-icon--1">
-                                    <font-awesome-icon icon="fa-solid fa-computer" class="fa-solid"/>
-                                </div>
-                                <h3 class="pt-2">Maitrise du développement web</h3>
-                                <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                            </div>
-                            <!-- FEATURE 2-->
-                            <div class="feature text-start pe-3">
-                                <div class="feature-icon feature-icon--2">
-                                    <font-awesome-icon icon="fa-solid fa-book-open" class="fa-solid"/>
-                                </div>
-                                <h3 class="pt-2">Expertise en ingénierie de formation</h3>
-                                <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                            </div>
-                            <!-- FEATURE 3-->
-                            <div class="feature text-start pe-3">
-                                <div class="feature-icon feature-icon--3">
-                                    <font-awesome-icon icon="fa-solid fa-certificate" class="fa-solid"/>
-                                </div>
-                                <h3 class="pt-2">Certifications plateforme LMS Moodle</h3>
-                                <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                            </div>
-                            <!-- FEATURE 4-->
-                            <div class="feature text-start pe-3">
-                                <div class="feature-icon feature-icon--4">
-                                    <font-awesome-icon icon="fa-solid fa-bars-progress" class="fa-solid"/>
-                                </div>
-                                <h3 class="pt-2">Expérience en gestion de projet</h3>
-                                <p class="pt-2">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                            </div>
+                    <!-- FEATURES-->
+                    <div class="feature text-start pe-3 pb-3" v-for="(item, id) in $store.state.homepage.about.aboutContent"  v-bind:key="id">
+                         <div class="feature-icon  feature-icon--1">
+                            <font-awesome-icon icon="fa-solid fa-computer" class="fa-solid"/>
+                        </div>
+                        <h3 class="feature__title pt-2">{{ item.title }}</h3>
+                        <p class="feature__content pt-2">{{ item.content }}</p>
+                    </div>
                 </div>
                 <!-- TECHNOLOGIES -->
                 <div class="values__list__technologies">
-                    <h3 class="pb-3">Les technologies maitrisées</h3>
-                            <div class="technologies">
-                                    <div class="me-2"><img src="../assets/logo-nodejs.jpeg" alt="logo nodejs" class="technologies__img rounded-1"></div>
-                                    <div class="me-2"><img src="../assets/logo-MySQL.jpeg" alt="logo mysql" class="technologies__img rounded-1"></div>
-                                    <div class="me-2"><img src="../assets/logo-express.png" alt="logo express" class="technologies__img rounded-1"></div>
-                                    <div class="me-2"><img src="../assets/logo-sequelize.png" alt="logo sequelize" class="technologies__img rounded-1"></div>
-                                    <div class="me-2"><img src="../assets/logo-vue3js.webp" alt="logo vue3js" class="technologies__img rounded-1"></div>
-                                    <div class="me-2"><img src="../assets/logo-moodle.webp" alt="logo vue3js" class="technologies__img rounded-1"></div>
-                                </div>
+                    <div class="feature-icon feature-icon--5">
+                        <font-awesome-icon icon="fa-solid fa-microchip" class="fa-solid"/>
+                    </div>
+                    <h3 class="feature__title pb-3 pt-2">{{ $store.state.homepage.about.technologies.title }}</h3>
+                    <div class="technologies">
+                        <div v-for="(item, id) in $store.state.homepage.about.technologies.logos"  v-bind:key="id"><img :src=url+item.attributes.url :alt=item.attributes.caption class="technologies__img rounded-1"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-
-
   
 </template>
 
 <script>
+
 export default {
     name: 'AddedValues',
+
+    data () {
+        return {
+            show: false,
+            url: this.$store.state.urlUploads
+        }
+    }
+
 }
 </script>
 
 <style scoped lang="scss">
-@import "../scss/utils/variables";
-
-.section-values {
-    background: $yellow-color;
-}
 
 .values {
-    display: grid;
-    grid-template: 1fr;
-    &__img {
-        height: 250px;
-        background: url(../assets/computer-pink.png) no-repeat;
-        background-position: center center;
-        background-size: cover;
-        border-radius: 7px 0 0 7px;
-    }
     &__list {
-        background: $clear-color;
-        border-radius: 0 7px 7px 0;
+        background: $primary-color-transp;
+        border-radius: 7px;
         &__features {
             display: grid;
             grid-template-columns: 1fr;
@@ -92,27 +58,46 @@ export default {
         &__technologies{
             padding-top: 20px;
         }
+        &__title {
+            border-bottom: 1px solid $clear-color
+        
+        }
     }
 
 }
 
 .technologies{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    row-gap: 8px;
+    column-gap: 8px;
     &__img {
         height: 55px;
         object-fit: cover;
-        padding-bottom: 8px;
     }
 }
 
+.feature {
+    &__title {
+        color: $clear-color;
+    }
+    &__content {
+        color: $clear-color;
+    }
+}
+.fa-solid {
+    width: 20px;
+    height: 20px;
+}
+
 .feature-icon {
-    height: 48px;
-    width: 48px;
+    height: 36px;
+    width: 36px;
     display: grid;
     justify-items: center;
     align-items: center;
     border-radius: 7px;
+    color: $clear-color;
     &--1 {
         background-color: $pink-color;
     }
@@ -123,7 +108,11 @@ export default {
         background-color: $secondary-color;
     }
     &--4 {
-        background-color: $primary-color;
+        background-color: $clear-color;
+        color: $secondary-color;
+    }
+    &--5 {
+        background-color: $pink-color;       
     }
 }
 
@@ -131,23 +120,16 @@ export default {
     color: $pink-color;
 }
 
-.fa-solid {
-    width: 30px;
-    height: 30px;
-    color: $clear-color;
-}
+
 
 // --- MEDIA QUERIES ----
 @media(max-width: 899px) {
-    .values {
-        grid-template-columns: 1fr;
-    }
+
 }
 
 @media(min-width: 900px) {
+
     .values {
-        margin-top: -10vh;
-        grid-template-columns: 1fr 3fr;
         &__img {
             height: auto;
         }

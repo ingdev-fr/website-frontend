@@ -1,10 +1,10 @@
 <template>
-  <header class="header">
+  <header class="header py-2 px-4">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg my-0 py-0">
           <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand" href="#"><img class="logo-img" src="../assets/new-logo-ingdev.png"/></a>
+            <a class="navbar-brand" href="#"><img class="logo-img" :src=$store.state.header.logo /></a>
             <!-- Toggle button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -48,17 +48,13 @@ export default {
 
 <style scoped lang="scss">
 // Variables
-@import "../scss/utils/variables";
 
 .header{
-  background-color: $primary-color;
+  background-color: $header-color;
 }
 
 .logo-img {
-  height: 8vh;
-  &:hover {
-    transform: scale(1.3);
-  }
+  height: 5vh;
 }
 
 .navbar {
@@ -105,12 +101,11 @@ export default {
   .navbar {
   }
   .logo-img {
+    height: 6vh;
   }
 }
     // ----- 1200px ------
 @media(min-width: 1200px) {
-  .header {
-    height: 10vh;
-  }
+
 }
 </style>

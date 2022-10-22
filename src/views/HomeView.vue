@@ -19,7 +19,9 @@ export default {
   },
 
   created: function() {
+    this.$store.dispatch('getHeader');
     this.$store.dispatch('getHomepageHero');
+    this.$store.dispatch('getHomepageAbout');
     }, // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
 
 }

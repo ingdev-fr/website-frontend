@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "sass": "sass --watch ./src/scss/main.scss:./public/css/style.css --style compressed"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -19,8 +18,8 @@
     "bootstrap": "^5.2.2",
     "core-js": "^3.8.3",
     "i": "^0.3.7",
-    "node-sass": "^7.0.3",
     "npm": "^8.19.2",
+    "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
