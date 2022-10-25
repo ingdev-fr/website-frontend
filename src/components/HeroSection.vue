@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <img class="jumbotron__wave" src="../assets/yellow-wave-2.svg" alt="">
+    <img class="jumbotron__wave" src="../assets/images/yellow-wave-2.svg" alt="">
   </section>
     
 </template>

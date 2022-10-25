@@ -1,33 +1,36 @@
 <template>
-    <section class="section-values p-4" :style="{'background-image': `url(${this.$store.state.homepage.about.image})`}">
-        <div class="container-grid values d-flex col-lg-8 mx-auto">
-
-            <div class="values__list p-4">
-                <h2 class="values__list__title feature__title mb-3 pb-3 text-center">{{ $store.state.homepage.about.title }}</h2>
-                <div class="values__list__features">
-                    <!-- FEATURES-->
-                    <div class="feature text-start pe-3 pb-3" v-for="(item, id) in $store.state.homepage.about.aboutContent"  v-bind:key="id">
-                         <div class="feature-icon  feature-icon--1">
-                            <font-awesome-icon icon="fa-solid fa-computer" class="fa-solid"/>
-                        </div>
-                        <h3 class="feature__title pt-2">{{ item.title }}</h3>
-                        <p class="feature__content pt-2">{{ item.content }}</p>
-                    </div>
+    <section class="section-values row py-5 px-3">
+        <div class="template">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center">
+                    <h2 class="values__list__title feature__title mb-3 pb-3 fs-1 fw-bold ">{{ $store.state.homepage.about.title }}</h2>
+                    <p class="values__list__content fs-5">{{ $store.state.homepage.about.content }}</p>
                 </div>
-                <!-- TECHNOLOGIES -->
-                <div class="values__list__technologies">
-                    <div class="feature-icon feature-icon--5">
-                        <font-awesome-icon icon="fa-solid fa-microchip" class="fa-solid"/>
-                    </div>
-                    <h3 class="feature__title pb-3 pt-2">{{ $store.state.homepage.about.technologies.title }}</h3>
-                    <div class="technologies">
-                        <div v-for="(item, id) in $store.state.homepage.about.technologies.logos"  v-bind:key="id"><img :src=url+item.attributes.url :alt=item.attributes.caption class="technologies__img rounded-1"></div>
+            </div>
+            <div class="container-grid values col-md-10 col-lg-8 mx-auto">
+                <div class="values__list p-4">
+                    <div class="values__list__features">
+                        <!-- FEATURES-->
+                        <div class="feature text-start pe-3 pb-3" v-for="(item, id) in $store.state.homepage.about.aboutContent"  v-bind:key="id">
+                            <svg width="140" height="72" viewBox="0 0 378 179" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g class="svgCircles">
+                                    <g class="groupPink">
+                                        <circle class="circle-3" cx="167" cy="89" r="40"/>
+                                        <circle class="circle-1" cx="61" cy="89" r="40"/>
+                                    </g>
+                                    <g class="groupLight">
+                                        <circle class="circle-light" cx="61" cy="89" r="40"/>
+                                    </g>
+                                </g>
+                            </svg>
+                            <h3 class="feature__title pt-2">{{ item.title }}</h3>
+                            <p class="feature__content pt-2">{{ item.content }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-  
 </template>
 
 <script>
@@ -38,7 +41,7 @@ export default {
     data () {
         return {
             show: false,
-            url: this.$store.state.urlUploads
+            url: this.$store.state.urlUploads,
         }
     }
 
@@ -46,7 +49,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.section-values {
+    background: url('../assets/images/iphone-values.png');
+    background-size: cover;
+    background-position: center;
+}
 .values {
     &__list {
         background: $primary-color-transp;
@@ -58,19 +65,15 @@ export default {
         &__technologies{
             padding-top: 20px;
         }
-        &__title {
-            border-bottom: 1px solid $clear-color
-        
-        }
     }
 
 }
 
 .technologies{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     row-gap: 8px;
-    column-gap: 8px;
+    column-gap: 12px;
     &__img {
         height: 55px;
         object-fit: cover;
@@ -85,54 +88,56 @@ export default {
         color: $clear-color;
     }
 }
-.fa-solid {
-    width: 20px;
-    height: 20px;
-}
-
-.feature-icon {
-    height: 36px;
-    width: 36px;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    border-radius: 7px;
-    color: $clear-color;
-    &--1 {
-        background-color: $pink-color;
-    }
-    &--2 {
-        background-color: $yellow-color;
-    }
-    &--3 {
-        background-color: $secondary-color;
-    }
-    &--4 {
-        background-color: $clear-color;
-        color: $secondary-color;
-    }
-    &--5 {
-        background-color: $pink-color;       
-    }
-}
 
 .pink-color {
     color: $pink-color;
 }
 
+// ---------- ANIMATIONS --------------
+
+.circle {
+
+    &-light {
+        fill: $secondary-color;
+        fill-opacity: 0.54;
+        transition: all 0.5s ease;
+    }
+    &-1 {
+        fill: $pink-color;
+        transform: translateX(-100%);
+    }
+    &-3 {
+        fill: $pink-color;
+        transition: all 0.5s ease;
+    }
+}
+
+.feature:hover .circle-light {
+    transform: translateX(13%); //quand le svg sera hoover, le cercle bleu se déplacera vers la droite 
+}
+
+.feature:hover .circle-1 {
+    transform: translateX(0%); //quand le svg sera hoover, le cercle rose 3 se déplacera vers la droite et son opacité passera à 0. 
+}
+
+.feature:hover .circle-3 {
+    animation: rightLeft 1000ms forwards; 
+}
+
+@keyframes rightLeft {
+    0% {
+        transform: translateX(30%);
+    }
+     100% {
+        transform: translateX(-5%);
+     }
+}
+
 
 
 // --- MEDIA QUERIES ----
-@media(max-width: 899px) {
-
-}
-
-@media(min-width: 900px) {
-
+@media(min-width: 768px) {
     .values {
-        &__img {
-            height: auto;
-        }
         &__list {
             &__features {
                 grid-template-columns: 1fr 1fr;
@@ -140,8 +145,14 @@ export default {
             }
         }
     }
-    .technologies {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+}
+
+    // ----- 900px ------
+ @media(min-width: 900px) {
+    .section-values {
+        background: url('../assets/images/values-svg.png');
+        background-size: cover;
     }
 }
 </style>

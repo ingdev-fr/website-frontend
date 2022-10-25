@@ -1,20 +1,20 @@
 <template>
-  <main>
-    <HeroSection/>
+  <main class="mainSection">
+    <HeaderSection/>
     <AddedValues/>
   </main>
 </template>
 
 <script>
 // @ is an alias to /src
-import HeroSection from '@/components/HeroSection.vue'
+import HeaderSection from '@/components/HeaderSection.vue'
 import AddedValues from '@/components/AddedValues.vue'
 
 export default {
   name: 'HomeView',
 
   components: {
-    HeroSection,
+    HeaderSection,
     AddedValues,
   },
 
@@ -28,10 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.separator {
-  height: 10px;
-
-}
 
 
 </style>

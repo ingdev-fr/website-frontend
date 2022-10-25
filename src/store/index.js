@@ -18,6 +18,7 @@ const store = createStore({
                 },
             about: {
                 title: '',
+                content: '',
                 image: '',
                 aboutContent: [],
                 technologies: {
@@ -73,6 +74,7 @@ const store = createStore({
             // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
                 store.state.homepage.about.title = response.data.data.attributes.about.title;
+                store.state.homepage.about.content = response.data.data.attributes.about.content;
                 store.state.homepage.about.image = `http://localhost:1337${response.data.data.attributes.about.image.data.attributes.url}`;
                 store.state.homepage.about.aboutContent = response.data.data.attributes.about.aboutContent;
                 store.state.homepage.about.technologies.title = response.data.data.attributes.about.technologies.title;

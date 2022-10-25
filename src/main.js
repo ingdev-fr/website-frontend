@@ -8,8 +8,7 @@ import VueAxios from 'vue-axios'
 // Tailwind
 
 // Bootstrap
-
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap"
 
 
