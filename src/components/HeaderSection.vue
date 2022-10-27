@@ -5,7 +5,7 @@
       <nav class="navbar navbar-expand-lg">
             <div class="container-fluid p-0 ">
               <!-- Logo -->
-              <a class="navbar-brand text-white d-flex align-items-center" href="#"><img class="logo-img" :src=$store.state.header.logo /><div class="logo-text">INGDEV</div></a>
+              <a class="navbar-brand text-white d-flex align-items-center" href="#"><img class="logo-img me-2" src='../assets/svg/logo.svg'/><div class="logo-text">INGDEV</div></a>
               <!-- Toggle button -->
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,11 +38,41 @@
             </div>
       </nav>
       <!-- HERO SECTION -->
-      <section class="jumbotron mt-4">
+      <section class="jumbotron-container mt-4">
             <!-- JUMBOTRON TEXT -->
-            <div class="row jumbotron__text rounded-3 py-3 col-md-10 col-lg-8">
+            <div id="jumbotron__text" class="row jumbotron__text rounded-3 py-3 col-md-10 col-lg-8">
               <div class="pt-3 d-flex flex-column text-start justify-content-center">
-                <h1 class="jumbotron__text--h1 fw-bold fs-1">{{ $store.state.homepage.hero.title }}</h1>
+                <div class="d-flex align-items-end">
+                  <svg id="chart" width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="chart-1">
+                      <g id="rect">
+                        <rect id="rect-blue" x="230" y="260" width="36" height="152" transform="rotate(-180 230 260)" fill="url(#paint0_linear_38_764)"/>
+                        <rect id="rect-purple" x="173" y="260" width="36" height="179" transform="rotate(-180 173 260)" fill="url(#paint1_linear_38_764)"/>
+                        <rect id="rect-pink" x="116" y="260" width="36" height="139" transform="rotate(-180 116 260)" fill="url(#paint2_linear_38_764)"/>
+                        <rect id="rect-yellow" x="59" y="260" width="36" height="110" transform="rotate(-180 59 260)" fill="url(#paint3_linear_38_764)"/>
+                      </g>
+                    </g>
+                    <defs>
+                      <linearGradient id="paint0_linear_38_764" x1="248" y1="473" x2="248" y2="260" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#86C7ED"/>
+                      <stop offset="1" stop-color="#86C7ED" stop-opacity="0.68"/>
+                      </linearGradient>
+                      <linearGradient id="paint1_linear_38_764" x1="191" y1="476.5" x2="191" y2="260" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#A066CB"/>
+                      <stop offset="1" stop-color="#A066CB" stop-opacity="0.76"/>
+                      </linearGradient>
+                      <linearGradient id="paint2_linear_38_764" x1="134" y1="457.5" x2="134" y2="260" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F62992"/>
+                      <stop offset="1" stop-color="#F62992" stop-opacity="0.55"/>
+                      </linearGradient>
+                      <linearGradient id="paint3_linear_38_764" x1="77" y1="451" x2="77" y2="260" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#FFCA08"/>
+                      <stop offset="1" stop-color="#FFCA08" stop-opacity="0.66"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <h1 class="jumbotron__text--h1 fw-bold fs-1" >{{ $store.state.homepage.hero.title }}</h1>
+                </div>
                 <p class="jumbotron__text--content fs-5 mt-3"> {{ $store.state.homepage.hero.content }} </p>
               </div>
             </div>
@@ -87,7 +117,8 @@ export default {
 
 .header{
   background: url('../assets/images/iphone-header.png');
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 
 }
 
@@ -127,7 +158,7 @@ export default {
 }
 
 .logo-img {
-  height: 100%;
+  height: 40px;
 }
 
 .logo-text {
@@ -138,9 +169,15 @@ export default {
   color: $pink-color;
 }
 
+#chart {
+  height: 100px;
+  width: auto;
+}
+
 .technologies {
     &__img {
         height: 5vh;
+        box-shadow: 5px 4px 3px rgba($primary-color, 0.25);
     }
 }
 
@@ -164,6 +201,89 @@ export default {
 
 .jumbo__card {
   opacity: 0.95;
+  box-shadow: 5px 4px 4px rgba($primary-color, 0.25);
+}
+
+// --------- ANIMATIONS ------------
+#jumbotron__text:hover #rect-yellow
+ {
+    animation: moveUpDown1 1000ms forwards ease-out;
+    animation-iteration-count: infinite;
+  }
+#jumbotron__text:hover #rect-pink
+ {
+    animation: moveUpDown2 1000ms 150ms forwards ease-out;
+    animation-iteration-count: infinite;
+  }
+#jumbotron__text:hover #rect-purple
+ {
+    animation: moveUpDown3 1000ms 300ms forwards ease-out;
+    animation-iteration-count: infinite;
+  }
+#jumbotron__text:hover #rect-blue
+ {
+    animation: moveUpDown4 1000ms 500ms forwards ease-out;
+    animation-iteration-count: infinite;
+  }
+
+@keyframes moveUpDown1 {
+    0% {
+        height: 110px;
+    }
+    33% {
+        height: 200px;
+    }
+    0% {
+        height: 75px;
+    }
+     100% {
+      height: 110px;
+     }
+}
+
+@keyframes moveUpDown2 {
+    0% {
+        height: 139px;
+    }
+    33% {
+        height: 50px;
+    }
+    0% {
+        height: 90px;
+    }
+     100% {
+      height: 139px;
+     }
+}
+
+@keyframes moveUpDown3 {
+    0% {
+        height: 179px;
+    }
+    33% {
+        height: 90px;
+    }
+    0% {
+        height: 130px;
+    }
+     100% {
+      height: 179px;
+     }
+}
+
+@keyframes moveUpDown4 {
+    0% {
+        height: 152px;
+    }
+    33% {
+        height: 30px;
+    }
+    0% {
+        height: 110px;
+    }
+     100% {
+      height: 152px;
+     }
 }
 
 // --- MEDIA QUERIES ----
