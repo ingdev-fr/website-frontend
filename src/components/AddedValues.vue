@@ -12,14 +12,16 @@
                     <div class="values__list__features">
                         <!-- FEATURES-->
                         <div class="feature text-start pe-3 pb-3" v-for="(item, id) in $store.state.homepage.about.aboutContent"  v-bind:key="id">
-                            <svg width="140" height="72" viewBox="0 0 378 179" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g class="svgCircles">
-                                    <g class="groupPink">
-                                        <circle class="circle-3" cx="167" cy="89" r="40"/>
-                                        <circle class="circle-1" cx="61" cy="89" r="40"/>
+                            <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="svgCirclesText">
+                                    <g id="groupPink">
+                                    <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
+                                    <circle class="circle-1" cx="61" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/><text id="letterN" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="46.4473" y="101.091">N</tspan></text>
+                                    <text id="letterG" xml:space="preserve" style="white-space: pre"  font-size="36" letter-spacing="0em"><tspan x="153.623" y="102.091">G</tspan></text>
                                     </g>
-                                    <g class="groupLight">
-                                        <circle class="circle-light" cx="61" cy="89" r="40"/>
+                                    <g id="groupLight">
+                                    <circle class="circle-light" cx="61" cy="89" r="40" fill="#009CFE" fill-opacity="0.63"/>
+                                    <text id="letterI" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="55.2363" y="101.091">I</tspan></text>
                                     </g>
                                 </g>
                             </svg>
@@ -112,16 +114,37 @@ export default {
     }
 }
 
-.feature:hover .circle-light {
+#letterI, #letterN, #letterG {
+    opacity: 0;
+    fill: $clear-color;
+    font-family: inherit;
+}
+
+.feature:hover .circle-light,
+.feature:hover #letterN {
     transform: translateX(13%); //quand le svg sera hoover, le cercle bleu se déplacera vers la droite 
 }
 
-.feature:hover .circle-1 {
+.feature:hover .circle-1, 
+.feature:hover #letterI {
     transform: translateX(0%); //quand le svg sera hoover, le cercle rose 3 se déplacera vers la droite et son opacité passera à 0. 
 }
 
-.feature:hover .circle-3 {
+.feature:hover .circle-3,
+.feature:hover #letterG {
     animation: rightLeft 1000ms forwards; 
+}
+
+.feature:hover #letterI {
+    transform: translateX(0%);
+    animation: getOpacity 1000ms forwards;
+}
+.feature:hover #letterN {
+    transform: translateX(13%);
+    animation: getOpacity 1000ms forwards;
+}
+.feature:hover #letterG { 
+    animation: getOpacityforG 1000ms forwards;
 }
 
 @keyframes rightLeft {
@@ -133,6 +156,27 @@ export default {
      }
 }
 
+@keyframes getOpacity {
+    50% {
+        opacity: 0;
+    }
+     100% {
+        opacity: 100%;
+     }
+}
+
+@keyframes getOpacityforG {
+    0% {
+        transform: translateX(30%);
+    }
+    50% {
+        opacity: 0;
+    }
+     100% {
+        opacity: 100%;
+        transform: translateX(-5%);
+     }
+}
 
 
 // --- MEDIA QUERIES ----

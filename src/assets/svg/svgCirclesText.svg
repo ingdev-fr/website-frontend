@@ -1,0 +1,14 @@
+<svg width="350" height="180" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="svgCirclesText">
+<g id="groupPink">
+<circle id="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
+<circle id="circle-1" cx="61" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
+<text id="G" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="36" letter-spacing="0em"><tspan x="153.623" y="102.091">G</tspan></text>
+<text id="N" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="36" letter-spacing="0em"><tspan x="46.4473" y="101.091">N</tspan></text>
+</g>
+<g id="groupLight">
+<circle id="circle-light" cx="61" cy="89" r="40" fill="#009CFE" fill-opacity="0.63"/>
+<text id="I" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="36" letter-spacing="0em"><tspan x="55.2363" y="101.091">I</tspan></text>
+</g>
+</g>
+</svg>

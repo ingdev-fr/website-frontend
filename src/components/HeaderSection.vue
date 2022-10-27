@@ -83,13 +83,18 @@
                   </div>                   
                 </div>
           <!-- JUMBOTRON CARDS -->
-          <div class="row jumbotron__cards">
+          <div class="jumbotron__cards d-flex align-items-center justify-content-between">
             <!-- CARD 1 -->
             <div v-for="(item, id) in $store.state.homepage.hero.cards"  v-bind:key="id"><!--Attention, l'élément que l'on choisit pour la boucle sera celui que l'on va dupliquer pour chaque item-->
-              <div class="jumbo__card py-3 px-4 mb-3 text-white rounded-3 d-flex flex-column" :style="{'background-color': item.backgroundColor}">
+              <div class="jumbo__card py-3 px-4 me-3 mb-3text-white rounded-3 d-flex flex-column" :style="{'background-color': item.backgroundColor}">
+                <div class="d-flex">
+                  <img class="jumbo__icon me-2" src="../assets/images/computer.png" alt="">
+                  <p class="jumbo__card-intro fs-5">Performance et fonctionnalités</p>
+                </div>
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.content }}</p>
-                <button class="btn btn-warning jumbotron__button fw-bold mt-auto mx-auto" type="button">{{ item.button }}</button>
+
+                <button class="btn jumbotron__button fw-bold mt-auto mx-auto" type="button">{{ item.button }}</button>
               </div>
             </div>
           </div>
@@ -193,6 +198,8 @@ export default {
 .jumbotron {
   &__button {
   min-width: 200px;
+  background: $pink-color;
+  color: $clear-color;
   }
   &__text {
     color: $clear-color;
@@ -202,9 +209,23 @@ export default {
 .jumbo__card {
   opacity: 0.95;
   box-shadow: 5px 4px 4px rgba($primary-color, 0.25);
+  &-intro {
+    color: $secondary-color;
+  }
+}
+
+.jumbo__icon {
+  height: 35px;
+  width: auto;
+}
+
+.arrows {
+  width: 250px;
 }
 
 // --------- ANIMATIONS ------------
+
+  //----- CHART -----------
 #jumbotron__text:hover #rect-yellow
  {
     animation: moveUpDown1 1000ms forwards ease-out;
@@ -286,6 +307,25 @@ export default {
      }
 }
 
+  // ------ CIRCLES --------
+
+  .circle {
+
+&-light {
+    fill: $secondary-color;
+    fill-opacity: 0.54;
+    transition: all 0.5s ease;
+}
+&-1 {
+    fill: $pink-color;
+    transform: translateX(-100%);
+}
+&-3 {
+    fill: $pink-color;
+    transition: all 0.5s ease;
+}
+}
+
 // --- MEDIA QUERIES ----
     // ----- 700px ------
 @media(min-width: 700px) {
@@ -337,17 +377,13 @@ export default {
     height: 28vh;
   }
   &__technologies {
-    height: 12vh;
+    height: 10vh;
   }
   &__cards {
-    height: 40vh;
+    height: 48vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     }
-  }
-
-.jumbo__card {
-  height: 40vh;
   }
 }
 
