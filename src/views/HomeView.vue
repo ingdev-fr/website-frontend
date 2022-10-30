@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 .mainSection {
-  background: #f1c72f;
+  background: $primary-color-clear;
 }
 
 </style>

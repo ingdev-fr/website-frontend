@@ -14,7 +14,7 @@
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item mx-2">
-                    <a class="nav-link" href="#"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1 active"/>Accueil</a> 
+                    <a class="nav-link active" href="#"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1"/>Accueil</a> 
                   </li>
                   <li class="nav-item dropdown mx-2">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font-awesome-icon icon="fa-solid fa-store" class="nav-link__icon d-block mx-auto mb-1"/>Produits</a>
@@ -38,10 +38,10 @@
             </div>
       </nav>
       <!-- HERO SECTION -->
-      <section class="jumbotron-container mt-4">
+      <section class="jumbotron-container">
             <!-- JUMBOTRON TEXT -->
-            <div id="jumbotron__text" class="row jumbotron__text rounded-3 py-3 col-md-10 col-lg-8">
-              <div class="pt-3 d-flex flex-column text-start justify-content-center">
+            <div id="jumbotron__text" class="row jumbotron__text rounded-3 py-3 col-md-10">
+              <div class="pt-3 d-flex flex-column text-start">
                 <div class="d-flex align-items-end">
                   <svg id="chart" width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="chart-1">
@@ -73,27 +73,22 @@
                   </svg>
                   <h1 class="jumbotron__text--h1 fw-bold fs-1" >{{ $store.state.homepage.hero.title }}</h1>
                 </div>
-                <p class="jumbotron__text--content fs-5 mt-3"> {{ $store.state.homepage.hero.content }} </p>
-              </div>
-            </div>
-            <!-- TECHNOLOGIES -->
+                <p class="jumbotron__text--content fs-5 mt-3 col-lg-10"> {{ $store.state.homepage.hero.content }} </p>
+                <!-- TECHNOLOGIES -->
                 <div class="jumbotron__technologies mb-3">
                   <div class="technologies__pictures d-flex flex-wrap">
-                    <div v-for="(item, id) in $store.state.homepage.about.technologies.logos"  v-bind:key="id"><img :src=url+item.attributes.url :alt=item.attributes.caption class="technologies__img rounded-1 ms-2 mb-2"></div>
+                    <div v-for="(item, id) in $store.state.homepage.about.technologies.logos"  v-bind:key="id"><img :src=url+item.attributes.url :alt=item.attributes.caption class="technologies__img rounded-1 me-2 mb-2"></div>
                   </div>                   
                 </div>
+              </div>
+          </div>
           <!-- JUMBOTRON CARDS -->
-          <div class="jumbotron__cards d-flex align-items-center justify-content-between">
+          <div class="jumbotron__cards d-flex justify-content-between mt-5">
             <!-- CARD 1 -->
             <div v-for="(item, id) in $store.state.homepage.hero.cards"  v-bind:key="id"><!--Attention, l'élément que l'on choisit pour la boucle sera celui que l'on va dupliquer pour chaque item-->
               <div class="jumbo__card py-3 px-4 me-3 mb-3text-white rounded-3 d-flex flex-column" :style="{'background-color': item.backgroundColor}">
-                <div class="d-flex">
-                  <img class="jumbo__icon me-2" src="../assets/images/computer.png" alt="">
-                  <p class="jumbo__card-intro fs-5">Performance et fonctionnalités</p>
-                </div>
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.content }}</p>
-
                 <button class="btn jumbotron__button fw-bold mt-auto mx-auto" type="button">{{ item.button }}</button>
               </div>
             </div>
@@ -101,6 +96,7 @@
       </section>
     </div>
   </header>
+  
 </template>
 
 <script>
@@ -121,15 +117,20 @@ export default {
 // Variables
 
 .header{
-  background: url('../assets/images/iphone-header.png');
-  background-size: contain;
-  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+  &__img {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: -2;
+  }
 
 }
 
 .navbar {
   &-toggler {
-    background-color: $yellow-color;
+    background-color: $third-color;
   }
   &-brand {
     height: 40px;
@@ -148,17 +149,11 @@ export default {
     }
     &__contactButton{
       color: $clear-color;
-      background-color: $pink-color;
+      background-color: $secondary-color;
       &:hover {
-      background-color:$secondary-color;
+      background-color:$third-color;
       }
     }
-  }
-  & .active {
-    color: $pink-color !important;
-  }
-  & .connexion-link {
-    color: $secondary-color;
   }
 }
 
@@ -171,7 +166,7 @@ export default {
 }
 
 .active {
-  color: $pink-color;
+  color: $secondary-color !important;
 }
 
 #chart {
@@ -207,11 +202,9 @@ export default {
 }
 
 .jumbo__card {
+  height: 70%;
   opacity: 0.95;
   box-shadow: 5px 4px 4px rgba($primary-color, 0.25);
-  &-intro {
-    color: $secondary-color;
-  }
 }
 
 .jumbo__icon {
@@ -356,7 +349,7 @@ export default {
     // ----- 900px ------
 @media(min-width: 900px) {
   .header{
-  background: url('../assets/images/header-svg.png');
+  background: url('../assets/images/header-svg-white.png');
   background-size: cover;
   }
 }
@@ -365,22 +358,21 @@ export default {
   // ----- 1400px ------
 @media(min-width: 1400px) {
 .header {
-  height: 100vh;
+
 }
 .navbar{
   height: 10vh;
 }
 
+
 .jumbotron {
   height: 90vh;
   &__text {
-    height: 28vh;
+    height: 40vh;
   }
-  &__technologies {
-    height: 10vh;
-  }
+
   &__cards {
-    height: 48vh;
+    height: 50vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     }

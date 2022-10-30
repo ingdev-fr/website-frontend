@@ -10,8 +10,9 @@
             <div class="container-grid values col-md-10 col-lg-8 mx-auto">
                 <div class="values__list p-4">
                     <div class="values__list__features">
-                        <!-- FEATURES-->
-                        <div class="feature text-start pe-3 pb-3" v-for="(item, id) in $store.state.homepage.about.aboutContent"  v-bind:key="id">
+                        <!-- COMPETENCIES-->
+                            <!-- Competency-1 -->
+                        <div class="feature text-start pe-3 pb-3">
                             <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="svgCirclesText">
                                     <g id="groupPink">
@@ -25,8 +26,62 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h3 class="feature__title pt-2">{{ item.title }}</h3>
-                            <p class="feature__content pt-2">{{ item.content }}</p>
+                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency1.title }}</h3>
+                            <p class="feature__content pt-2">{{ $store.state.homepage.about.competency1.content }}</p>
+                        </div>
+                        <!-- Competency-2 -->
+                        <div class="feature text-start pe-3 pb-3">
+                            <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="svgCirclesText">
+                                    <g id="groupPink">
+                                    <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
+                                    <circle class="circle-1" cx="61" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/><text id="letterN" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="46.4473" y="101.091">N</tspan></text>
+                                    <text id="letterG" xml:space="preserve" style="white-space: pre"  font-size="36" letter-spacing="0em"><tspan x="153.623" y="102.091">G</tspan></text>
+                                    </g>
+                                    <g id="groupLight">
+                                    <circle class="circle-light" cx="61" cy="89" r="40" fill="#009CFE" fill-opacity="0.63"/>
+                                    <text id="letterI" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="55.2363" y="101.091">I</tspan></text>
+                                    </g>
+                                </g>
+                            </svg>
+                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency2.title }}</h3>
+                            <p class="feature__content pt-2">{{ $store.state.homepage.about.competency2.content }}</p>
+                        </div>
+                        <!-- Competency-3 -->
+                        <div class="feature text-start pe-3 pb-3">
+                            <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="svgCirclesText">
+                                    <g id="groupPink">
+                                    <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
+                                    <circle class="circle-1" cx="61" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/><text id="letterN" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="46.4473" y="101.091">N</tspan></text>
+                                    <text id="letterG" xml:space="preserve" style="white-space: pre"  font-size="36" letter-spacing="0em"><tspan x="153.623" y="102.091">G</tspan></text>
+                                    </g>
+                                    <g id="groupLight">
+                                    <circle class="circle-light" cx="61" cy="89" r="40" fill="#009CFE" fill-opacity="0.63"/>
+                                    <text id="letterI" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="55.2363" y="101.091">I</tspan></text>
+                                    </g>
+                                </g>
+                            </svg>
+                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency3.title }}</h3>
+                            <p class="feature__content pt-2">{{ $store.state.homepage.about.competency3.content }}</p>
+                        </div>
+                        <!-- Competency-4 -->
+                        <div class="feature text-start pe-3 pb-3">
+                            <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="svgCirclesText">
+                                    <g id="groupPink">
+                                    <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
+                                    <circle class="circle-1" cx="61" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/><text id="letterN" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="46.4473" y="101.091">N</tspan></text>
+                                    <text id="letterG" xml:space="preserve" style="white-space: pre"  font-size="36" letter-spacing="0em"><tspan x="153.623" y="102.091">G</tspan></text>
+                                    </g>
+                                    <g id="groupLight">
+                                    <circle class="circle-light" cx="61" cy="89" r="40" fill="#009CFE" fill-opacity="0.63"/>
+                                    <text id="letterI" xml:space="preserve" style="white-space: pre" font-size="36" letter-spacing="0em"><tspan x="55.2363" y="101.091">I</tspan></text>
+                                    </g>
+                                </g>
+                            </svg>
+                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency4.title }}</h3>
+                            <p class="feature__content pt-2">{{ $store.state.homepage.about.competency4.content }}</p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +113,7 @@ export default {
 }
 .values {
     &__list {
-        background: $primary-color-transp;
+        background: $third-color-transp;
         border-radius: 7px;
         &__features {
             display: grid;
@@ -118,6 +173,7 @@ export default {
     opacity: 0;
     fill: $clear-color;
     font-family: inherit;
+    font-weight: bold;
 }
 
 .feature:hover .circle-light,
