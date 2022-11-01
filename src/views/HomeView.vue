@@ -28,8 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mainSection {
-  background: $primary-color-clear;
-}
+
 
 </style>

@@ -24,17 +24,12 @@ export default {
   font-family: 'Poppins', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased; // permet de spécifier l'algorithme anti-crénelage (anti-aliasing) du rendu des fonts
   -moz-osx-font-smoothing: grayscale; // permet de spécifier l'algorithme anti-crénelage (anti-aliasing) du rendu des fonts pour OSx
-  color: $clear-color;
+  color: $primary-color;
 
   .template {
-  max-width: 1600px;
+  max-width: 1400px;
   margin: auto;
 }
-
-  h2 {
-    font-weight: 500;
-    font-size: 2rem;
-  }
 
   // Variables Bootstrap
   .btn-success {

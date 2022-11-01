@@ -3,16 +3,16 @@
         <div class="template">
             <div class="col-lg-8 mx-auto">
                 <div class="text-center">
-                    <h2 class="values__list__title feature__title mb-3 pb-3 fs-1 fw-bold ">{{ $store.state.homepage.about.title }}</h2>
-                    <p class="values__list__content fs-5">{{ $store.state.homepage.about.content }}</p>
+                    <h2 class="values__list__title mb-3 pb-3 fs-1 fw-bold ">{{ $store.state.homepage.about.title }}</h2>
+                    <p class="values__list__content fs-5 mb-5">{{ $store.state.homepage.about.content }}</p>
                 </div>
             </div>
-            <div class="container-grid values col-md-10 col-lg-8 mx-auto">
-                <div class="values__list p-4">
+            <div class="container-grid values col-md-10 col-lg-8 mx-auto d-flex flex-justify-center">
+                <div class="values__list px-5 py-3">
                     <div class="values__list__features">
                         <!-- COMPETENCIES-->
                             <!-- Competency-1 -->
-                        <div class="feature text-start pe-3 pb-3">
+                        <div class="feature text-start">
                             <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="svgCirclesText">
                                     <g id="groupPink">
@@ -26,11 +26,11 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency1.title }}</h3>
+                            <h3 class="feature__title">{{ $store.state.homepage.about.competency1.title }}</h3>
                             <p class="feature__content pt-2">{{ $store.state.homepage.about.competency1.content }}</p>
                         </div>
                         <!-- Competency-2 -->
-                        <div class="feature text-start pe-3 pb-3">
+                        <div class="feature text-start">
                             <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="svgCirclesText">
                                     <g id="groupPink">
@@ -44,11 +44,11 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency2.title }}</h3>
+                            <h3 class="feature__title">{{ $store.state.homepage.about.competency2.title }}</h3>
                             <p class="feature__content pt-2">{{ $store.state.homepage.about.competency2.content }}</p>
                         </div>
                         <!-- Competency-3 -->
-                        <div class="feature text-start pe-3 pb-3">
+                        <div class="feature text-start">
                             <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="svgCirclesText">
                                     <g id="groupPink">
@@ -62,11 +62,11 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency3.title }}</h3>
+                            <h3 class="feature__title">{{ $store.state.homepage.about.competency3.title }}</h3>
                             <p class="feature__content pt-2">{{ $store.state.homepage.about.competency3.content }}</p>
                         </div>
                         <!-- Competency-4 -->
-                        <div class="feature text-start pe-3 pb-3">
+                        <div class="feature text-start">
                             <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="svgCirclesText">
                                     <g id="groupPink">
@@ -80,7 +80,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h3 class="feature__title pt-2">{{ $store.state.homepage.about.competency4.title }}</h3>
+                            <h3 class="feature__title">{{ $store.state.homepage.about.competency4.title }}</h3>
                             <p class="feature__content pt-2">{{ $store.state.homepage.about.competency4.content }}</p>
                         </div>
                     </div>
@@ -107,9 +107,7 @@ export default {
 
 <style scoped lang="scss">
 .section-values {
-    background: url('../assets/images/iphone-values.png');
-    background-size: cover;
-    background-position: center;
+
 }
 .values {
     &__list {
@@ -118,6 +116,7 @@ export default {
         &__features {
             display: grid;
             grid-template-columns: 1fr;
+            column-gap: 30px;
         }
         &__technologies{
             padding-top: 20px;
@@ -148,6 +147,24 @@ export default {
 
 .pink-color {
     color: $pink-color;
+}
+
+// --- MEDIA QUERIES ----
+@media(min-width: 768px) {
+    .values {
+        &__list {
+            &__features {
+                grid-template-columns: 1fr 1fr;
+                row-gap: 20px;
+            }
+        }
+    }
+
+}
+
+    // ----- 900px ------
+ @media(min-width: 900px) {
+
 }
 
 // ---------- ANIMATIONS --------------
@@ -234,27 +251,6 @@ export default {
      }
 }
 
-
-// --- MEDIA QUERIES ----
-@media(min-width: 768px) {
-    .values {
-        &__list {
-            &__features {
-                grid-template-columns: 1fr 1fr;
-                row-gap: 20px;
-            }
-        }
-    }
-
-}
-
-    // ----- 900px ------
- @media(min-width: 900px) {
-    .section-values {
-        background: url('../assets/images/values-svg.png');
-        background-size: cover;
-    }
-}
 </style>
 
 

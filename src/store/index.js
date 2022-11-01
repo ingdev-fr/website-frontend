@@ -14,7 +14,22 @@ const store = createStore({
                 title: '',
                 content: '',
                 backgroundImage: '',
-                cards: [],
+                title2: '',
+                card : {
+                    title: '',
+                    content: '',
+                    keywords: '',
+                    },
+                card2 : {
+                    title: '',
+                    content: '',
+                    keywords: '',
+                        },
+                card3 : {
+                    title: '',
+                    content: '',
+                    keywords: '',
+                    },
                 },
             about: {
                 title: '',
@@ -69,14 +84,23 @@ const store = createStore({
         getHomepageHero() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/homepage?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=hero.card')
+            .get('http://localhost:1337/api/homepage?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=hero.card&populate[3]=hero.card2&populate[4]=hero.card3')
             // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
                 store.state.homepage.hero.backgroundImage = `http://localhost:1337${response.data.data.attributes.hero.backgroundImage.data.attributes.url}`;
                 store.state.homepage.hero.title = response.data.data.attributes.hero.title;
                 store.state.homepage.hero.content = response.data.data.attributes.hero.content;
-                store.state.homepage.hero.cards = response.data.data.attributes.hero.card;
-                console.log(response.data.data.attributes.hero.card);
+                store.state.homepage.hero.title2 = response.data.data.attributes.hero.title2;
+                store.state.homepage.hero.card.title = response.data.data.attributes.hero.card.title;
+                store.state.homepage.hero.card2.title = response.data.data.attributes.hero.card2.title;
+                store.state.homepage.hero.card3.title = response.data.data.attributes.hero.card3.title;
+                store.state.homepage.hero.card.content = response.data.data.attributes.hero.card.content;
+                store.state.homepage.hero.card2.content = response.data.data.attributes.hero.card2.content;
+                store.state.homepage.hero.card3.content = response.data.data.attributes.hero.card3.content;
+                store.state.homepage.hero.card.keywords = response.data.data.attributes.hero.card.keywords;
+                store.state.homepage.hero.card2.keywords = response.data.data.attributes.hero.card2.keywords;
+                store.state.homepage.hero.card3.keywords = response.data.data.attributes.hero.card3.keywords;
+
             })
             .catch((error) =>{
                 console.log(error.message);
