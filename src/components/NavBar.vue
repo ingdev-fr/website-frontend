@@ -1,5 +1,6 @@
 <template>
-        <nav class="navbar navbar-expand-lg">
+  <div class="template">
+    <nav class="navbar navbar-expand-lg">
             <div class="container-fluid p-0 ">
               <!-- Logo -->
               <a class="navbar-brand d-flex align-items-center" href="#"><img class="logo-img me-2" src='../assets/svg/logo.svg'/><div class="logo-text">INGDEV</div></a>
@@ -31,6 +32,7 @@
               </div>
             </div>
       </nav>
+  </div>
 </template>
 
 <script>
@@ -62,7 +64,7 @@ export default {
     }
     &__contactButton{
       color: $clear-color;
-      background-color: $pink-color;
+      background-color: $third-color;
       &:hover {
       background-color:$third-color;
       }
@@ -75,7 +77,9 @@ export default {
 }
 
 .logo-text {
+  font-family: "Titillium Web";
   font-size: 40px;
+  font-weight: bold;
 }
 
 .active {

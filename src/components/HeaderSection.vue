@@ -1,8 +1,6 @@
 <template>
   <header class="header py-3 px-4 px-md-5">
     <div class="template ">
-      <!-- NAVIGATION -->
-      <NavBar/>
       <!-- HERO SECTION -->
       <section class="hero-container mt-4">
           <!-- HERO TEXT -->
@@ -51,13 +49,13 @@
           <!-- PRODUCTS LIST -->
           <div class="products">
             <h2 class="products--title mb-4 col-xl-8">{{ $store.state.homepage.hero.title2}}</h2>
-            <div class="d-flex">
+            <div class="products--frame">
               <div class="products--cards col-lg-8">
                 <!-- Products 1 -->
                 <div class="products--card d-flex align-items-center my-4 bg-light rounded-3">
                   <div id="card__icon-1" class="card__icon d-flex justify-content-center p-3"></div>
                   <div class="card__content px-3">
-                    <h4 class="mt-3">{{ $store.state.homepage.hero.card.title}}</h4>
+                    <h3 class="mt-3">{{ $store.state.homepage.hero.card.title}}</h3>
                     <p>{{ $store.state.homepage.hero.card.content}}</p>
                     <p class="products__keywords">{{ $store.state.homepage.hero.card.keywords}}</p>
                   </div>
@@ -67,7 +65,7 @@
                 <div class="products--card d-flex align-items-center my-4 bg-light rounded-3">
                   <div id="card__icon-2" class="card__icon d-flex justify-content-center p-3"></div>
                   <div class="card__content px-3">
-                    <h4 class="mt-3">{{ $store.state.homepage.hero.card2.title}}</h4>
+                    <h3 class="mt-3">{{ $store.state.homepage.hero.card2.title}}</h3>
                     <p>{{ $store.state.homepage.hero.card2.content}}</p>
                     <p class="products__keywords">{{ $store.state.homepage.hero.card2.keywords}}</p>
                   </div>
@@ -76,17 +74,18 @@
                 <div class="products--card d-flex align-items-center my-4 bg-light rounded-3">
                   <div id="card__icon-3" class="card__icon d-flex justify-content-center p-3"></div>
                   <div class="card__content px-3">
-                    <h4 class="mt-3">{{ $store.state.homepage.hero.card3.title}}</h4>
+                    <h3 class="mt-3">{{ $store.state.homepage.hero.card3.title}}</h3>
                     <p>{{ $store.state.homepage.hero.card3.content}}</p>
                     <p class="products__keywords">{{ $store.state.homepage.hero.card3.keywords}}</p>
                   </div>
                 </div>
               </div>
-            <div class="products__illustration p-3 d-flex align-items-center justify-content-center col-lg-4">
-              <img class="products__illustration--pic" src="../assets/images/computer.png" alt="">
+              <!-- Illustration-->
+              <div class="products__illustration p-3 d-flex align-items-center justify-content-start col-lg-4">
+                <img class="products__illustration--pic" src="../assets/images/dazzle-line-design-system.svg" alt="">
+              </div>
             </div>
           </div>
-        </div>
       </section>
     </div>
   </header>
@@ -94,13 +93,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
 
 export default {
     name: 'HeaderSection',
 
     components: {
-        NavBar,
   },
 
     data () {
@@ -115,9 +112,7 @@ export default {
 <style scoped lang="scss">
 
 // -------- HEADER -----------------
-.header{
-  background: linear-gradient($primary-color-clear, #ffffff);
-}
+
     // HERO -----------------------
   .hero {
   &__chart {
@@ -127,7 +122,6 @@ export default {
   &__text {
     color: $primary-color;
     &--h1 {
-      font-size: 60px;
       margin-top: auto;
       margin-bottom: 0;
     }
@@ -142,40 +136,36 @@ export default {
     // PRODUCTS ---------------------
 .products {
   margin-top: 60px;
-  &--title {
-    font-size: 40px;
-    font-weight: bold;
-  }
   &--card {
     box-shadow: 2px 2px 10px rgba($primary-color, 0.25);
   }
   &__illustration {
     &--pic {
-      height: 400px;
+      height: 45vh;
     }
   }
   &__keywords {
-    color: $third-color;
+    color: $third-color-dark;
     font-weight: 600;
   }
 
 .card__icon {
-  width: 20%;
-  height: 70px;
+  width: 35%;
+  height: 90px;
 }
 
 #card__icon-1 {
-  background: url('../assets/images/icons8-web-96.png') no-repeat center center;
+  background: url('../assets/images/icons8-web-96.svg') no-repeat center center;
   background-size: contain;
 }
 
 #card__icon-2 {
-  background: url('../assets/images/icons8-web-96.png') no-repeat center center;
+  background: url('../assets/images/icons8-backend-development.svg') no-repeat center center;
   background-size: contain;
 }
 
 #card__icon-3 {
-  background: url('../assets/images/icons8-web-96.png') no-repeat center center;
+  background: url('../assets/images/icons8-moodle.svg') no-repeat center center;
   background-size: contain;
   }
 }
@@ -186,11 +176,27 @@ export default {
     // ----- 700px ------
 
 
-    // ----- 900px ------
-
+    // ----- 1200px ------
+    @media(min-width: 1200px) {
+  .products {
+  &--frame {
+    display: flex;
+    }
+  }
+}
 
     // ----- 1400px ------
 
+@media(min-width: 1600px) {
+  .products {
+  &__illustration {
+    &--pic {
+      height: 50vh;
+      }
+    }
+  }
+}
+  
 
 // --------- ANIMATIONS ------------
 
