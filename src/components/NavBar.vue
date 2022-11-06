@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg">
             <div class="container-fluid p-0 ">
               <!-- Logo -->
-              <a class="navbar-brand d-flex align-items-center" href="#"><img class="logo-img me-2" src='../assets/svg/logo.svg'/><div class="logo-text">INGDEV</div></a>
+              <a class="navbar-brand d-flex align-items-center" href="#"><img class="logo-img me-2" src='../assets/svg/logo.svg' alt="ingdev logo"/><div class="logo-text">INGDEV</div></a>
               <!-- Toggle button -->
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,9 +47,6 @@ export default {
   &-toggler {
     background-color: $secondary-color;
   }
-  &-brand {
-    height: 40px;
-  }
   & .nav-item {
     display: block;
   }
@@ -64,21 +61,22 @@ export default {
     }
     &__contactButton{
       color: $clear-color;
-      background-color: $third-color;
+      background-color: $secondary-color;
+      box-shadow: 5px 4px 3px rgba($primary-color, 0.25);
       &:hover {
-      background-color:$third-color;
+      background-color:$fourth-color;
       }
     }
   }
 }
 
 .logo-img {
-  height: 40px;
+  height: 2.5rem;
 }
 
 .logo-text {
   font-family: "Titillium Web";
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 

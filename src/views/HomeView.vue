@@ -1,20 +1,18 @@
 <template>
   <main class="mainSection">
-    <div class="header">
-      <NavBar />
-      <HeaderSection/>
-    </div>
+    <HeaderSection/>
     <ProductsDetails/>
     <AddedValues/>
+    <FooterSection/>
   </main>
 </template>
 
 <script>
 // @ is an alias to /src
-import NavBar from '@/components/NavBar.vue'
-import HeaderSection from '@/components/HeaderSection.vue'
-import ProductsDetails from '@/components/ProductsDetails.vue'
-import AddedValues from '@/components/AddedValues.vue'
+import HeaderSection from '@/components/homepage/HeaderSection.vue'
+import ProductsDetails from '@/components/homepage/ProductsDetails.vue'
+import AddedValues from '@/components/homepage/AddedValues.vue'
+import FooterSection from '@/components/FooterSection.vue'
 
 export default {
   name: 'HomeView',
@@ -25,10 +23,10 @@ export default {
   },
 
   components: {
-    NavBar,
     HeaderSection,
     ProductsDetails,
     AddedValues,
+    FooterSection
   },
 
   created: function() {
@@ -41,11 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.header{
-  background-image: radial-gradient(circle farthest-side at 20% 0%, $secondary-color-clear 10%, #ffffff 90%);
-
-
+.mainSection {
+  background-image: radial-gradient( at center center, $clear-color 20%, $third-color-clear 60%, $third-color);
 }
-
 </style>

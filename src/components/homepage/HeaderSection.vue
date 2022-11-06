@@ -1,5 +1,6 @@
 <template>
   <header class="header py-3 px-4 px-md-5">
+    <NavBar/>
     <div class="template ">
       <!-- HERO SECTION -->
       <section class="hero-container mt-4">
@@ -48,7 +49,7 @@
           </div>
           <!-- PRODUCTS LIST -->
           <div class="products">
-            <h2 class="products--title mb-4 col-xl-8">{{ $store.state.homepage.hero.title2}}</h2>
+            <h2 class="products--title mb-4 col-xl-10">{{ $store.state.homepage.hero.title2}}</h2>
             <div class="products--frame">
               <div class="products--cards col-lg-8">
                 <!-- Products 1 -->
@@ -82,7 +83,7 @@
               </div>
               <!-- Illustration-->
               <div class="products__illustration p-3 d-flex align-items-center justify-content-start col-lg-4">
-                <img class="products__illustration--pic" src="../assets/images/dazzle-line-design-system.svg" alt="">
+                <img class="products__illustration--pic" src="../../assets/images/dazzle-line-design-system.svg" alt="">
               </div>
             </div>
           </div>
@@ -93,11 +94,13 @@
 </template>
 
 <script>
+import NavBar from '../../components/NavBar.vue'
 
 export default {
     name: 'HeaderSection',
 
     components: {
+      NavBar,
   },
 
     data () {
@@ -112,7 +115,12 @@ export default {
 <style scoped lang="scss">
 
 // -------- HEADER -----------------
+.header{
+  background-image: 
+    radial-gradient( 50% 50% at center 400px, $clear-color 30%, transparent),
 
+    ;
+}
     // HERO -----------------------
   .hero {
   &__chart {
@@ -155,17 +163,17 @@ export default {
 }
 
 #card__icon-1 {
-  background: url('../assets/images/icons8-web-96.svg') no-repeat center center;
+  background: url('../../assets/images/icons8-web-96.svg') no-repeat center center;
   background-size: contain;
 }
 
 #card__icon-2 {
-  background: url('../assets/images/icons8-backend-development.svg') no-repeat center center;
+  background: url('../../assets/images/icons8-backend-development.svg') no-repeat center center;
   background-size: contain;
 }
 
 #card__icon-3 {
-  background: url('../assets/images/icons8-moodle.svg') no-repeat center center;
+  background: url('../../assets/images/icons8-moodle.svg') no-repeat center center;
   background-size: contain;
   }
 }
@@ -196,7 +204,26 @@ export default {
     }
   }
 }
-  
+
+  // ------ CIRCLES --------
+
+  .circle {
+
+&-light {
+    fill: $secondary-color;
+    fill-opacity: 0.54;
+    transition: all 0.5s ease;
+}
+&-1 {
+    fill: $pink-color;
+    transform: translateX(-100%);
+}
+&-3 {
+    fill: $pink-color;
+    transition: all 0.5s ease;
+}
+}
+
 
 // --------- ANIMATIONS ------------
 
@@ -281,26 +308,5 @@ export default {
       height: 152px;
      }
 }
-
-  // ------ CIRCLES --------
-
-  .circle {
-
-&-light {
-    fill: $secondary-color;
-    fill-opacity: 0.54;
-    transition: all 0.5s ease;
-}
-&-1 {
-    fill: $pink-color;
-    transform: translateX(-100%);
-}
-&-3 {
-    fill: $pink-color;
-    transition: all 0.5s ease;
-}
-}
-
-
 
 </style>

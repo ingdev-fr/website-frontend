@@ -3,7 +3,7 @@
         <div class="template row">
             <!-- IMAGE -->
             <div class="col-lg-4 d-flex align-items-center justify-content-end">
-                <img class="values__img" src="../assets/images/dazzle-line-startup-investment.svg" alt="">
+                <img class="values__img" src="../../assets/images/dazzle-line-startup-investment.svg" alt="">
             </div>
             <!-- BLOC DE COMPETENCES-->
             <div class="col-lg-8">
@@ -115,7 +115,7 @@ export default {
 <style scoped lang="scss">
 
 .section-values {
-    background-image: radial-gradient(circle farthest-side at 55% 100%, $third-color-clear 10%, #ffffff 90%);
+    background-image: radial-gradient(150rem 60rem at bottom right, $secondary-color-clear 10%, transparent 90%);
 }
 .values {
     &__list {
