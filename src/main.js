@@ -12,7 +12,6 @@ import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap"
 
 
-
 // Fontawesome
     /* import the fontawesome core */
     import { library } from '@fortawesome/fontawesome-svg-core'
