@@ -1,7 +1,7 @@
 <template>
-  <header class="header py-3 px-4 px-md-5">
-    <NavBar/>
+  <header class="header">
     <div class="template ">
+      <NavBar/>
       <!-- HERO SECTION -->
       <section class="hero-container mt-4">
           <!-- HERO TEXT -->

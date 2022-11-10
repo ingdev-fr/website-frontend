@@ -28,6 +28,7 @@ export default {
       .template {
       max-width: 1400px;
       margin: auto;
+      padding: 1rem 2rem;
     }
 
       // Taille des polices
@@ -43,11 +44,6 @@ export default {
       
       p {
         font-size: 1rem;
-      }
-
-      // Variables Bootstrap
-      .btn-success {
-        background-color: purple;
       }
 }
 
