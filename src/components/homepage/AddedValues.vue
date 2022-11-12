@@ -1,24 +1,24 @@
 <template>
-    <section class="section-values py-5 px-3 mt-5">
-        <div class="template row">
+    <section class="section-values pb-5 px-3 ">
+        <div class="template d-lg-flex">
             <!-- IMAGE -->
-            <div class="col-lg-4 d-flex align-items-center justify-content-end">
+            <div class="col-lg-4 d-flex d-flex-column d-flex-lg row align-items-center justify-content-center mb-5">
                 <img class="values__img" src="../../assets/images/dazzle-line-startup-investment.svg" alt="">
             </div>
             <!-- BLOC DE COMPETENCES-->
             <div class="col-lg-8">
-                <div class="ms-5">
+                <div class="ms-lg-5 text-center text-lg-start">
                     <!-- Titre et contenu-->
                     <h2 class="values__list__title mb-3 pb-3 fw-bold">{{ $store.state.homepage.about.title }}</h2>
                     <p class="values__list__content mb-5">{{ $store.state.homepage.about.content }}</p>
                     <!-- Liste des compétences-->
                     <div class="container-grid values d-flex flex-justify-center">
-                        <div class="values__list px-5 py-3">
+                        <div class="values__list px-2 px-lg-5 py-3">
                             <div class="values__list__features">
                                 <!-- COMPETENCIES-->
                                     <!-- Competency-1 -->
-                                <div class="feature text-start">
-                                    <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div class="feature d-flex flex-column align-items-center align-items-lg-start">
+                                    <svg class="ms-5 ms-lg-0" width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g id="svgCirclesText">
                                             <g id="groupPink">
                                             <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
@@ -35,8 +35,8 @@
                                     <p class="feature__content pt-2">{{ $store.state.homepage.about.competency1.content }}</p>
                                 </div>
                                 <!-- Competency-2 -->
-                                <div class="feature text-start">
-                                    <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div class="feature text-lg-start">
+                                    <svg class="ms-5 ms-lg-0" width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g id="svgCirclesText">
                                             <g id="groupPink">
                                             <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
@@ -53,8 +53,8 @@
                                     <p class="feature__content pt-2">{{ $store.state.homepage.about.competency2.content }}</p>
                                 </div>
                                 <!-- Competency-3 -->
-                                <div class="feature text-start">
-                                    <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div class="feature text-lg-start">
+                                    <svg class="ms-5 ms-lg-0" width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g id="svgCirclesText">
                                             <g id="groupPink">
                                             <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
@@ -71,8 +71,8 @@
                                     <p class="feature__content pt-2">{{ $store.state.homepage.about.competency3.content }}</p>
                                 </div>
                                 <!-- Competency-4 -->
-                                <div class="feature text-start">
-                                    <svg width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div class="feature text-lg-start">
+                                    <svg class="ms-5 ms-lg-0" width="140" height="72" viewBox="0 0 350 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g id="svgCirclesText">
                                             <g id="groupPink">
                                             <circle class="circle-3" cx="167" cy="89" r="40" fill="#F62992" fill-opacity="0.74"/>
@@ -129,7 +129,7 @@ export default {
         }
     }
     &__img {
-            height: 45vh;
+            height: 27vh;
         }
 }
 
@@ -163,6 +163,15 @@ export default {
         }
     }
 
+}
+
+// --- MEDIA QUERIES ----
+
+    // ----- min 992px ------
+    @media(min-width: 992px) {
+    .values__img {
+        height: 45vh;
+    }
 }
 
     // ----- 1600px ------

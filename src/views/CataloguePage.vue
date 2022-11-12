@@ -1,14 +1,17 @@
 <template>
-    <main class="mainSection">
-        <!-- SECTION HEADER -->
+    <main class="catalog">
+        <div class="template">
+            <!-- SECTION HEADER -->
             <NavBar/>
             <HeaderCatalog/>
             <ContentCatalog/>
-        <!-- CATALOGUE -->
-        <section class="catalog_stuff">
+            <!-- CATALOGUE -->
+            <section class="catalog_stuff">
 
 
-        </section>
+            </section>
+        </div>
+        
     </main>
 
   
@@ -27,6 +30,19 @@ export default {
         HeaderCatalog,
         ContentCatalog
   },
+
+  methods : {
+    // Je créé la méthode qui permet de réécrire la valeur de la donnée "activeClass" du store pour afficher dynamiquement la classe "active" dans la navigation de cette page. 
+    changeActiveClass : function () {
+      this.$store.commit('CHANGE_ACTIVECLASS');
+      this.$store.state.activeClass = "showroom";
+      console.log(this.$store.state.activeClass);
+    }
+  },
+
+  mounted: function () {
+    this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
+  }
     
 
 }
@@ -34,7 +50,7 @@ export default {
 
 <style scoped lang="scss">
 
-.mainSection {
+.catalog {
     background-image: radial-gradient(100rem 80rem at top left, $third-color-clear 10%, #ffffff 90%);
 }
 

@@ -4,18 +4,18 @@
               <!-- Logo -->
               <a class="navbar-brand d-flex align-items-center" href="#"><img class="logo-img" src='../assets/images/logo.svg' alt="ingdev logo"/></a>
               <!-- Toggle button -->
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" role="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <!-- Menu de navigation -->
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <!-- ACCUEIL -->
-                  <li class="nav-item mx-2">
-                    <router-link class="nav-link" to="/"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1"/>Accueil</router-link>
+                  <li class="nav-item mx-2" id="nav-item-1" :class="this.$store.state.activeClass == 'accueil' ? 'active' : '' ">
+                    <router-link class="nav-link" to="/"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1" />Accueil</router-link>
                   </li>
                   <!-- SHOWROOM -->
-                  <li class="nav-item dropdown mx-2">
+                  <li class="nav-item dropdown mx-2" id="nav-item-2" :class="this.$store.state.activeClass == 'showroom' ? 'active' : '' ">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font-awesome-icon icon="fa-solid fa-store" class="nav-link__icon d-block mx-auto mb-1"/>Showroom</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <router-link class="dropdown-item" to="/catalogue">Catalogue formations</router-link>
@@ -24,11 +24,11 @@
                     </ul>
                   </li>
                   <!-- CONNEXION -->
-                  <li class="nav-item mx-5">
+                  <li class="nav-item mx-2 mx-lg-5" id="nav-item-3">
                     <router-link class="nav-link connexion-link" to="/login"><font-awesome-icon icon="fa-solid fa-right-to-bracket" class="nav-link__icon d-block mx-auto mb-1"/>Connexion</router-link>
                   </li>
                   <!-- CONTACT -->
-                  <li class="nav-item ms-5 d-flex align-items-center justify-content-center">
+                  <li class="nav-item  d-flex align-items-center justify-content-center justify-content-lg-center">
                       <!-- BUTTON -->
                     <button class="nav-link btn nav-link__contactButton px-2" data-bs-toggle="modal" data-bs-target="#contactModal" data-bs-whatever="@mdo">Contactez-nous</button>
                       <!-- MODAL -->
@@ -126,7 +126,7 @@ export default {
       this.notConfirm = '';
       // emailjs.sendForm('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID','élément HTML','YOUR_PUBLIC_KEY')
       emailjs.sendForm('service_otbd5ld', 'template_kveigk3', document.getElementById('contactForm'),
-      'LErD-dEpKHaBcYZ0F')
+      'LErD-dEpKHaBcYZ0F') // Ici j'envoie les données des inputs du form comprenant un attribut "name" à emailJS. 
       .then(
         (result => {
           console.log('SUCCESS!', result.text);
@@ -175,17 +175,16 @@ export default {
       }
     }
   }
+  & .dropdown-menu {
+    background: $third-color-clear;
+  }
 }
 .logo-img {
-  height: 50px;
-}
-
-.active {
-  color: $secondary-color !important;
+  height: 2.5rem;
 }
 
 #modal-header {
-  background: $third-color;
+  background: $third-color-transp;
 }
 
 .contact-icon {
@@ -198,6 +197,65 @@ export default {
 
 .notConfirm {
   color: red;
+}
+
+      .active {
+        border-bottom: 2px solid $third-color;
+      }   
+
+// ------------  MEDIA QUERIES -----------
+
+    // ----  MAX 1400px = small desktops
+@media(max-width: 1399px) {
+  
+}
+
+    // ----  MAX 992px = Tablettes larges
+@media(max-width: 991px) {
+  body{
+    font-size: 12px;
+}
+  .navbar {
+    height: initial;
+  }
+  .collapse {
+
+    border-radius: 10px;
+    margin-top: 25px;
+    padding: 10px 0;
+  }
+  .nav-item {
+    & .nav-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    &__icon {
+      margin-right: 5px !important; 
+      margin-left: 0 !important;
+      }
+    &__contactButton {
+      margin-top: 10px;
+    }
+    }
+  }
+
+  #navbarDropdownMenuLink::after {
+    margin-top: 10px;
+  }
+
+  .active {
+    background: $third-color;
+    border-radius: 10px;
+  }
+
+
+}
+
+    // ----  0 => 768px = Tablettes et smartphones 
+@media(max-width: 767px) {
+
 }
 
 </style>

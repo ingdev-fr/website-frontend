@@ -6,6 +6,7 @@ const store = createStore({
     state: {
         urlUploads: "http://localhost:1337",
         urlEndpoints: "http://localhost:1337/api",
+        activeClass: '',
         header: {
             logo: '',
         },
@@ -62,6 +63,9 @@ const store = createStore({
 
     // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments. 
     mutations: {
+        CHANGE_ACTIVECLASS(state) {
+            state.activeClass = ''
+        }
 
         
     },

@@ -1,12 +1,19 @@
 <template>
     <router-view/>
+    <FooterSection/>
 
 </template>
 
 <script>
+import FooterSection from '@/components/FooterSection.vue'
 
 export default {
   name: 'App',
+
+  components: {
+    FooterSection, 
+
+  }
 }
 
 </script>
@@ -28,7 +35,7 @@ export default {
       .template {
       max-width: 1400px;
       margin: auto;
-      padding: 1rem 2rem;
+      padding: 0 2rem;
     }
 
       // Taille des polices
@@ -45,7 +52,23 @@ export default {
       p {
         font-size: 1rem;
       }
+
 }
+
+// ------------  MEDIA QUERIES -----------
+
+    // ----  0 => 992px = Tablettes larges
+@media(max-width: 991px) {
+
+  // FONT-SIZE REM 
+  :root {
+    font-size: 14px;
+  }
+
+  .template{
+    padding: 1rem 2rem;
+  }
+} 
 
 </style>
 

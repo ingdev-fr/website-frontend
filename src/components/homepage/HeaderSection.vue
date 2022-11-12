@@ -1,9 +1,9 @@
 <template>
   <header class="header">
-    <div class="template ">
+    <div class="template">
       <NavBar/>
       <!-- HERO SECTION -->
-      <section class="hero-container mt-4">
+      <section class="hero-container mt-lg-4">
           <!-- HERO TEXT -->
           <div id="hero__text" class="row hero__text rounded-3 py-3 col-xl-10 mx-auto">
             <div class="pt-3 d-flex flex-column justify-content-center align-items-center text-center">
@@ -49,12 +49,12 @@
           </div>
           <!-- PRODUCTS LIST -->
           <div class="products">
-            <h2 class="products--title mb-4 col-xl-10">{{ $store.state.homepage.hero.title2}}</h2>
+            <h2 class="products--title mb-4 col-xl-10 text-center text-lg-start">{{ $store.state.homepage.hero.title2}}</h2>
             <div class="products--frame">
               <div class="products--cards col-lg-8">
                 <!-- Products 1 -->
-                <div class="products--card d-flex align-items-center my-4 bg-light rounded-3">
-                  <div id="card__icon-1" class="card__icon d-flex justify-content-center p-3"></div>
+                <div class="products--card d-lg-flex align-items-center my-4 py-2 bg-light rounded-3">
+                  <div id="card__icon-1" class="card__icon  p-3"></div>
                   <div class="card__content px-3">
                     <h3 class="mt-3">{{ $store.state.homepage.hero.card.title}}</h3>
                     <p>{{ $store.state.homepage.hero.card.content}}</p>
@@ -63,8 +63,8 @@
                   
                 </div>
                 <!-- Products 2 -->
-                <div class="products--card d-flex align-items-center my-4 bg-light rounded-3">
-                  <div id="card__icon-2" class="card__icon d-flex justify-content-center p-3"></div>
+                <div class="products--card d-lg-flex align-items-center my-4 py-2 bg-light rounded-3">
+                  <div id="card__icon-2" class="card__icon p-3"></div>
                   <div class="card__content px-3">
                     <h3 class="mt-3">{{ $store.state.homepage.hero.card2.title}}</h3>
                     <p>{{ $store.state.homepage.hero.card2.content}}</p>
@@ -72,8 +72,8 @@
                   </div>
                 </div>
                 <!-- Products 3 -->
-                <div class="products--card d-flex align-items-center my-4 bg-light rounded-3">
-                  <div id="card__icon-3" class="card__icon d-flex justify-content-center p-3"></div>
+                <div class="products--card d-lg-flex align-items-center my-4 py-2 bg-light rounded-3">
+                  <div id="card__icon-3" class="card__icon p-3"></div>
                   <div class="card__content px-3">
                     <h3 class="mt-3">{{ $store.state.homepage.hero.card3.title}}</h3>
                     <p>{{ $store.state.homepage.hero.card3.content}}</p>
@@ -82,7 +82,7 @@
                 </div>
               </div>
               <!-- Illustration-->
-              <div class="products__illustration p-3 d-flex align-items-center justify-content-start col-lg-4">
+              <div class="products__illustration p-3 d-flex flex-column flex-lg-row justify-content-center align-items-center col-lg-4">
                 <img class="products__illustration--pic" src="../../assets/images/dazzle-line-design-system.svg" alt="">
               </div>
             </div>
@@ -149,7 +149,7 @@ export default {
   }
   &__illustration {
     &--pic {
-      height: 45vh;
+      height: 30vh;
     }
   }
   &__keywords {
@@ -158,7 +158,6 @@ export default {
   }
 
 .card__icon {
-  width: 35%;
   height: 90px;
 }
 
@@ -175,33 +174,6 @@ export default {
 #card__icon-3 {
   background: url('../../assets/images/icons8-moodle.svg') no-repeat center center;
   background-size: contain;
-  }
-}
-
-
-// --- MEDIA QUERIES ----
-
-    // ----- 700px ------
-
-
-    // ----- 1200px ------
-    @media(min-width: 1200px) {
-  .products {
-  &--frame {
-    display: flex;
-    }
-  }
-}
-
-    // ----- 1400px ------
-
-@media(min-width: 1600px) {
-  .products {
-  &__illustration {
-    &--pic {
-      height: 50vh;
-      }
-    }
   }
 }
 
@@ -222,6 +194,49 @@ export default {
     fill: $pink-color;
     transition: all 0.5s ease;
 }
+}
+
+
+// --- MEDIA QUERIES ----
+
+    // ----- max 992px = Tablettes normales------
+  @media(max-width: 992px) {
+.products--card {
+  text-align: center;
+}
+.card__icon {
+  text-align: center;
+}
+
+
+  }
+    // ----- min 992px ------
+    @media(min-width: 992px) {
+  .products {
+  &--frame {
+    display: flex;
+    }
+  &__illustration {
+    &--pic {
+      height: 45vh;
+    }
+    }
+  }
+  .card__icon {
+    width: 35%;
+  }
+}
+
+    // ----- 1400px ------
+
+@media(min-width: 1600px) {
+  .products {
+  &__illustration {
+    &--pic {
+      height: 50vh;
+      }
+    }
+  }
 }
 
 

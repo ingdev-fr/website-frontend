@@ -1,6 +1,6 @@
 <template>
-    <div class="details mt-5">
-        <div class="template text-center py-5">
+    <div class="details mt-lg-5">
+        <div class="template text-center py-lg-5">
             <!-- TITRE -->
             <h2 class="details__title col-lg-8 mx-auto mb-5">Travaillons ensemble à chaque étape de la construction de votre solution!</h2>
             <!-- LISTE DES PHASES -->
@@ -51,4 +51,10 @@ export default {
 
 <style lang="scss" scoped>
 
+// --- MEDIA QUERIES ----
+
+    // ----- min 992px ------
+@media(min-width: 992px) {
+
+}
 </style>

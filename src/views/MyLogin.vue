@@ -167,6 +167,14 @@
       margin-left: 2px;
       margin-right: 2px;
   }
-  
+
+// ------------  MEDIA QUERIES -----------
+
+      // ----  0 => 992px = Tablettes larges
+@media(max-width: 991px) {
+  .navbar {
+    height: initial;
+  }
+}
   </style>
   

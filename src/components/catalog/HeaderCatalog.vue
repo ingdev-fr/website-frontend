@@ -1,5 +1,5 @@
 <template>
-  <section class="catalog__header template">
+  <section class="catalog__header">
     <!---------- PRESENTATIONS  -->
     <div class="py-5 text-center container">
         <div class="row py-lg-5">

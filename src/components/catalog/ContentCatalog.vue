@@ -1,12 +1,10 @@
 <template>
-    <section class="template">
-        <div class="contentCatalog row d-flex">
-            <div class="searchbar col-md-4">
-                <div class="filtres"></div>
-                <div class="promotionnal"></div>
-            </div>
-            <div class="trainings col-md-8"></div>
+    <section class="contentCatalog row d-flex">
+        <div class="searchbar col-md-4">
+            <div class="filtres"></div>
+            <div class="promotionnal"></div>
         </div>
+        <div class="trainings col-md-8"></div>
     </section>
 </template>
 
