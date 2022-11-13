@@ -16,6 +16,7 @@ const store = createStore({
                 content: '',
                 backgroundImage: '',
                 title2: '',
+                content2:'',
                 card : {
                     title: '',
                     content: '',
@@ -95,6 +96,7 @@ const store = createStore({
                 store.state.homepage.hero.title = response.data.data.attributes.hero.title;
                 store.state.homepage.hero.content = response.data.data.attributes.hero.content;
                 store.state.homepage.hero.title2 = response.data.data.attributes.hero.title2;
+                store.state.homepage.hero.content2 = response.data.data.attributes.hero.content2;
                 store.state.homepage.hero.card.title = response.data.data.attributes.hero.card.title;
                 store.state.homepage.hero.card2.title = response.data.data.attributes.hero.card2.title;
                 store.state.homepage.hero.card3.title = response.data.data.attributes.hero.card3.title;

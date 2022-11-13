@@ -115,12 +115,12 @@ export default {
 <style scoped lang="scss">
 
 .section-values {
-    background-image: radial-gradient(150rem 60rem at bottom right, $secondary-color-clear 10%, transparent 90%);
+    background: linear-gradient($third-color-clear, $third-color);
 }
 .values {
     &__list {
         background: #fff;
-        box-shadow: 2px 2px 10px rgba($primary-color, 0.25);
+        box-shadow: 5px 4px 3px rgba($text-color, 0.25);
         border-radius: 7px;
         &__features {
             display: grid;
@@ -135,16 +135,16 @@ export default {
 
 .feature {
     &__title {
-        color: $primary-color;
+        color: $text-color;
     }
     &__content {
-        color: $primary-color;
+        color: $text-color;
     }
 }
 
 #letterI, #letterN, #letterG {
     opacity: 0;
-    fill: $primary-color;
+    fill: $text-color;
     font-family: inherit;
     font-weight: bold;
 }

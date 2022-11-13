@@ -38,20 +38,23 @@
                 </svg>
                 <h1 class="hero__text--h1 fw-bold pb-0" >{{ $store.state.homepage.hero.title }}</h1>
               </div>
-              <p class="hero__text--content fs-5 mt-3 col-lg-10"> {{ $store.state.homepage.hero.content }} </p>
+              <p class="hero__text--content-large fs-5 mt-3 col-lg-10"> {{ $store.state.homepage.hero.content }} </p>
+              <p class="hero__text--content-small fs-5 mt-3 col-lg-10"> Mettez en place vos processus de conception, gestion et pilotage de vos formations.</p>
+
                 <!-- HERO TECHNOLOGIES -->
-              <div class="hero__technologies my-3">
-                <div class="hero__technologies__pictures d-flex flex-wrap">
+              <div class="hero__technologies mt-3">
+                <div class="hero__technologies__pictures d-flex flex-wrap justify-content-center">
                   <div v-for="(item, id) in $store.state.homepage.about.technologies.logos"  v-bind:key="id"><img :src=url+item.attributes.url :alt=item.attributes.caption class="hero__technologies__img rounded-1 me-2 mb-2"></div>
                 </div>                   
               </div>
             </div>
           </div>
           <!-- PRODUCTS LIST -->
-          <div class="products">
-            <h2 class="products--title mb-4 col-xl-10 text-center text-lg-start">{{ $store.state.homepage.hero.title2}}</h2>
+          <div class="products mt-5">
+            <h2 class="products--title mb-5 mb-lg-4 col-xl-10 text-center text-lg-start">{{ $store.state.homepage.hero.title2}}</h2>
+            <p class="hero__text--content fs-5 mt-3 col-lg-10"> {{ $store.state.homepage.hero.content2 }} </p>
             <div class="products--frame">
-              <div class="products--cards col-lg-8">
+              <div class="products--cards col-lg-8 me-xl-5">
                 <!-- Products 1 -->
                 <div class="products--card d-lg-flex align-items-center my-4 py-2 bg-light rounded-3">
                   <div id="card__icon-1" class="card__icon  p-3"></div>
@@ -116,10 +119,7 @@ export default {
 
 // -------- HEADER -----------------
 .header{
-  background-image: 
-    radial-gradient( 50% 50% at center 400px, $clear-color 30%, transparent),
-
-    ;
+  background: radial-gradient(circle at center 350px, $third-color-clear, transparent 75%);
 }
     // HERO -----------------------
   .hero {
@@ -128,24 +128,27 @@ export default {
   width: auto;
   }
   &__text {
-    color: $primary-color;
+    color: $text-color;
     &--h1 {
       margin-top: auto;
       margin-bottom: 0;
+    }
+    &--content-small {
+      display: none;
     }
   }
   &__technologies {
     &__img {
         height: 5vh;
-        box-shadow: 5px 4px 3px rgba($primary-color, 0.25);
+        box-shadow: 5px 4px 3px rgba($text-color, 0.25);
     }
   }
 }
     // PRODUCTS ---------------------
 .products {
-  margin-top: 60px;
+
   &--card {
-    box-shadow: 2px 2px 10px rgba($primary-color, 0.25);
+    box-shadow: 5px 4px 3px rgba($text-color, 0.25);
   }
   &__illustration {
     &--pic {
@@ -201,11 +204,21 @@ export default {
 
     // ----- max 992px = Tablettes normales------
   @media(max-width: 992px) {
+.header{
+  background: radial-gradient(circle at top center, $third-color-clear -20%, transparent 85%);
+}
 .products--card {
   text-align: center;
 }
 .card__icon {
   text-align: center;
+}
+
+.hero__text--content-large {
+  display: none; 
+}
+.hero__text--content-small {
+  display: initial; 
 }
 
 
@@ -234,6 +247,18 @@ export default {
   &__illustration {
     &--pic {
       height: 50vh;
+      }
+    }
+  }
+}
+
+    // ----- 2000px ------
+
+    @media(min-width: 2000px) {
+  .products {
+  &__illustration {
+    &--pic {
+      height: 35vh;
       }
     }
   }

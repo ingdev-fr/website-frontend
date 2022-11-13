@@ -51,7 +51,7 @@ export default {
 <style scoped lang="scss">
 
 .catalog {
-    background-image: radial-gradient(100rem 80rem at top left, $third-color-clear 10%, #ffffff 90%);
+
 }
 
 

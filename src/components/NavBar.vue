@@ -153,12 +153,15 @@ export default {
   height: 10vh;
   &-toggler {
     background-color: $secondary-color;
+    &-icon {
+      width: 1em;
+    }
   }
   & .nav-item {
     display: block;
   }
   & .nav-link {
-    color: $primary-color;
+    color: $text-color;
     &:hover {
       transform: scale(1.05);
     }
@@ -169,7 +172,7 @@ export default {
     &__contactButton{
       color: $clear-color;
       background-color: $secondary-color;
-      box-shadow: 5px 4px 3px rgba($primary-color, 0.25);
+      box-shadow: 5px 4px 3px rgba($text-color, 0.25);
       &:hover {
       background-color:$fourth-color;
       }
@@ -199,9 +202,9 @@ export default {
   color: red;
 }
 
-      .active {
-        border-bottom: 2px solid $third-color;
-      }   
+.active {
+  border-bottom: 2px solid $text-color;
+}   
 
 // ------------  MEDIA QUERIES -----------
 
@@ -241,6 +244,10 @@ export default {
     }
   }
 
+  .logo-img {
+    height: 2.5rem;
+  }
+
   #navbarDropdownMenuLink::after {
     margin-top: 10px;
   }
@@ -248,8 +255,13 @@ export default {
   .active {
     background: $third-color;
     border-radius: 10px;
+    border: none;
   }
 
+  .dropdown-item {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+  }
 
 }
 

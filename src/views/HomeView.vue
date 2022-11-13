@@ -1,7 +1,7 @@
 <template>
   <main class="mainSection">
     <HeaderSection/>
-    <ProductsDetails/>
+    <ProcessDetails/>
     <AddedValues/>
   </main>
 </template>
@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 import HeaderSection from '@/components/homepage/HeaderSection.vue'
-import ProductsDetails from '@/components/homepage/ProductsDetails.vue'
+import ProcessDetails from '@/components/homepage/ProcessDetails.vue'
 import AddedValues from '@/components/homepage/AddedValues.vue'
 
 export default {
@@ -23,7 +23,7 @@ export default {
 
   components: {
     HeaderSection,
-    ProductsDetails,
+    ProcessDetails,
     AddedValues,
   },
 
@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 .mainSection {
-  background-image: radial-gradient( at center center, $clear-color 20%, $third-color-clear 60%, $third-color);
+  background: $third-color;
 }
 
 </style>
