@@ -1,6 +1,6 @@
 <template>
     <footer class="footer py-5">
-      <div class="template d-lg-flex">
+      <div class="template d-md-flex">
         <!-- INFOS FOOTER -->
         <div class="footer__infos col-md-4 p-2">
           <div class="">
@@ -165,6 +165,12 @@ a {
   text-decoration: none;
 }
 
+// --- MEDIA QUERIES ----
+
+    // ----- max 992px = Tablettes normales------
+@media(max-width: 992px) {
+
+}
 
 
 </style>

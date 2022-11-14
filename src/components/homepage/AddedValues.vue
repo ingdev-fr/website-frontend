@@ -13,7 +13,7 @@
                     <p class="values__list__content mb-5">{{ $store.state.homepage.about.content }}</p>
                     <!-- Liste des compétences-->
                     <div class="container-grid values d-flex flex-justify-center">
-                        <div class="values__list px-2 px-lg-5 py-3">
+                        <div class="values__list px-2 px-md-4 px-lg-5 py-3">
                             <div class="values__list__features">
                                 <!-- COMPETENCIES-->
                                     <!-- Competency-1 -->

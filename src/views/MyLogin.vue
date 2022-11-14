@@ -3,7 +3,6 @@
         <div class="template text-center">
             <NavBar/>
             <div class="login__box d-flex align-items-center justify-content-center">
-                <img class="login__picture col-md-10" src="../assets/images/logo-v-noblack.svg" alt="logo Ingdev">
                 <div class="login__back row justify-content-center align-items-center col-md-7 mx-auto">
                     <h1 class= "login__title text-center fs-2">Se connecter</h1>
                     <form class="form col-10 col-md-8 col-lg-6 text-center" id="form" action="">
@@ -77,6 +76,19 @@
           loginErrorMessage: "L'identifiant n'est pas valide",
       }
     },
+
+    methods : {
+    // Je créé la méthode qui permet de réécrire la valeur de la donnée "activeClass" du store pour afficher dynamiquement la classe "active" dans la navigation de cette page. 
+    changeActiveClass : function () {
+      this.$store.commit('CHANGE_ACTIVECLASS');
+      this.$store.state.activeClass = "connexion";
+      console.log(this.$store.state.activeClass);
+    },
+    // fonction pour se logger
+    loginUser: function () {
+        this.loginError = true;
+      }
+  },
   
     computed: {
       // Validation des champs du formulaire
@@ -98,13 +110,11 @@
           }
       }
     },
-  
-    methods: {
-      // fonction pour se logger
-      loginUser: function () {
-        this.loginError = true;
-      }
-    }
+
+    mounted: function () {
+    this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
+  }
+
   }
   
   </script>
@@ -113,7 +123,7 @@
 
 .background {
     height: 100vh;
-    background-image: radial-gradient( at center center, $clear-color 10%, $third-color-clear 60%, $third-color);
+    background-image: linear-gradient( $third-color-clear, $third-color);
 }
 
 .navbar {
@@ -132,16 +142,12 @@
       max-width: 25%;
       }
       & span {
-          color: #0a58ca;
+          color: $text-color;
           cursor: pointer;
       }
       & .disabled{
           background-color: rgb(170, 170, 170);
       }
-    }
-    &__picture {
-    height: 90vh;
-    position: absolute; 
     }
     &__back{
     position: absolute;
@@ -150,7 +156,7 @@
     &__title{
         font-size: 38px;
         margin-bottom: 30px;
-        color: $secondary-color;
+        color: $text-color;
         }
     &__button {
     background: $secondary-color;

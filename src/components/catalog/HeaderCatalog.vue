@@ -1,43 +1,68 @@
 <template>
-  <section class="catalog__header">
+  <section class="presentation template">
     <!---------- PRESENTATIONS  -->
     <div class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-md-10 mx-auto">
-                <h1 class="fw-light">Nos formations</h1>
-                <p class="lead text-muted">Retrouvez dans notre exemple de catalogue les informations essentielles permettant à vos clients de sélectionner la formation adaptée à leurs besoins : Recherche par catégorie ou par contenu, modalités de formation, programme de formation avec possibilité de téléchargement, tarifs et disponibilités des places.
+                <h1 class="mb-5">Nos formations</h1>
+                <p class="lead fs-5">Retrouvez dans notre exemple de catalogue les informations essentielles permettant à vos clients de sélectionner la formation adaptée à leurs besoins : Recherche par catégorie ou par contenu, modalités de formation, programme de formation avec possibilité de téléchargement, tarifs et disponibilités des places.
                 </p>
             </div>
         </div>
     </div>
-    <!----------- INFORMATIONS-->
-            <!-- CONTENT -->
-    <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                    <p class="text-white fs-4">Conditions</p>
-                    <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+    <!----------- FORMATIONS -->
+    <div class="formations row">
+        <!-- Promotions -->
+        <div class="promotion col-md-4 p-2 rounded">
+            <h2 class="fs-4 text-center">A ne pas manquer</h2>
+        </div>
+        <!-- Barre de recherche -->
+        <div class="recherche col-md-8 p-2 rounded">
+            <h2 class="fs-4 text-center">Recherche</h2>
+            <form class="input-group row" role="search" v-on:submit.prevent>
+                <div class="d-md-flex mb-3">
+                    <input class="form-control rounded me-1" type="search" placeholder="Recherche par mots clés !" aria-label="Search" v-model="searchWords" @keyup.enter="setSearch()">
+                    <select class="form-select rounded ms-1" aria-label="Domaines de formation">
+                        <option selected>Recherche par domaines de formation</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
                 </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-white">Nos cours en ligne</h4>
-                    <a href="#" class="text-white">Ingdev LMS</a>
+                <div class="d-md-flex justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Default checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Default checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Default checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Default checkbox
+                        </label>
+                    </div>
                 </div>
+            </form>
+            <!-- Affichage des formations -->
+            <div class="affichage">
+
             </div>
         </div>
     </div>
-            <!-- TOGGLE BAR-->
-    <div class="navbar navbar-dark bg-dark shadow-sm">
-         <div class="container">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                <strong>Informations</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </div>      
+    
   </section>
 </template>
 
@@ -48,8 +73,11 @@ export default {
 }
 </script>
 
-<style lang="scss scoped">
+<style lang="scss" scoped>
 
-
+.promotion {
+    border: 1px solid $third-color;
+    background: $third-color-clear;
+}
 
 </style>

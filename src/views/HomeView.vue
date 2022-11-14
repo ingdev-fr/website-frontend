@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 .mainSection {
-  background: $third-color;
+  background: $secondary-color;
 }
 
 </style>

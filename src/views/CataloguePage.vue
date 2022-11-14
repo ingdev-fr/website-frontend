@@ -51,7 +51,7 @@ export default {
 <style scoped lang="scss">
 
 .catalog {
-
+  background: linear-gradient($third-color-clear 30%, $third-color);
 }
 
 

@@ -38,6 +38,11 @@ export default {
       padding: 0 2rem;
     }
 
+      // FONT-SIZE REM 
+      :root {
+        font-size: 20px;
+      }
+
       // Taille des polices
       h1 {
         font-size: 3.7rem;
@@ -57,8 +62,8 @@ export default {
 
 // ------------  MEDIA QUERIES -----------
 
-    // ----  0 => 992px = Tablettes larges
-@media(max-width: 991px) {
+    // ----  0 => 699px = Tablettes larges
+@media(max-width: 699px) {
 
   // FONT-SIZE REM 
   :root {

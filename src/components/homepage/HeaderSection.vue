@@ -119,7 +119,7 @@ export default {
 
 // -------- HEADER -----------------
 .header{
-  background: radial-gradient(circle at center 350px, $third-color-clear, transparent 75%);
+  background: radial-gradient(circle at center 350px, $third-color-clear 20%, transparent 75%);
 }
     // HERO -----------------------
   .hero {
@@ -205,7 +205,7 @@ export default {
     // ----- max 992px = Tablettes normales------
   @media(max-width: 992px) {
 .header{
-  background: radial-gradient(circle at top center, $third-color-clear -20%, transparent 85%);
+  background: radial-gradient(circle at top center, $third-color-clear 10%, transparent 85%);
 }
 .products--card {
   text-align: center;

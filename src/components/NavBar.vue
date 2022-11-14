@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid p-0 ">
+            <div class="container-fluid pt-3 px-0">
               <!-- Logo -->
               <a class="navbar-brand d-flex align-items-center" href="#"><img class="logo-img" src='../assets/images/logo.svg' alt="ingdev logo"/></a>
               <!-- Toggle button -->
@@ -24,7 +24,7 @@
                     </ul>
                   </li>
                   <!-- CONNEXION -->
-                  <li class="nav-item mx-2 mx-lg-5" id="nav-item-3">
+                  <li class="nav-item mx-2 mx-lg-5" id="nav-item-3" :class="this.$store.state.activeClass == 'connexion' ? 'active' : '' ">
                     <router-link class="nav-link connexion-link" to="/login"><font-awesome-icon icon="fa-solid fa-right-to-bracket" class="nav-link__icon d-block mx-auto mb-1"/>Connexion</router-link>
                   </li>
                   <!-- CONTACT -->
@@ -153,8 +153,10 @@ export default {
   height: 10vh;
   &-toggler {
     background-color: $secondary-color;
+    border-radius: 50px;
     &-icon {
       width: 1em;
+      height: 1.3em;
     }
   }
   & .nav-item {
@@ -184,6 +186,12 @@ export default {
 }
 .logo-img {
   height: 2.5rem;
+}
+
+.navbar-toggler {
+  background: $third-color;
+  color: $secondary-color-clear;
+  
 }
 
 #modal-header {

@@ -4,7 +4,7 @@
             <!-- TITRE -->
             <h2 class="details__title col-lg-8 mx-auto mb-5">Travaillons ensemble à chaque étape de la construction de votre solution!</h2>
             <!-- LISTE DES PHASES -->
-            <div class="details__phases col-lg-10 pt-2 mx-auto">
+            <div class="details__phases col-md-8 col-lg-10 pt-2 mx-auto">
                 <div class="d-flex mx-auto  flex-wrap">
                     <!-- Etape 1-->
                     <div id="phase1" class="phase text-center mb-3 mx-3 p-2 col-12 col-lg-5 ">
