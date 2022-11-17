@@ -34,93 +34,158 @@
                         <div class="card-body promotion__card__body">
                             <div class="d-flex">
                                 <img class="promotion__card__body__img" src="../../assets/images/icons8-process.svg" alt="">
-                                <h4 class="fs-5 ms-2">Objectifs</h4>
+                                <h4 class="fs-5 ms-2">Présentation</h4>
                             </div>
                             <p class="card-text">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Barre de recherche -->
+            <!-- Recherche de formations -->
             <div class="recherche p-4 rounded">
                 <h2 class="fs-4 text-center mb-4">Trouver votre formation</h2>
-                <form class="row" role="search" v-on:submit.prevent>
-                    <div class="d-md-flex mb-3">
-                        <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="searchWords" @keyup.enter="setSearch()">
-                        <select class="form-select rounded ms-1" aria-label="Domaines de formation">
-                            <option selected>Recherche par domaines de formation</option>
-                            <option value="1">Pédagogie</option>
-                            <option value="2">Pédagogie digitale</option>
-                            <option value="3">Ingénierie de formation</option>
-                            <option value="3">Développement Web</option>
-                        </select>
-                    </div>
-                    <div class="d-md-flex justify-content-between mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Eligible CPF
-                            </label>
+                <div class="bg-light p-4 mb-3 rounded">
+                    <p class="fw-bold">Recherche :</p>
+                    <form class="row" role="search" v-on:submit.prevent>
+                        <!-- Barre de recherche -->
+                        <div class="search-bar d-md-flex mb-3">
+                            <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="searchWords" @keyup.enter="setSearch()">
+                            <select class="form-select rounded ms-1" aria-label="Domaines de formation">
+                                <option selected>Recherche par domaines de formation</option>
+                                <option value="1">Pédagogie</option>
+                                <option value="2">Pédagogie digitale</option>
+                                <option value="3">Ingénierie de formation</option>
+                                <option value="3">Développement Web</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Durée
-                            </label>
+                        <!-- Filtres Modalités -->
+                        <div class="search-filters">
+                            <p class="fw-bold">Filtres :</p>
+                            <div class="d-md-flex justify-content-between mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-cpf">
+                                    <label class="form-check-label" for="form-check-cpf">
+                                        Eligible CPF
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-duree">
+                                    <label class="form-check-label" for="form-check-duree">
+                                        Durée
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-qualif">
+                                    <label class="form-check-label" for="form-check-qualif">
+                                        Formation qualifiante
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-modal">
+                                    <label class="form-check-label" for="form-check-modal">
+                                        A distance
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Formation qualitfiante
-                            </label>
+                        <!-- Filtres Catégories -->
+                        <div class="search-filters">
+                            <p class="fw-bold">Catégories :</p>
+                            <div class="d-md-flex flex-wrap mb-3">
+                                <div class="form-check form-switch me-5">
+                                    <input class="form-check-input form-check-input-peda" type="checkbox" value="" id="form-check-peda">
+                                    <label class="form-check-label pedagogie" for="form-check-peda">
+                                        Pédagogie
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5 mb-3">
+                                    <input class="form-check-input form-check-input-peda-digi" type="checkbox" value="" id="form-check-peda-digi">
+                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-digi">
+                                        Pédagogie digitale
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5 mb-3">
+                                    <input class="form-check-input form-check-input-inge" type="checkbox" value="" id="form-check-peda-inge">
+                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-inge">
+                                        Ingénierie de formation
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5">
+                                    <input class="form-check-input form-check-input-gestion" type="checkbox" value="" id="form-check-peda-gestion">
+                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-gestion">
+                                        Gestion de projet
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5">
+                                    <input class="form-check-input form-check-input-info" type="checkbox" value="" id="form-check-peda-info">
+                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-info">
+                                        Informatique
+                                    </label>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                A distance
-                            </label>
+                        <!-- Bouton de recherche -->
+                        <div class="my-2">
+                            <button class="button btn btn-recherche">Lancer la recherche</button>
                         </div>
-                    </div>
-                    <div class="text-center mb-4">
-                        <button class="button btn btn-primary">Lancer la recherche</button>
+                    </form>
+                </div>
+                <!-- Affichage des formations -->
+                <div class="affichage bg-light p-4 rounded">
+                    <div class="d-flex affichage__resultats">
+                        <p class="fs-5">Résultats :</p>
                     </div>
                     
-                </form>
-                <!-- Affichage des formations -->
-                <div class="affichage">
                     <div class="card affichage__card">
                         <!-- CARD HEADER -->
-                        <div class="card-header">
-                            <h3 class="affichage__card__header fs-4 mb-0">Réaliser une formation dans Moodle</h3>
-                            <div class="">Domaine : <span class="text-primary">Pédagogie digitale</span></div>
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="d-flex">
+                                <div class="cat-color me-2" style="background: orange;"></div>
+                                <div class="">
+                                    <h3 class="affichage__card__header fs-4 mb-0 fw-bold">Réaliser une formation dans Moodle</h3>
+                                    <div class="domaine">Domaine : <span class="domaine-span" style="color: orange;">Pédagogie digitale</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-program">Programme</a>
+                            </div>
                         </div>
-                        <!-- CARD BODY 1 MODALITES -->
+                        <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
                             <div class="">
                                 <div><span class="fw-bold">Durée :</span> 3 jours</div>
                                 <div><span class="fw-bold">Modalité : </span>Blended learning</div>
-                                <div><span class="fw-bold">Certifications : </span>Certificat de réussite</div>
-                                <div><span class="fw-bold">Prochaine session 2022 : </span>25/11, 26/11, 30/11</div>
+                                <div><span class="fw-bold">Certification : </span>Certificat de réussite</div>
                             </div>
                         </div>
-                        <!-- CARD BODY 2 OBJECTIFS -->
-                        <div class="affichage__card__body-2 accordion accordion-flush ms-3" id="accordionObjectifs">
-                            <div class="accordion-item">
-                                <h4 class="accordion-header fs-5" id="headingOne">
-                                    <button class="accordion-button collapsed px-0 py-2 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Objectifs
-                                    </button>
-                                </h4>
+                        <!-- CARD BODY PRESENTATION COLLAPSE-->
+                        <div class="affichage__card__body-2">
+                            <div class="card-header d-flex">
+                                <img class="ico me-2" src="../../assets/images/icons8-plus-orange.svg" alt="icone plus">
+                                <h4 class="fs-5 rounded-0" data-bs-toggle="collapse" href="#collapsePresentation" role="button" aria-expanded="false" aria-controls="collapsePresentation">Présentation</h4>
                             </div>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionObjectifs">
-                                <p class="card-text accordion-body">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</p>
+                            <div id="collapsePresentation" class="collapse ">
+                                <p class="card-text card-body">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</p>
+                            </div>
+                            
+                        </div>
+                        <!-- CARD BODY SESSIONS COLLAPSE-->
+                        <div class="affichage__card__body-2">
+                            <div class="card-header d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img class="ico me-2" src="../../assets/images/icons8-plus-orange.svg" alt="icone plus">
+                                    <h4 class="fs-5 rounded-0"  data-bs-toggle="collapse" href="#collapseSessions" role="button" aria-expanded="false" aria-controls="collapseSessions">Sessions</h4>
+                                </div>
+                                <div><a href="#collapseSessions" class="btn btn-inscription" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseSessions">S'inscrire</a></div>
+                            </div>
+                            <div id="collapseSessions" class="collapse ">
+                                <p class="card-text card-body">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</p>
                             </div>
                             
                         </div>
                         <!-- CARD FOOTER -->
-                        <div class="card-footer d-flex justify-content-between">
-                            <div><a href="#" class="btn btn-primary">Programme</a></div>
-                            <div><a href="#" class="btn btn-success">S'inscrire</a></div>
+                        <div class="card-footer bg-white">
                         </div>
                     </div>
                 </div>
@@ -141,7 +206,7 @@ export default {
 
 .promotion, .recherche {
     border: 1px solid $third-color;
-    background: $third-color;
+    background: linear-gradient(0.25turn, $fifth-color-clear, $third-color-clear);
 }
 
 .promotion {
@@ -163,35 +228,70 @@ export default {
 .affichage {
     &__card {
         box-shadow: 5px 4px 3px rgba($text-color, 0.25);
-    }   
+    } 
+    &__resultats {
+        &__img {
+            height: 2rem;
+        }
+    }  
 }
 
-.accordion {
-    &-header {
-        & .accordion-button {
-            border-bottom: 1px solid $third-color;
-            outline: none;
+.card-header {
+    background: $fourth-color-clear;
+}
 
-            &:not(.collapsed) {
-                color: $third-color;
-                background-color: $secondary-color-clear;
-                box-shadow: none;
-            }
-        }
-    }
+.cat-color {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
 }
 
 .btn{
+    &-recherche {
+        background: $secondary-color;
+        color: white;
+    }
     &-program {
-        width: 120px;
-
-     
+        background: $third-color;
+        color: white;
+        width: 130px;
     }
     &-inscription {
-        width: 120px; 
+        background: $secondary-color;
+        color: white;
+        width: 130px;
     }
 }
+ .ico {
+    height: 1.3rem;
+    margin-top: 2px;
+ }
 
+ .form-check {
+    &-input {
+        &-general {
+            border: 1px solid $third-color;
+            background-image: url("../../assets/images/round-switch-item-general.svg") !important;
+        }
+        &-peda {
+            background-image: url("../../assets/images/round-switch-item-peda.svg") !important;
+        }
+        &-peda-digi {
+            background-image: url("../../assets/images/round-switch-item-peda-digi.svg") !important;
+        }
+    }
+ }
+
+ .domaine-span {
+    font-weight: 600; 
+ }
+
+ .pedagogie-digitale::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: orange;
+ }
 
 // ------------------- MEDIA QUERIES -------------------
 
