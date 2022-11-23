@@ -183,7 +183,13 @@ export default {
   & .dropdown-menu {
     background: $third-color-clear;
   }
+  & .dropdown-item {
+    &:hover {
+      background: $secondary-color-clear;
+    }
+  }
 }
+
 .logo-img {
   height: 2.5rem;
 }

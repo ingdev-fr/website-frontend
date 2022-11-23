@@ -231,7 +231,7 @@ export default {
     }
   &__illustration {
     &--pic {
-      height: 45vh;
+      height: 25vh;
     }
     }
   }
@@ -242,11 +242,11 @@ export default {
 
     // ----- 1400px ------
 
-@media(min-width: 1600px) {
+@media(min-width: 1400px) {
   .products {
   &__illustration {
     &--pic {
-      height: 50vh;
+      height: 30vh;
       }
     }
   }
