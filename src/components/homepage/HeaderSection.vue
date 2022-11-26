@@ -1,7 +1,7 @@
 <template>
   <header class="header">
+    <NavBar/>
     <div class="template">
-      <NavBar/>
       <!-- HERO SECTION -->
       <section class="hero-container mt-lg-4">
           <!-- HERO TEXT -->

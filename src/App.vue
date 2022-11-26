@@ -58,6 +58,10 @@ export default {
         font-size: 1rem;
       }
 
+      .formationTitle {
+        font-family: 'Titillium', Helvetica, Arial, sans-serif;
+      }
+
 }
 
 // ------------  MEDIA QUERIES -----------

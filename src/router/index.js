@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MyLogin from '../views/MyLogin.vue'
 import Catalogue from '../views/CataloguePage.vue'
+import ProgrammeFormation from '../views/ProgrammeFormation.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/catalogue',
     name: 'catalogue',
     component: Catalogue
+  },
+  {
+    path: '/programme/:name',
+    name: 'programme',
+    component: ProgrammeFormation,
   },
 ]
 

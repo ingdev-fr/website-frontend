@@ -1,8 +1,8 @@
 <template>
-    <main class="catalog">
+    <section class="catalog">
+        <NavBar/>
         <div class="template">
             <!-- SECTION HEADER -->
-            <NavBar/>
             <PresentationCatalog/>
             <div class="onglets" v-if="this.modeButton == 'true'">
               <button class="ongletPromotion buttonRecherche btn text-light" type="button" @click="modeVisibleRecherche()"><div class="exclu my-2 fs-5">Recherche</div></button>
@@ -14,7 +14,7 @@
             </div>
         </div>
         
-    </main>
+      </section>
 
   
 </template>

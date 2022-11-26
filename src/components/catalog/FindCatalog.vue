@@ -98,21 +98,19 @@
         <div class="affichage p-4 rounded">
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
-                    </div>
-                    
+                    </div>      
                     <div class="card affichage__card">
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="cat-color me-2" style="background: orange;"></div>
                                 <div class="">
-                                    <h3 class="affichage__card__header fs-5 mb-0 fw-bold text-light">Réaliser une formation dans Moodle</h3>
+                                    <h2 class="affichage__card__header formationTitle fs-4 mb-0 fw-bold text-light">Réaliser une formation dans Moodle</h2>
                                     <div class="domaine text-light">Domaine : <span class="domaine-span" style="color: orange;">Pédagogie digitale</span></div>
                                 </div>
                             </div>
-                            <div>
-                                <a href="#" class="btn btn-program mt-1">Programme</a>
-                            </div>
+                            <!-- Modal Programme de formation -->
+                            <button type="button" class="btn btn-program mt-1" @click="showProgram('item.title')">Programme</button>
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
@@ -161,8 +159,13 @@
 
 <script>
 export default {
-    name: 'FindCatalog', 
-
+    name: 'FindCatalog',
+    
+    methods: {
+        showProgram: function(title) {
+            this.$router.push({name: 'programme', params : {name: title}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
+        }
+    }
 }
 </script>
 

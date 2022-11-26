@@ -1,7 +1,7 @@
 <template>
-    <div class="background">
+    <section class="background">
+        <NavBar/>
         <div class="template text-center">
-            <NavBar/>
             <div class="login__box d-flex align-items-center justify-content-center">
                 <div class="login__back row justify-content-center align-items-center col-md-7 mx-auto">
                     <h1 class= "login__title text-center fs-2">Se connecter</h1>
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
   </template>
   
   

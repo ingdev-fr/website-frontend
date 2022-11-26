@@ -3,7 +3,7 @@
   <div class="card promotion__card mb-3">
     <img class="card-img-top card__img" src="../../assets/images/restaurant-1.jpeg"  alt="">
     <div class="card-header header-training promotion__card__header">
-        <h3 class="d-inline-flex fs-5 fw-bold mb-0 text-light">Réaliser une formation dans Moodle<span class="cat-color ms-2" style="background: orange;"></span></h3>
+        <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Réaliser une formation dans Moodle<span class="cat-color ms-2" style="background: orange;"></span></h2>
         <p class="mb-2 text-light">Domaine : <span style="color: orange;">Pédagogie digitale</span>
         </p>
     </div>
@@ -22,7 +22,33 @@
         </div>
         <div id="collapsePresentationPromotion" class="collapse ">
             <p class="card-text card-body mb-0">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</p>
-            <a href="#" class="btn btn-program mb-3 ms-3">Programme</a>
+            <!-- Modal Programme de formation -->
+            <button href="#" type="button" class="btn btn-program mt-1 ms-3 mb-3" data-bs-toggle="modal" data-bs-target="#programFormation">Programme</button>
+            <!-- Modal -->
+            <div class="modal fade" id="programFormation" tabindex="-1" aria-labelledby="Programme de formation" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- header-->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- body-->
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <p>Test</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- footer-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>                           
     </div>
     <!-- CARD BODY SESSIONS COLLAPSE-->
@@ -58,6 +84,7 @@ export default {
 <style lang="scss" scoped>
 .card {
     box-shadow: 5px 4px 3px rgba($text-color, 0.25);
+
     &__img {
             height: 200px;
             object-fit: cover;
@@ -109,5 +136,8 @@ export default {
     height: 1rem;
     margin-top: 3px;
  }
+
+
+
 
 </style>
