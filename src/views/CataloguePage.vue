@@ -72,7 +72,7 @@ export default {
 
   },
 
-  mounted: function () {
+  mounted () {
     this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
     window.addEventListener("resize", this.resizeWindow); //jécoute si il y a une resize du window
     this.resizeWindow(); // je charge au démarrage la fonction pour évaluer la largeur de départ de la fenêtre

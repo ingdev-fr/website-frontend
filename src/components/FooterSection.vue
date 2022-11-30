@@ -2,7 +2,7 @@
     <footer class="footer py-5">
       <div class="template d-md-flex">
         <!-- INFOS FOOTER -->
-        <div class="footer__infos col-md-4 p-2">
+        <div class="footer__infos col-md-4">
           <div class="">
             <!-- LOGO -->
             <div class="d-flex mb-2">
@@ -23,7 +23,7 @@
           </div>
         </div>
         <!--  CERTIFCATIONS - PARTENAIRES  -->
-        <div class="col-md-4 mb-lg-3 p-2 d-lg-flex flex-lg-column align-items-lg-center">
+        <div class="col-md-4 mb-lg-3 d-lg-flex flex-lg-column align-items-lg-center">
           <div class="">
             <!-- CERTIFICATIONS -->
             <div class="certif mb-2">
@@ -44,7 +44,7 @@
               </div>
             </div>
             <!-- PARTENAIRES -->
-            <div class="mt-3">
+            <div class="partenaires mt-3">
               <h3 class="link-title fw-bold mb-2 fs-6">Partenaires :</h3>
               <ul class="list-unstyled">
                 <li class="me-3">Ingénierie de formation : <a href="https://www.linkedin.com/in/damien-will/" target="blank">Damien Will</a></li>
@@ -52,7 +52,7 @@
               </ul>
             </div>
             <!-- RESEAUX SOCIAUX -->
-            <div class="d-flex align-items-center">
+            <div class="reseaux d-flex align-items-center">
               <h3 class="link-title fw-bold mb-2 fs-6">Linkedin :</h3>
               <ul class="list-unstyled">
                 <li class="pt-1 ms-2"><a href="https://www.linkedin.com/company/ingdev-ingdev/" target="blank"><img src="../assets/images/icons8-linkedin-circled.svg" alt="Linkedin Ingdev" class="certif__img"></a></li>
@@ -61,7 +61,7 @@
           </div>
         </div>
         <!-- ILLUSTRATION - CONCEPTION -->
-        <div class="col-md-4 px-2 d-lg-flex flex-lg-column align-items-lg-end">
+        <div class="illustration col-md-4 d-lg-flex flex-lg-column align-items-lg-end">
           <div class="">
             <!-- ILLUSTRATION-->
             <div class="footer__illustration d-flex justify-content-center">
@@ -165,12 +165,22 @@ a {
   text-decoration: none;
 }
 
-// --- MEDIA QUERIES ----
+.illustration {
+  margin-top: -20px;;
+}
+
+// ------------------- MEDIA QUERIES ------------------------------------
 
     // ----- max 992px = Tablettes normales------
 @media(max-width: 992px) {
 
 }
 
+  // PRINT 
+@media print {
+  .illustration, .partenaires, .reseaux, .certif {
+    display: none !important;
+  }
+}
 
 </style>
