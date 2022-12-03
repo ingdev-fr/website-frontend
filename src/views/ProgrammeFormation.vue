@@ -53,19 +53,19 @@
             <!-- Menu navigation programme -->
             <div class="template">
                 <ul class="nav navTraining">
-                    <li id="public" class="nav-item" :class="this.modeActive == 'public' ? 'active' : '' " @click="modePublic()">
+                    <li id="public" class="nav-item" :class="this.modeActive == 'public' ? 'active' : '' " @click.prevent="modePublic()">
                         <a class="nav-link py-lg-3 px-4" aria-current="page" href="#">Public</a>
                     </li>
-                    <li class="nav-item" :class="this.modeActive == 'comp' ? 'active' : '' " @click="modeComp()">
+                    <li class="nav-item" :class="this.modeActive == 'comp' ? 'active' : '' " @click.prevent="modeComp()">
                         <a class="nav-link py-lg-3 px-4" href="#">Compétences</a>
                     </li>
-                    <li class="nav-item" :class="this.modeActive == 'prog' ? 'active' : '' " @click="modeProg()">
+                    <li class="nav-item" :class="this.modeActive == 'prog' ? 'active' : '' " @click.prevent="modeProg()">
                         <a class="nav-link py-lg-3 px-4" href="#">Programme</a>
                     </li>
-                    <li class="nav-item" :class="this.modeActive == 'certif' ? 'active' : '' " @click="modeCertif()">
+                    <li class="nav-item" :class="this.modeActive == 'certif' ? 'active' : '' " @click.prevent="modeCertif()">
                         <a class="nav-link py-lg-3 px-4" href="#">Certification</a>
                     </li>
-                    <li class="nav-item" :class="this.modeActive == 'lieu' ? 'active' : '' " @click="modeLieu()">
+                    <li class="nav-item" :class="this.modeActive == 'lieu' ? 'active' : '' " @click.prevent="modeLieu()">
                         <a class="nav-link py-lg-3 px-4" href="#">Lieu</a>
                     </li>
                 </ul>

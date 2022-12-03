@@ -59,7 +59,8 @@ const store = createStore({
                     content: '',
                 }
             }        
-        }
+        },
+        formations: [],
     },
 
     // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments. 
@@ -133,6 +134,19 @@ const store = createStore({
                 store.state.homepage.about.competency3.content = response.data.data.attributes.about.competency3.content;
                 store.state.homepage.about.competency4.title = response.data.data.attributes.about.competency4.title;
                 store.state.homepage.about.competency4.content = response.data.data.attributes.about.competency4.content;
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        getFormations() {
+            // Je fais un appel à l'API
+            axios
+            .get('http://localhost:1337/api/formations?populate=deep')
+            // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
+            .then((response) => {
+                store.state.formations = response.data.data;
+                console.log(store.state.formations);
             })
             .catch((error) =>{
                 console.log(error.message);
