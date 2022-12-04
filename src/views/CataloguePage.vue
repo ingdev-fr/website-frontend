@@ -74,6 +74,9 @@ export default {
 
   created: function() {
     this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+    this.$store.dispatch('getSessions');
+    this.$store.dispatch('getVilles');
+    this.$store.dispatch('getCategories');
   },
 
   mounted () {

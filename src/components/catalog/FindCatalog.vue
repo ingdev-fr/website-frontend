@@ -34,20 +34,17 @@
                     </div>
                     <div class="select d-flex flex-wrap my-3">
                         <div class="me-5 selectDuree">
-                            <select name="ville" class="form-select" aria-label="Durée">
+                            <select name="duree" class="form-select" aria-label="Durée">
                                 <option selected>Durée</option>
-                                <option value="dog">- de 5 jours</option>
-                                <option value="cat">Entre 5 et 15 jours</option>
-                                <option value="hamster">+ de 15 jours</option>
+                                <option value="- de 5 jours">- de 5 jours</option>
+                                <option value="Entre 5 et 15 jours">Entre 5 et 15 jours</option>
+                                <option value="+ de 15 jours">+ de 15 jours</option>
                             </select>
                         </div>
                         <div class="me-5">
-                            <select name="ville" class="form-select" aria-label="Ville">
-                                <option selected>Ville</option>
-                                <option value="dog">Metz</option>
-                                <option value="cat">Nancy</option>
-                                <option value="hamster">Luxembourg</option>
-                                <option value="parrot">Paris</option>
+                            <select name="ville" class="form-select" aria-label="Ville" >
+                                <option selected>Villes</option>
+                                <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.villes" v-bind:key="idx">{{item.attributes.nom}}</option>
                             </select>
                         </div>
                     </div>         
@@ -55,37 +52,14 @@
                 <!-- Filtres Catégories -->
                 <div class="search-filters">
                             <p class="fw-bold">Catégories :</p>
-                            <div class="d-md-flex flex-wrap mb-3">
-                                <div class="form-check form-switch me-5">
-                                    <input class="form-check-input form-check-input-peda" type="checkbox" value="" id="form-check-peda">
-                                    <label class="form-check-label pedagogie" for="form-check-peda">
-                                        Pédagogie
+                            <div class="d-md-flex flex-wrap mb-3" >
+                                <div class="form-check form-switch me-5" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">
+                                    <input class="form-check-input" :class="'form-check-input-'+item.id" type="checkbox" value="" :id="'form-check-input-'+item.id">
+                                    <label class="form-check-label" :class="'form-check-label-'+item.id" :for="'form-check-input-'+item.id">
+                                        {{item.attributes.nom}}
                                     </label>
                                 </div>
-                                <div class="form-check form-switch me-5 mb-3">
-                                    <input class="form-check-input form-check-input-peda-digi" type="checkbox" value="" id="form-check-peda-digi">
-                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-digi">
-                                        Pédagogie digitale
-                                    </label>
-                                </div>
-                                <div class="form-check form-switch me-5 mb-3">
-                                    <input class="form-check-input form-check-input-ing" type="checkbox" value="" id="form-check-peda-ing">
-                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-ing">
-                                        Ingénierie de formation
-                                    </label>
-                                </div>
-                                <div class="form-check form-switch me-5">
-                                    <input class="form-check-input form-check-input-projet" type="checkbox" value="" id="form-check-peda-projet">
-                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-projet">
-                                        Gestion de projet
-                                    </label>
-                                </div>
-                                <div class="form-check form-switch me-5">
-                                    <input class="form-check-input form-check-input-informatique" type="checkbox" value="" id="form-check-peda-informatique">
-                                    <label class="form-check-label pedagogie-digitale" for="form-check-peda-informatique">
-                                        Informatique
-                                    </label>
-                                </div>
+                                
                             </div>
                 </div>
                 <!-- Bouton de recherche -->
@@ -99,25 +73,25 @@
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
                     </div>      
-                    <div class="card affichage__card">
+                    <div class="card affichage__card" v-for="(item, idx) in $store.state.formations" v-bind:key="idx">
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
                             <div class="d-flex">
-                                <div class="cat-color me-2" style="background: orange;"></div>
+                                <div class="cat-color me-2" :style="{backgroundColor: item.attributes.category_formation.data.attributes.color}"></div>
                                 <div class="">
-                                    <h2 class="affichage__card__header formationTitle fs-4 mb-0 fw-bold text-light">Réaliser une formation dans Moodle</h2>
-                                    <div class="domaine text-light">Domaine : <span class="domaine-span" style="color: orange;">Pédagogie digitale</span></div>
+                                    <h2 class="affichage__card__header formationTitle fs-4 mb-0 fw-bold text-light">{{item.attributes.titre}}</h2>
+                                    <div class="domaine text-light">Domaine : <span class="domaine-span" :style="{color: item.attributes.category_formation.data.attributes.color}">{{item.attributes.category_formation.data.attributes.nom}}</span></div>
                                 </div>
                             </div>
                             <!-- Modal Programme de formation -->
-                            <button type="button" class="btn btn-program mt-1" @click="showProgram('item.title')">Programme</button>
+                            <button type="button" class="btn btn-program mt-1" @click="showProgram(item.id)">Programme</button>
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
                             <div class="">
-                                <div><span class="fw-bold">Durée :</span> 3 jours</div>
-                                <div><span class="fw-bold">Modalité : </span>Blended learning</div>
-                                <div><span class="fw-bold">Certification : </span>Certificat de réussite</div>
+                                <div><span class="fw-bold">Durée : </span>{{item.attributes.duree_en_jour}}<span v-if="item.attributes.duree_en_jour == 1"> jour</span><span v-else> jours</span></div>
+                                <div><span class="fw-bold">Modalité : </span><span class="me-1">{{item.attributes.modalite_pedagogique.data.attributes.nom}}</span></div>
+                                <div class="d-flex"><span class="fw-bold">Certification : </span><ul class="mb-0 ps-1"><li class="nav-link" v-for="(certif, idx) in item.attributes.certifications.data" :key="idx">{{certif.attributes.nom}}</li></ul></div>
                             </div>
                         </div>
                         <!-- CARD BODY PRESENTATION COLLAPSE-->
@@ -162,8 +136,8 @@ export default {
     name: 'FindCatalog',
     
     methods: {
-        showProgram: function(title) {
-            this.$router.push({name: 'programme', params : {name: title}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
+        showProgram: function(param) {
+            this.$router.push({name: 'programme', params : {name: param}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
         }
     }
 }
@@ -185,19 +159,19 @@ export default {
             border: 1px solid $third-color;
             background-image: url("../../assets/images/round-switch-item-general.svg") !important;
         }
-        &-peda {
+        &-1 {
             background-image: url("../../assets/images/round-switch-item-peda.svg") !important;
         }
-        &-peda-digi {
+        &-2 {
             background-image: url("../../assets/images/round-switch-item-peda-digi.svg") !important;
         }
-        &-ing {
+        &-3 {
             background-image: url("../../assets/images/round-switch-item-ing.svg") !important;
         }
-        &-projet {
+        &-4 {
             background-image: url("../../assets/images/round-switch-item-projet.svg") !important;
         }
-        &-informatique {
+        &-5 {
             background-image: url("../../assets/images/round-switch-item-informatique.svg") !important;
         }
     }

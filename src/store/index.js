@@ -61,6 +61,9 @@ const store = createStore({
             }        
         },
         formations: [],
+        sessions: [],
+        villes: [],
+        categories: [],
     },
 
     // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments. 
@@ -143,10 +146,51 @@ const store = createStore({
             // Je fais un appel à l'API
             axios
             .get('http://localhost:1337/api/formations?populate=deep')
-            // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
+            // Ensuite je récupère les données des formations et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
                 store.state.formations = response.data.data;
                 console.log(store.state.formations);
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        getSessions() {
+            // Je fais un appel à l'API
+            axios
+            .get('http://localhost:1337/api/sessions?populate=deep')
+            // Ensuite je récupère les données des sessions et j'attribue aux datas du store les valeurs des données récupérées. 
+            .then((response) => {
+                store.state.sessions = response.data.data;
+                console.log(store.state.sessions);
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        getVilles() {
+            // Je fais un appel à l'API
+            axios
+            .get('http://localhost:1337/api/villes?sort=nom')
+            // Ensuite je récupère les données des villes et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique. 
+            .then((response) => {
+                store.state.villes = response.data.data;
+                console.log(store.state.villes);
+                console.log(store.state.villes[0].attributes.nom);
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        getCategories() {
+            // Je fais un appel à l'API
+            axios
+            .get('http://localhost:1337/api/category-formations?sort=nom')
+            // Ensuite je récupère les données des catégories de formation et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique. 
+            .then((response) => {
+                store.state.categories = response.data.data;
+                console.log(store.state.categories);
+                console.log(store.state.categories[0].attributes.nom);
             })
             .catch((error) =>{
                 console.log(error.message);
