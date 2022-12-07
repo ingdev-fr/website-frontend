@@ -22,7 +22,7 @@
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-salle-de-classe.svg" alt="icone de modalité pédagogique">
-                                <div class="ms-2">{{modalite_pedagogique}}</div>
+                                <div class="ms-2" v-for="(modalite, idx) in modalite_pedagogiques" :key="idx">{{modalite.attributes.nom}}<span v-if="(idx + 1) !== modalite_pedagogiques.length"> /</span></div>
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-certification.svg" alt="icone de certification">
@@ -67,7 +67,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- Contenu de la formation pour le SCREEN -->
+            <!-- Contenu de la formation pour le PC (screen) -->
             <div class="backgroundContent onScreen py-3 py-lg-5">
                 <h2 class="print__title fs-3 p-2">Public</h2>
                 <div class="template">
@@ -76,16 +76,16 @@
                         <div class="row">
                             <div class="profils col-lg-8">
                                 <h3 class="fs-4">Les métiers et profils visés :</h3>
-                                <p>{{public_description.metiers_profils_vises}}</p>
+                                <p>{{publicDescriptif.descriptif}}</p>
                                 <h3 class="fs-4">Pré-requis :</h3>
                                 <ul>
-                                    <li v-for="(prereq,idx) in public_description.prerequis" :key="idx">{{prereq.nom}}</li>
+                                    <li v-for="(prereq,idx) in publicDescriptif.prerequis" :key="idx">{{prereq.nom}}</li>
                                 </ul>
                             </div>
                             <div class="listProfils col-lg-4">
                                 <div class="d-flex justify-content-lg-center align-items-lg-center">
                                     <div class="">
-                                        <div class="metier px-lg-3 py-1 fs-5" v-for="(metier,idx) in public_description.liste_metiers" :key="idx"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{metier.nom}}</div>
+                                        <div class="metier px-lg-3 py-1 fs-5" v-for="(metier,idx) in publicDescriptif.metiers" :key="idx"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{metier.nom}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                         <div class="row">
                             <div class="profils col-lg-8">
                                 <h3 class="fs-4">Les compétences visées :</h3>
-                                <p>Dans ce cours vous découvrirez les fonctionnalités de base et l'ergonomie de la plateforme Moodle.<br>Vous apprendrez comment créer un cours dans Moodle, le structurer par sessions, lui ajouter différentes activités d'apprentisssage et des espaces d'échanges et de feedbacks. Vous apprendrez également à structurer l'évaluation du cours en ajoutant des activités d'évaluation et en paramétrant des modalités d'évaluation (type, échelle, seuil de réussite, critères). Vous découvrirez comment organiser le suivi des évaluations des participants à travers l'utilisation du carnet de notes. Enfin, vous apprendrez comment inscrire un participant à un cours et comment gérer les inscriptions. </p>
+                                <p>{{competences_description.competences_visees}}</p>
                                 <h3 class="fs-4">Compétences :</h3>
                                 <ul>
                                     <li>Découvrir les bases de la plateforme Moodle</li>
@@ -368,14 +368,14 @@ export default {
             presentation_rapide: '',
             duree_en_jour: '',
             duree_en_heures: '',
-            modalite_pedagogique: '',
+            modalite_pedagogiques: [],
             certifications: [],
             cpfFormation: '',
             codeFormation: '',
             prixFormation: '',
             top_formation: '',
             pdf: '',
-            public_description: '',
+            publicDescriptif: '',
             competences_description: '',
             programme: '',
             
@@ -415,11 +415,12 @@ export default {
             this.codeFormation = this.maFormation.attributes.code;
             this.presentation_rapide = this.maFormation.attributes.presentation_rapide;
             this.duree_en_heures = this.maFormation.attributes.duree_en_heures;
-            this.modalite_pedagogique = this.maFormation.attributes.modalite_pedagogique.data.attributes.nom;
+            this.modalite_pedagogiques = this.maFormation.attributes.modalite_pedagogiques.data;
             this.prixFormation = this.maFormation.attributes.prix;
             this.certifications = this.maFormation.attributes.certifications.data;
             this.cpfFormation = this.maFormation.attributes.CPF;
-            this.public_description = this.maFormation.attributes.public_description;
+            this.publicDescriptif= this.maFormation.attributes.public;
+            this.competences_description = this.maFormation.attributes.competences_description;
         }
 
     },

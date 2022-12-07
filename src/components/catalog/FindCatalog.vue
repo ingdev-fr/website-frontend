@@ -90,7 +90,12 @@
                         <div class="card-body affichage__card__body">
                             <div class="">
                                 <div><span class="fw-bold">Durée : </span>{{item.attributes.duree_en_jour}}<span v-if="item.attributes.duree_en_jour == 1"> jour</span><span v-else> jours</span></div>
-                                <div><span class="fw-bold">Modalité : </span><span class="me-1">{{item.attributes.modalite_pedagogique.data.attributes.nom}}</span></div>
+                                <div>
+                                    <span class="fw-bold">Modalité : </span>
+                                    <ul>
+                                        <li class="me-1" v-for="(mod, idx) in item.attributes.modalite_pedagogiques.data" :key="idx">{{mod.attributes.nom}}</li>
+                                    </ul>
+                                </div>
                                 <div class="d-flex">
                                     <span class="fw-bold">Certification : </span>
                                     <div class="nav-link ms-1" v-for="(certif, idx) in item.attributes.certifications.data" :key="idx">{{certif.attributes.nom}}<span v-if="(idx + 1) !== item.attributes.certifications.data.length"> /</span></div>
