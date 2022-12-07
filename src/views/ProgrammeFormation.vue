@@ -99,15 +99,10 @@
                         <div class="row">
                             <div class="profils col-lg-8">
                                 <h3 class="fs-4">Les compétences visées :</h3>
-                                <p>{{competences_description.competences_visees}}</p>
+                                <div class="mb-3">{{competences.visees}}</div>
                                 <h3 class="fs-4">Compétences :</h3>
                                 <ul>
-                                    <li>Découvrir les bases de la plateforme Moodle</li>
-                                    <li>Concevoir un cours dans Moodle</li>
-                                    <li>Animer un cours dans Moodle</li>
-                                    <li>Evaluer un cours dans Moodle</li>
-                                    <li>Effectuer le suivi des évaluations dans Moodle</li>
-                                    <li>Gérer un cours et les inscriptions dans Moodle</li>
+                                    <li v-for="(comp, idx) in competences.liste" :key="idx">{{comp.nom}}</li>
                                 </ul>
                             </div>
                             <!-- Image -->
@@ -376,7 +371,7 @@ export default {
             top_formation: '',
             pdf: '',
             publicDescriptif: '',
-            competences_description: '',
+            competences: '',
             programme: '',
             
 
@@ -420,7 +415,7 @@ export default {
             this.certifications = this.maFormation.attributes.certifications.data;
             this.cpfFormation = this.maFormation.attributes.CPF;
             this.publicDescriptif= this.maFormation.attributes.public;
-            this.competences_description = this.maFormation.attributes.competences_description;
+            this.competences = this.maFormation.attributes.competences;
         }
 
     },
