@@ -10,33 +10,33 @@
             <div class="template d-md-flex text-light">
                 <div class="col-lg-8 ps-md-2 mb-3 mb-md-0">
                     <!-- Titre et descriptif -->
-                    <div class="cat p-2 mb-3 text-dark rounded">Pédagogie digitale</div>
-                    <h1 class="formationTitle fs-1">Réaliser une formation dans Moodle</h1>
-                    <h2 class="pitch formationTitle fs-5">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</h2>
+                    <div class="cat p-2 mb-3 text-dark rounded">{{categoryFormation}}</div>
+                    <h1 class="formationTitle fs-1">{{titreFormation}}</h1>
+                    <h2 class="pitch formationTitle fs-5">{{presentation_rapide}}</h2>
                     <!-- Modalités -->
                     <div class="modalites">
                         <div class="d-md-flex flex-wrap my-3">
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-objet-avec-durée.svg" alt="icone de durée">
-                                <div class="ms-2">21 heures</div>
+                                <div class="ms-2">{{duree_en_heures}} heures</div>
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-salle-de-classe.svg" alt="icone de modalité pédagogique">
-                                <div class="ms-2">A distance</div>
+                                <div class="ms-2">{{modalite_pedagogique}}</div>
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-certification.svg" alt="icone de certification">
-                                <div class="ms-2">Certificat de réussite</div>
+                                <div class="ms-2" v-for="(certif,idx) in certifications" :key="idx" >{{certif.attributes.nom}} <span v-if="(idx + 1) !== certifications.length"> /</span></div>
                             </div>
-                            <div class="duree d-flex align-items-center me-3 me-md-5">
+                            <div class="duree d-flex align-items-center me-3 me-md-5" v-if="cpfFormation == true">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-cpf.svg" alt="icone de certification">
                                 <div class="ms-2">CPF</div>
                             </div>
                         </div>
                         <!-- Code et prix -->
                         <div class="codePrix d-flex align-items-center pt-3">
-                            <div>Code : <span class="code ms-2 p-2 rounded">FORM-3-06</span></div>
-                            <div class="tarif ms-3">Tarifs : <span class="price ms-2 p-2 rounded">1590€ HT</span></div>
+                            <div>Code : <span class="code ms-2 p-2 rounded">{{codeFormation}}</span></div>
+                            <div class="tarif ms-3">Tarifs : <span class="price ms-2 p-2 rounded">{{prixFormation}}€ HT</span></div>
                         </div>
                     </div>
                     
@@ -65,9 +65,6 @@
                     <li class="nav-item" :class="this.modeActive == 'certif' ? 'active' : '' " @click.prevent="modeCertif()">
                         <a class="nav-link py-lg-3 px-4" href="#">Certification</a>
                     </li>
-                    <li class="nav-item" :class="this.modeActive == 'lieu' ? 'active' : '' " @click.prevent="modeLieu()">
-                        <a class="nav-link py-lg-3 px-4" href="#">Lieu</a>
-                    </li>
                 </ul>
             </div>
             <!-- Contenu de la formation pour le SCREEN -->
@@ -79,22 +76,16 @@
                         <div class="row">
                             <div class="profils col-lg-8">
                                 <h3 class="fs-4">Les métiers et profils visés :</h3>
-                                <p>Pour toutes personnes en situation d'exercer les métiers de formateur, responsable, concepteur ou ingénieur pédagogiques, souhaitant apprendre les bases de la plateforme Moodle, de la création, de l'animation, de l'évaluation et de la gestion d'un cours sur la plateforme pédagogique.</p>
+                                <p>{{public_description.metiers_profils_vises}}</p>
                                 <h3 class="fs-4">Pré-requis :</h3>
                                 <ul>
-                                    <li>Etre en situation d'exercice,</li>
-                                    <li>Avoir des bases en pédagogie et création ou animation de cours,</li>
-                                    <li>Disposer d'un accès internet,</li>
-                                    <li>Avoir un niveau de base en compétences numériques (niveau 3 PIX minimum).</li>
+                                    <li v-for="(prereq,idx) in public_description.prerequis" :key="idx">{{prereq.nom}}</li>
                                 </ul>
                             </div>
                             <div class="listProfils col-lg-4">
                                 <div class="d-flex justify-content-lg-center align-items-lg-center">
                                     <div class="">
-                                        <div class="metier px-lg-3 py-1 fs-5"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche"> Formateur</div>
-                                        <div class="metier px-lg-3 py-1 fs-5"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Responsable pédagogique</div>
-                                        <div class="metier px-lg-3 py-1 fs-5"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Concepteur pédagogique</div>
-                                        <div class="metier px-lg-3 py-1 fs-5"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Ingénieur pédagogique</div>
+                                        <div class="metier px-lg-3 py-1 fs-5" v-for="(metier,idx) in public_description.liste_metiers" :key="idx"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{metier.nom}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -351,18 +342,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Lieu -->
-                <h2 class="print__title fs-3 p-2">Lieu de formation</h2>
-                <div class="template">
-                    <div class="lieu">
-                        <div class="row">
-                            <div class="profils col-md-8">
-                                <h3 class="fs-4">Lieu de formation :</h3>
-                                <p>La formation se déroule entièrement en ligne sur la plateforme pédagogique de la société Ingdev.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -382,7 +361,32 @@ export default {
     data() {
         return {
             modeActive: 'public',
+            code: 'test',
+            maFormation: {},
+            categoryFormation: '',
+            titreFormation: '',
+            presentation_rapide: '',
+            duree_en_jour: '',
+            duree_en_heures: '',
+            modalite_pedagogique: '',
+            certifications: [],
+            cpfFormation: '',
+            codeFormation: '',
+            prixFormation: '',
+            top_formation: '',
+            pdf: '',
+            public_description: '',
+            competences_description: '',
+            programme: '',
+            
+
+
+
         }
+    },
+
+    computed : {
+       
     },
 
     methods : {
@@ -402,9 +406,34 @@ export default {
         modeLieu : function () {
             this.modeActive = 'lieu';
             },
-        },
+        searchMyFormation : function () {
+            const code = this.$route.params.code;
+            console.log(code);
+            this.maFormation = this.$store.state.formations.find(training => training.attributes.code == code);
+            this.categoryFormation = this.maFormation.attributes.category_formation.data.attributes.nom;
+            this.titreFormation = this.maFormation.attributes.titre;
+            this.codeFormation = this.maFormation.attributes.code;
+            this.presentation_rapide = this.maFormation.attributes.presentation_rapide;
+            this.duree_en_heures = this.maFormation.attributes.duree_en_heures;
+            this.modalite_pedagogique = this.maFormation.attributes.modalite_pedagogique.data.attributes.nom;
+            this.prixFormation = this.maFormation.attributes.prix;
+            this.certifications = this.maFormation.attributes.certifications.data;
+            this.cpfFormation = this.maFormation.attributes.CPF;
+            this.public_description = this.maFormation.attributes.public_description;
+        }
 
+    },
+
+    created: function () {
+        this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+    },
+
+    mounted: function () {
+        this.searchMyFormation();
+
+    }
 }
+
 </script>
 
 
@@ -468,7 +497,7 @@ export default {
         background: $third-color-clear;
     }
     & .iconMetier {
-        height: 1.7rem;
+        height: 1.3rem;
     }
     & .iconeContenu {
         height: 1rem;

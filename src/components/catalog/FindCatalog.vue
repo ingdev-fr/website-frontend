@@ -73,7 +73,7 @@
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
                     </div>      
-                    <div class="card affichage__card" v-for="(item, idx) in $store.state.formations" v-bind:key="idx">
+                    <div class="card affichage__card mb-3" v-for="(item, idx) in $store.state.formations" v-bind:key="idx">
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
                             <div class="d-flex">
@@ -84,24 +84,27 @@
                                 </div>
                             </div>
                             <!-- Modal Programme de formation -->
-                            <button type="button" class="btn btn-program mt-1" @click="showProgram(item.id)">Programme</button>
+                            <button type="button" class="btn btn-program mt-1" @click="showProgram(item.attributes.code)">Programme</button>
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
                             <div class="">
                                 <div><span class="fw-bold">Durée : </span>{{item.attributes.duree_en_jour}}<span v-if="item.attributes.duree_en_jour == 1"> jour</span><span v-else> jours</span></div>
                                 <div><span class="fw-bold">Modalité : </span><span class="me-1">{{item.attributes.modalite_pedagogique.data.attributes.nom}}</span></div>
-                                <div class="d-flex"><span class="fw-bold">Certification : </span><ul class="mb-0 ps-1"><li class="nav-link" v-for="(certif, idx) in item.attributes.certifications.data" :key="idx">{{certif.attributes.nom}}</li></ul></div>
+                                <div class="d-flex">
+                                    <span class="fw-bold">Certification : </span>
+                                    <div class="nav-link ms-1" v-for="(certif, idx) in item.attributes.certifications.data" :key="idx">{{certif.attributes.nom}}<span v-if="(idx + 1) !== item.attributes.certifications.data.length"> /</span></div>
+                                </div>
                             </div>
                         </div>
                         <!-- CARD BODY PRESENTATION COLLAPSE-->
                         <div class="affichage__card__body-2">
                             <div class="card-header d-flex">
                                 <img class="ico me-2" src="../../assets/images/icons8-plus-orange.svg" alt="icone plus">
-                                <div class="" data-bs-toggle="collapse" href="#collapsePresentationFind" role="button" aria-expanded="false" aria-controls="collapsePresentationFind">Présentation</div>
+                                <div class="" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div>
                             </div>
-                            <div id="collapsePresentationFind" class="collapse">
-                                <p class="card-text card-body">Apprenez à concevoir, animer et évaluer un cours dans Moodle. Inscrivez vos étudiants et communiquez avec eux !</p>
+                            <div :id="'collapsePresentationFind'+item.id" class="collapse">
+                                <p class="card-text card-body">{{item.attributes.presentation_rapide}}</p>
                             </div>
                             
                         </div>
@@ -110,18 +113,14 @@
                             <div class="card-header d-flex justify-content-between">
                                 <div class="d-flex">
                                     <img class="ico me-2" src="../../assets/images/icons8-plus-orange.svg" alt="icone plus">
-                                    <div class=""  data-bs-toggle="collapse" href="#collapseSessionsFind" role="button" aria-expanded="false" aria-controls="collapseSessionsFind">Sessions</div>
+                                    <div class=""  data-bs-toggle="collapse" :href="'#collapseSessionFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapseSessionFind'+item.id">Sessions</div>
                                 </div>
                             </div>
-                            <div id="collapseSessionsFind" class="collapse">
+                            <div :id="'collapseSessionFind'+item.id" class="collapse mb-3">
                                 <div class="card-text card-body">Nos sessions sont organisées par dates et par ville.</div>
-                                <div class="session card-text ms-3 d-flex pe-4">
-                                    <img class="sessionList-logo me-2" src="../../assets/images/logo-v.svg" alt="item de liste">
-                                    <div class="card-session px-2 d-flex mb-1 rounded"> Du 14/12/2022 au 16/12/2022 - Paris - 1895.00 € HT - Places disponibles<a class="nav-link text-primary d-flex ms-4" href="">S'inscrire</a></div>
-                                </div>
-                                <div class="session card-text ms-3 d-flex pe-4">
-                                    <img class="sessionList-logo me-2" src="../../assets/images/logo-v.svg" alt="item de liste">
-                                    <div class="card-session px-2 d-flex mb-1 rounded"> Du 21/12/2022 au 24/12/2022 - Metz - 1895.00 € HT - Places disponibles<a class="nav-link text-primary ms-4" href="">S'inscrire</a></div>
+                                <div class="session card-text d-flex flex-wrap ps-3 pe-2 pt-2 align-items-center" v-for="(session, idx) in item.attributes.sessions.data" :key="idx">
+                                    <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10" ><span class="session-span">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{item.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
+                                    <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" ><a class="nav-link text-light" href="">S'inscrire</a></button>
                                 </div>
                             </div>
                         </div>
@@ -137,9 +136,14 @@ export default {
     
     methods: {
         showProgram: function(param) {
-            this.$router.push({name: 'programme', params : {name: param}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
+            this.$router.push({name: 'programme', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
         }
-    }
+    },
+
+    created: function() {
+        // On ne va charger que les données des formations car elles contiennent toutes les autres !
+    this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+  },
 }
 </script>
 
@@ -199,11 +203,7 @@ export default {
     }
 }
 
-.card-session {
-    &:hover {
-        background: $clear-color;
-    }
- }
+ .button-inscription:hover
 
 //------- POUR L'AFFICHAGE --------------------
 .affichage {
@@ -221,6 +221,15 @@ export default {
 .header-training {
     background: $secondary-color;
 }
+
+.session {
+    border: 1px solid $third-color-clear;
+    &:hover {
+        background: $third-color-clear;
+    }
+}
+
+
 
 .cat-color {
     width: 20px;
@@ -242,6 +251,10 @@ export default {
  .sessionList-logo {
     height: 1rem;
     margin-top: 3px;
+ }
+
+ .session-span {
+    font-weight: 600;
  }
 
 // ------------------- MEDIA QUERIES -------------------

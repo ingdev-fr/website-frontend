@@ -6,6 +6,7 @@ const store = createStore({
     state: {
         urlUploads: "http://localhost:1337",
         urlEndpoints: "http://localhost:1337/api",
+        urlFront: 'http://localhost:8080',
         activeClass: '',
         header: {
             logo: '',
@@ -80,10 +81,10 @@ const store = createStore({
         getHeader() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/header?populate=*')
+            .get(`${store.state.urlEndpoints}/header?populate=*`)
             // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
-                store.state.header.logo = `http://localhost:1337${response.data.data.attributes.logo.data.attributes.url}`;
+                store.state.header.logo = `${store.state.urlUploads}${response.data.data.attributes.logo.data.attributes.url}`;
             })
             .catch((error) =>{
                 console.log(error.message);
@@ -93,10 +94,10 @@ const store = createStore({
         getHomepageHero() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/homepage?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=hero.card&populate[3]=hero.card2&populate[4]=hero.card3')
+            .get(`${store.state.urlEndpoints}/homepage?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=hero.card&populate[3]=hero.card2&populate[4]=hero.card3`)
             // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
-                store.state.homepage.hero.backgroundImage = `http://localhost:1337${response.data.data.attributes.hero.backgroundImage.data.attributes.url}`;
+                store.state.homepage.hero.backgroundImage = `${store.state.urlUploads}${response.data.data.attributes.hero.backgroundImage.data.attributes.url}`;
                 store.state.homepage.hero.title = response.data.data.attributes.hero.title;
                 store.state.homepage.hero.content = response.data.data.attributes.hero.content;
                 store.state.homepage.hero.title2 = response.data.data.attributes.hero.title2;
@@ -120,12 +121,12 @@ const store = createStore({
         getHomepageAbout() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/homepage?populate[0]=about&populate[1]=about.image&populate[2]=about.competency1&populate[3]=about.competency2&populate[4]=about.competency3&populate[5]=about.competency4&populate[6]=about&populate[7]=about.technologies&populate[8]=about.technologies.logos')
+            .get(`${store.state.urlEndpoints}/homepage?populate[0]=about&populate[1]=about.image&populate[2]=about.competency1&populate[3]=about.competency2&populate[4]=about.competency3&populate[5]=about.competency4&populate[6]=about&populate[7]=about.technologies&populate[8]=about.technologies.logos`)
             // Ensuite je récupère les données et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
                 store.state.homepage.about.title = response.data.data.attributes.about.title;
                 store.state.homepage.about.content = response.data.data.attributes.about.content;
-                store.state.homepage.about.image = `http://localhost:1337${response.data.data.attributes.about.image.data.attributes.url}`;
+                store.state.homepage.about.image = `${store.state.urlUploads}${response.data.data.attributes.about.image.data.attributes.url}`;
                 store.state.homepage.about.aboutContent = response.data.data.attributes.about.aboutContent;
                 store.state.homepage.about.technologies.title = response.data.data.attributes.about.technologies.title;
                 store.state.homepage.about.technologies.logos = response.data.data.attributes.about.technologies.logos.data;
@@ -145,7 +146,7 @@ const store = createStore({
         getFormations() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/formations?populate=deep')
+            .get(`${store.state.urlEndpoints}/formations?populate=deep`)
             // Ensuite je récupère les données des formations et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
                 store.state.formations = response.data.data;
@@ -158,7 +159,7 @@ const store = createStore({
         getSessions() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/sessions?populate=deep')
+            .get(`${store.state.urlEndpoints}/sessions?populate=deep`)
             // Ensuite je récupère les données des sessions et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
                 store.state.sessions = response.data.data;
@@ -171,7 +172,7 @@ const store = createStore({
         getVilles() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/villes?sort=nom')
+            .get(`${store.state.urlEndpoints}/villes?sort=nom`)
             // Ensuite je récupère les données des villes et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique. 
             .then((response) => {
                 store.state.villes = response.data.data;
@@ -185,7 +186,7 @@ const store = createStore({
         getCategories() {
             // Je fais un appel à l'API
             axios
-            .get('http://localhost:1337/api/category-formations?sort=nom')
+            .get(`${store.state.urlEndpoints}/category-formations?sort=nom`)
             // Ensuite je récupère les données des catégories de formation et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique. 
             .then((response) => {
                 store.state.categories = response.data.data;

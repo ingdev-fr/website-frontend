@@ -72,13 +72,6 @@ export default {
 
   },
 
-  created: function() {
-    this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
-    this.$store.dispatch('getSessions');
-    this.$store.dispatch('getVilles');
-    this.$store.dispatch('getCategories');
-  },
-
   mounted () {
     this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
     window.addEventListener("resize", this.resizeWindow); //jécoute si il y a une resize du window
