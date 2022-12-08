@@ -356,32 +356,52 @@ export default {
     data() {
         return {
             modeActive: 'public',
-            code: 'test',
-            maFormation: {},
-            categoryFormation: '',
-            titreFormation: '',
-            presentation_rapide: '',
-            duree_en_jour: '',
-            duree_en_heures: '',
-            modalite_pedagogiques: [],
-            certifications: [],
-            cpfFormation: '',
-            codeFormation: '',
-            prixFormation: '',
-            top_formation: '',
-            pdf: '',
-            publicDescriptif: '',
-            competences: '',
-            programme: '',
-            
-
-
-
         }
     },
 
     computed : {
-       
+        // je récupère la formation pour laquelle je vais afficher les informations en récupérant le paramètre d'url qui est son code. 
+       maFormation () {
+        const code = this.$route.params.code;
+        console.log(code);
+        return this.$store.state.formations.find(training => training.attributes.code == code);
+       },
+       // J'attribue les différentes valeurs aux données que je vais afficher dans le html
+       categoryFormation () {
+        return this.maFormation.attributes.category_formation.data.attributes.nom;
+       },
+       titreFormation () {
+        return this.maFormation.attributes.titre;
+       },
+       presentation_rapide () {
+        return this.maFormation.attributes.presentation_rapide;
+       },
+       duree_en_heures () {
+        return this.maFormation.attributes.duree_en_heures;
+       },
+       modalite_pedagogiques () {
+        return this.maFormation.attributes.modalite_pedagogiques.data;
+       },
+       certifications () {
+        return this.maFormation.attributes.certifications.data;
+       },
+       cpfFormation () {
+        return this.maFormation.attributes.CPF;
+       },
+       codeFormation () {
+        return this.maFormation.attributes.code;
+       },
+       prixFormation () {
+        return this.maFormation.attributes.prix;
+       },
+       publicDescriptif () {
+        return this.maFormation.attributes.public;
+       },
+       competences () {
+        return this.maFormation.attributes.competences;
+       },
+
+
     },
 
     methods : {
@@ -401,22 +421,6 @@ export default {
         modeLieu : function () {
             this.modeActive = 'lieu';
             },
-        searchMyFormation : function () {
-            const code = this.$route.params.code;
-            console.log(code);
-            this.maFormation = this.$store.state.formations.find(training => training.attributes.code == code);
-            this.categoryFormation = this.maFormation.attributes.category_formation.data.attributes.nom;
-            this.titreFormation = this.maFormation.attributes.titre;
-            this.codeFormation = this.maFormation.attributes.code;
-            this.presentation_rapide = this.maFormation.attributes.presentation_rapide;
-            this.duree_en_heures = this.maFormation.attributes.duree_en_heures;
-            this.modalite_pedagogiques = this.maFormation.attributes.modalite_pedagogiques.data;
-            this.prixFormation = this.maFormation.attributes.prix;
-            this.certifications = this.maFormation.attributes.certifications.data;
-            this.cpfFormation = this.maFormation.attributes.CPF;
-            this.publicDescriptif= this.maFormation.attributes.public;
-            this.competences = this.maFormation.attributes.competences;
-        }
 
     },
 
@@ -424,10 +428,6 @@ export default {
         this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
     },
 
-    mounted: function () {
-        this.searchMyFormation();
-
-    }
 }
 
 </script>

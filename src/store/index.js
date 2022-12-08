@@ -67,15 +67,25 @@ const store = createStore({
         categories: [],
     },
 
-    // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments. 
+    // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments (comme la donnée à modifier). 
     mutations: {
         CHANGE_ACTIVECLASS(state) {
             state.activeClass = ''
-        }
-
-        
+        },
+        GET_FORMATIONS(state, formations) {
+            state.formations = formations; // la data array 'formations' du state = la data à modifier en argument dans la mutation qui provient qui est en fait l'argument (et la réponse api) de l'action qui appelle cette mutation donc response.data.data
+        }, 
+        GET_SESSIONS(state, sessions) {
+            state.sessions = sessions;
+        },
+        GET_VILLES(state, villes) {
+            state.villes = villes;
+        },
+        GET_CATEGORIES(state, categories) {
+            state.categories = categories;
+        },
     },
-    // Les actions permettent de réaliser des actions asynchrones sur les datas comme la récupération d'une API. 
+    // Les actions permettent de réaliser des actions asynchrones comme la récupération d'une API. 
     actions: {
         // Fonction de récupération du header avec les données reçue de l'API
         getHeader() {
@@ -143,55 +153,49 @@ const store = createStore({
                 console.log(error.message);
             })
         },
-        getFormations() {
-            // Je fais un appel à l'API
+        getFormations( {commit} ) {
+            // Je fais un appel à l'API (attention, 'commit' est entre {})
             axios
             .get(`${store.state.urlEndpoints}/formations?populate=deep`)
             // Ensuite je récupère les données des formations et j'attribue aux datas du store les valeurs des données récupérées. 
-            .then((response) => {
-                store.state.formations = response.data.data;
-                console.log(store.state.formations);
+            .then(response => {
+                commit('GET_FORMATIONS', response.data.data);
             })
             .catch((error) =>{
                 console.log(error.message);
             })
         },
-        getSessions() {
+        getSessions( {commit} ) {
             // Je fais un appel à l'API
             axios
             .get(`${store.state.urlEndpoints}/sessions?populate=deep`)
             // Ensuite je récupère les données des sessions et j'attribue aux datas du store les valeurs des données récupérées. 
             .then((response) => {
-                store.state.sessions = response.data.data;
-                console.log(store.state.sessions);
+                commit('GET_SESSIONS', response.data.data);
             })
             .catch((error) =>{
                 console.log(error.message);
             })
         },
-        getVilles() {
+        getVilles( {commit}) {
             // Je fais un appel à l'API
             axios
             .get(`${store.state.urlEndpoints}/villes?sort=nom`)
             // Ensuite je récupère les données des villes et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique. 
             .then((response) => {
-                store.state.villes = response.data.data;
-                console.log(store.state.villes);
-                console.log(store.state.villes[0].attributes.nom);
+                commit('GET_VILLES', response.data.data);
             })
             .catch((error) =>{
                 console.log(error.message);
             })
         },
-        getCategories() {
+        getCategories( {commit} ) {
             // Je fais un appel à l'API
             axios
             .get(`${store.state.urlEndpoints}/category-formations?sort=nom`)
             // Ensuite je récupère les données des catégories de formation et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique. 
             .then((response) => {
-                store.state.categories = response.data.data;
-                console.log(store.state.categories);
-                console.log(store.state.categories[0].attributes.nom);
+                commit('GET_CATEGORIES', response.data.data);
             })
             .catch((error) =>{
                 console.log(error.message);
