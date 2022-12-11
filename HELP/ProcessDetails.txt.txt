@@ -1,0 +1,14 @@
+TEMPLATE : 
+- Pas de données dynamique, j'ai fait le fainéant, tout est codé en dur !!!
+
+
+
+LOGIQUE SCRIPT : 
+
+
+
+
+
+SCSS : 
+
+

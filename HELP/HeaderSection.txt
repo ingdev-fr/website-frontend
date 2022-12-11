@@ -1,0 +1,15 @@
+TEMPLATE : 
+- j'ai une animation faite avec du svg crée dans Figma. 
+- Les données dynamiques sont importées directement du store dans le html via les mustaches {{}}. pas de computed, j'utilise uniquement la notation pointée. 
+
+
+
+LOGIQUE SCRIPT : 
+
+1.// J'utilise l'url dynamique du store. Comme ça si je passe sur un autre serveur, en changeant juste la variable je reste stable. 
+
+
+
+SCSS : 
+
+- des animations avec des keyframes. 

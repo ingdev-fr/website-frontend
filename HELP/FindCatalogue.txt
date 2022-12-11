@@ -1,0 +1,22 @@
+TEMPLATE : 
+- C'est ma colonne de droite du catalogue comprenant la section de recherche et la section des résultats. 
+
+- Section RECHERCHE : 
+    - Je n'ai pas mis de bouton pour le formulaire de recherche. J'ai paramétré la touche 'entrée' comme touche d'envoi (@keyup.enter) qui lance ma méthode associée à la recherche 'setSearch'. 
+    - Les filtres sont précédés de 'form-check-input' qui ont des background-images stylés dans le scss.
+
+- Section RESULTATS : 
+    - On affiche les données dans les {{}} ou on crée des boucles en utilisant la notation pointée directement à partir des données du store plutôt que des computed. 
+    - Pour les listes, on les affiche à l'horizontal en séparant les valeurs par un '/' sauf pour le dernier élément en utilisant un span avec v-if qui fonctionne avec tous les éléments du tableau sauf le dernier. 
+    - On utilise des sections avec collapse. 
+
+
+
+LOGIQUE SCRIPT : 
+
+1.// Récupération des données des villes et des catégories pour les afficher comme filtres dans la recherche : Ca a déjà été fait dans le composant parent 'CataloguePage'. Donc maitenant, on va les chercher directement dans le store. 
+
+2.// Création d'une page dynamique pour afficher le programme d'une formation spécifique choisie dans la liste des résultats : l'url de la page de la formation à afficher sera construite avec un paramètre d'url qui s'appelle "code" (il existe une route dans le router : "path: '/programme/:code') " et qui sera transmis via notre méthode 'showProgram' lors du click sur le bouton 'programme' de la formation concernée dans la liste des résultats. 
+
+
+SCSS : 

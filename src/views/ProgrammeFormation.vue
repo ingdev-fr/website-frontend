@@ -12,17 +12,17 @@
                     <!-- Titre et descriptif -->
                     <div class="cat p-2 mb-3 text-dark rounded">{{categoryFormation}}</div>
                     <h1 class="formationTitle fs-1">{{titreFormation}}</h1>
-                    <h2 class="pitch formationTitle fs-5">{{presentation_rapide}}</h2>
+                    <h2 class="pitch formationTitle fs-5">{{presentationRapide}}</h2>
                     <!-- Modalités -->
                     <div class="modalites">
                         <div class="d-md-flex flex-wrap my-3">
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-objet-avec-durée.svg" alt="icone de durée">
-                                <div class="ms-2">{{duree_en_heures}} heures</div>
+                                <div class="ms-2">{{dureeEnHeures}} heures</div>
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-salle-de-classe.svg" alt="icone de modalité pédagogique">
-                                <div class="ms-2" v-for="(modalite, idx) in modalite_pedagogiques" :key="idx">{{modalite.attributes.nom}}<span v-if="(idx + 1) !== modalite_pedagogiques.length"> /</span></div>
+                                <div class="ms-2" v-for="(modalite, idx) in modalitePedagogiques" :key="idx">{{modalite.attributes.nom}}<span v-if="(idx + 1) !== modalitePedagogiques.length"> /</span></div>
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-certification.svg" alt="icone de certification">
@@ -67,7 +67,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- Contenu de la formation pour le PC (screen) -->
+            <!-- !!!!!!!!!!!!!!!!! CONTENU FORMATION POUR SCREEN !!!!!!!!!!!!!!!!!!!!!!!-->
             <div class="backgroundContent onScreen py-3 py-lg-5">
                 <h2 class="print__title fs-3 p-2">Public</h2>
                 <div class="template">
@@ -110,33 +110,37 @@
                         </div>
                     </div>
                 </div>
-                <!-- Programme -->
-                <h2 class="print__title fs-3 p-2">Programme</h2>
+                <!-- Modules -->
+                <h2 class="print__title fs-3 p-2">Modules</h2>
                 <div class="template">
                     <div class="programme" v-if="modeActive == 'prog'">
                         <!--  Module 1 de formation -->
-                        <div class="card promotion__card mb-3">
+                        <div class="card promotion__card mb-3" v-for="(mod, idx) in modulesFormation" :key="idx">
                             <div class="card-header promotion__card__header">
-                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Module 1: Découvrir les bases de la plateforme Moodle<span class="cat-color ms-2" style="background: orange;"></span></h2>
+                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Module {{mod.numeroModule}}: {{mod.titre}}</h2>
                             </div>
                             <div class="card-body">
                                 <div class="">
-                                    <div><span class="fw-bold">Objectif(s) :</span> Découvrir les bases de la plateforme Moodle</div>
-                                    <div><span class="fw-bold">Durée : </span>4 heures</div>
-                                    <div><span class="fw-bold">Modalités pédagogiques : </span>A distance</div>
+                                    <div class="d-flex">
+                                        <span class="fw-bold">Objectif(s) :</span>
+                                        <div class="ms-1" v-for="(obj, idx) in mod.objectifs" :key="idx">{{obj.nom}}</div>
+                                    </div>
+                                    <div><span class="fw-bold">Durée : </span>{{mod.dureeModuleHeures}} heures</div>
+                                    <div class="d-flex">
+                                        <span class="fw-bold">Modalités pédagogiques : </span>
+                                        <div class="ms-1" v-for="(modal, idx) in mod.modalitePedagogiques.data" :key="idx">{{modal.attributes.nom}}<span v-if="(idx + 1) !== mod.modalitePedagogiques.data.length"> /</span></div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Collapse Contenus-->
                             <div class="affichage__card__body-2">
                                 <div class="card-header d-flex">
                                     <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                    <div class="" data-bs-toggle="collapse" href="#collapseContenus" role="button" aria-expanded="false" aria-controls="collapseContenus">Contenus théoriques et méthodologiques</div>
+                                    <div class="" data-bs-toggle="collapse" :href="'#collapseContenus'+mod.id" role="button" aria-expanded="false" :aria-controls="'#collapseContenus'+mod.id">Contenus théoriques et méthodologiques</div>
                                 </div>
-                                <div id="collapseContenus" class="collapse.show">
+                                <div :id="'collapseContenus'+mod.id" class="collapse.show">
                                     <div class="px-5 py-3">
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Les différentes pages de Moodle (accueil, tableau de bord, cours, profil, administration)</div>
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Les fonctionnalités de base de Moodle</div>
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Ergonomie et expérience utilisateur</div>
+                                        <div class="ms-" v-for="(content, idx) in mod.savoirs" :key="idx">           <img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{ content.nom}}</div>
                                     </div>
                                 </div>                           
                             </div>
@@ -145,13 +149,12 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="d-flex">
                                         <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                        <div class=""  data-bs-toggle="collapse" href="#collapseApprentissage" role="button" aria-expanded="false" aria-controls="collapseApprentissage">Activités d'apprentissage</div>
+                                        <div class=""  data-bs-toggle="collapse" :href="'#collapseApprentissage'+mod.id" role="button" aria-expanded="false" :aria-controls="'#collapseApprentissage'+mod.id">Activités d'apprentissage</div>
                                     </div>
                                 </div>
-                                <div id="collapseApprentissage" class="collapse.show">
+                                <div :id="'collapseApprentissage'+mod.id" class="collapse.show">
                                     <div class="px-5 py-3">
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Tutoriel de démonstration</div>
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Exercices pratiques de navigation</div>
+                                        <div class="ms-" v-for="(actiapp, idx) in mod.activitesApprentissage" :key="idx"><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{ actiapp.nom}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -160,13 +163,12 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="d-flex">
                                         <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                        <div class=""  data-bs-toggle="collapse" href="#collapseEvaluation" role="button" aria-expanded="false" aria-controls="collapseEvaluation">Activités d'évaluation</div>
+                                        <div class=""  data-bs-toggle="collapse" :href="'#collapseEvaluation'+mod.id" role="button" aria-expanded="false" :aria-controls="'#collapseEvaluation'+mod.id">Activités d'évaluation</div>
                                     </div>
                                 </div>
-                                <div id="collapseEvaluation" class="collapse.show">
+                                <div :id="'collapseEvaluation'+mod.id" class="collapse.show">
                                     <div class="px-5 py-3">
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Quiz formatif pour mémoriser les connaissances</div>
-
+                                        <div class="ms-" v-for="(actieval, idx) in mod.activitesEvaluation" :key="idx"><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{ actieval.nom}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +205,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Contenu de la formation pour le PRINT (sans les V-if)-->
+            <!-- !!!!!!!!!!!!!!  CONTENU FORMATION POUR PRINT (sans les V-if) !!!!!!!!!!!!!!!!!-->
             <div class="backgroundContent print py-3 py-lg-5">
                 <h2 class="print__title fs-3 p-2">Public</h2>
                 <div class="template onscreen">
@@ -262,15 +264,15 @@
                 <div class="template">
                     <div class="programme">
                         <!--  Module 1 de formation -->
-                        <div class="card promotion__card mb-3">
-                            <div class="card-header promotion__card__header">
-                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Module 1: Découvrir les bases de la plateforme Moodle<span class="cat-color ms-2" style="background: orange;"></span></h2>
+                        <div class="card promotion__card mb-3" v-for="(mod, idx) in programme" :key="idx">
+                            <div class="card-header promotion__card__header" >
+                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light" >Module 4: test</h2>
                             </div>
                             <div class="card-body">
                                 <div class="">
-                                    <div><span class="fw-bold">Objectif(s) :</span> Découvrir les bases de la plateforme Moodle</div>
-                                    <div><span class="fw-bold">Durée : </span>4 heures</div>
-                                    <div><span class="fw-bold">Modalités pédagogiques : </span>A distance</div>
+                                    <div><span class="fw-bold">Objectif(s) :</span> {{mod.objectifs}}</div>
+                                    <div><span class="fw-bold">Durée : </span>{{mod.dureeModuleHeures}}</div>
+                                    <div><span class="fw-bold">Modalités pédagogiques : </span>{{mod.modalitePedagogiques}}</div>
                                 </div>
                             </div>
                             <!-- Collapse Contenus-->
@@ -368,19 +370,19 @@ export default {
        },
        // J'attribue les différentes valeurs aux données que je vais afficher dans le html
        categoryFormation () {
-        return this.maFormation.attributes.category_formation.data.attributes.nom;
+        return this.maFormation.attributes.categoryFormation.data.attributes.nom;
        },
        titreFormation () {
         return this.maFormation.attributes.titre;
        },
-       presentation_rapide () {
-        return this.maFormation.attributes.presentation_rapide;
+       presentationRapide () {
+        return this.maFormation.attributes.presentationRapide;
        },
-       duree_en_heures () {
-        return this.maFormation.attributes.duree_en_heures;
+       dureeEnHeures () {
+        return this.maFormation.attributes.dureeEnHeures;
        },
-       modalite_pedagogiques () {
-        return this.maFormation.attributes.modalite_pedagogiques.data;
+       modalitePedagogiques () {
+        return this.maFormation.attributes.modalitePedagogiques.data;
        },
        certifications () {
         return this.maFormation.attributes.certifications.data;
@@ -400,12 +402,14 @@ export default {
        competences () {
         return this.maFormation.attributes.competences;
        },
+       modulesFormation () {
+        return this.maFormation.attributes.modules;
+       },
 
 
     },
 
-    methods : {
-    // Je créé la méthode qui permet de réécrire la valeur de la donnée "activeClass" du store pour afficher dynamiquement la classe "active" dans la navigation de cette page. 
+    methods : { 
         modePublic : function () {
             this.modeActive = 'public';
             },
@@ -421,12 +425,21 @@ export default {
         modeLieu : function () {
             this.modeActive = 'lieu';
             },
+        // Je créé la méthode qui permet de réécrire la valeur de la donnée "activeClass" du store pour afficher dynamiquement la classe "active" dans la navigation de cette page. 
+        changeActiveClass : function () {
+            this.$store.commit('CHANGE_ACTIVECLASS');
+            this.$store.state.activeClass = "showroom";
+            }
 
     },
 
     created: function () {
         this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
     },
+
+    mounted: function () {
+    this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
+  }
 
 }
 
@@ -566,7 +579,7 @@ export default {
         display: none;
     }
     .program{
-    print-color-adjust:exact !important;
+    print-color-adjust: exact !important;
     background: white !important;
     orphans: 2 !important;
     }

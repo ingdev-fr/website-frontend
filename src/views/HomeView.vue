@@ -32,7 +32,6 @@ export default {
     changeActiveClass : function () {
       this.$store.commit('CHANGE_ACTIVECLASS');
       this.$store.state.activeClass = "accueil";
-      console.log(this.$store.state.activeClass);
     }
 
   },

@@ -1,0 +1,30 @@
+TEMPLATE : 
+- Pour le MENU : 
+    1.// J'utilise une :class dans chaque lien du menu (qui se base sur une condition ternaire de la valeur de la data 'activeClass' du store) pour attribuer la classe 'active' au lien qui correspond à celui de la page qui sera visitée. Le lien sera stylé différemment et l'utilisateur pourra donc voir grace au menu sur quelle page il est. 
+    C'est dans chaque composant que l'on va appeler la mutation du store liée à la classe active, donc pas dans la navBar car on a besoin de savoir dans quel composant on se situe (accueil, showroom, ...) pour attribuer la bonne valeur à la 'activeClass' du store ! 
+    2.// J'utilise <router-link> pour paramétrer le chemin de chaque lien du menu. 
+    3.// J'utilise un 'dropdown' pour faire un sous menu. 
+
+- Pour le FORMULAIRE de CONTACT: 
+    1.// J'utilise un modal. 
+    2.// Lorsque l'on ferme le modal du formulaire, les données rentrées dans les champs s'effacent : méthod 'resetForm'.
+    3.// La structure du formulaire : 
+        - J'utilise '.prevent' dans le submit à la racine du formulaire pour éviter le rechargement de la page à l'envoi ! Comme je suis dans un modal, ça ne le fait pas ! 
+        - Je lie le submit à la racine du formulaire avec ma méthode d'envoi 'sendEmail' pour remplacer la méthode d'envoi par défaut.
+        - J'utilise des 'v-model' pour capter les données des champs dans mes datas. 
+    4.// Lorsque l'on envoie le formulaire (au click du bouton), il y a (méthode 'sendEmail'): 
+        - un spinner qui se déclenche (avec un v-if et un mode) jusqu'à la réponse de l'API qui confirme la transaction,
+        - L'envoi des données au back end (ici c'est le serveur mail de 'emailJS')
+        - Un message de succès ou d'erreur en fonction de la réponse de l'API   
+
+
+LOGIQUE SCRIPT : 
+
+1.// Effacer les données du formulaire à la fermeture du modal de contact avec méthode 'resetForm'.
+
+2.// Paramétrer l'envoi du formulaire avec la méthode 'sendEmail'. 
+
+
+
+
+SCSS : 

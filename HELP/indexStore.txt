@@ -1,0 +1,13 @@
+LOGIQUE : 
+
+1.// Création des variables d'environnement internes au store : je les réutilise ensuite dans les actions dans les adresses d'appel à l'API. 
+
+2.// Mise en place du système de classe active dynamique pour les liens du menu : on a une state 'activeClass' a laquelle on associe une mutation qui sera appelée dans des composants et qui permettra de modifier sa valeur. 
+
+3.// Chargement des données de l'API vie des Actions concernant les informations de la page d'accueil (header + homepage) qui ne sont pas codées en dur mais viennent d'une API car je souhaite que l'utilisateur du site puisse le modifier à partir d'une API. (actions : 'getHeader', 'getHomepageHero', 'getHomepageAbout').
+Ensuite, via des Mutations, je traite les résultats des Actions correspondantes et je réaffecte les données dans le state. 
+
+4.// Chargement des données de l'API concernant les listes des formations, des sessions, des villes, des catégories. (actions : 'getFormations', 'getSessions', 'getVilles', 'getCategories').
+- Je respecte le cycle des transformations : action (appel API et récupération des données) puis mutation (réaffectation des données dans des datas ou transformation des données)
+- Pour les formations, dans la mutation, j'ai 2 instructions : d'abord récolter les données dans un tableau général, puis filtrage des données pour récupérer les formations 'à la une' dans le tableau/data 'onTop'. 
+- Je peux donc effectuer plusieurs transformations/réaffectations de donnéées dans une mutation !!!

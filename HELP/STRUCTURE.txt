@@ -1,0 +1,23 @@
+APP
+    RouterView
+    Footer
+
+    HOMEVIEW
+        HeaderSection
+            Navbar
+        ProcessDetails
+        AddedValues
+
+
+    CATALOGUEPAGE
+        NavBar
+        PresentationCatalog
+        TrainingsPromotion
+            CardVerticalCollapse
+        FindCatalog
+
+    PROGRAMMEFORMATION
+        NavBar
+
+    MYLOGIN
+        NavBar

@@ -108,7 +108,6 @@ export default {
 
     data () {
         return {
-            show: false,
             url: this.$store.state.urlUploads,
         }
     }

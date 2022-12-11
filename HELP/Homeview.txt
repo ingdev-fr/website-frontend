@@ -1,0 +1,22 @@
+TEMPLATE : 
+- c'est une view donc composée de template
+
+- On a des animations en hover. 
+
+
+
+LOGIQUE SCRIPT : 
+1.// Pour placer la classe 'active' sur le lien correspondant à la page actuelle dans le menu, je créé une fonction 'changeActiveClass' qui utilisera le commit de la mutation 'CHANGE_ACTIVECLASS' du store pour ensuite réécrire la valeur de la data 'activeClass' du store sur "accueil". 
+Au montage de la page, j'appelle cette fonction
+Grace au paramétrage dans le composant 'barnav' le lien accueil du menu est stylé différemment pour montrer qu'on est sur cette page. 
+
+2.// Récupération des données de l'API : A la création de la page, j'appelle les actions permettant les appels à l'API pour charger dans le store les données du header, du hero et du about. 
+En effet, comme je souhaite que les utilisateurs puissent changer en backoffice les informations de la page, j'ai prévu un backend avec Strapi pour laisser les users écrire les données. 
+
+
+
+
+SCSS : 
+
+
+

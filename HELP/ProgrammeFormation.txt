@@ -1,0 +1,24 @@
+TEMPLATE : 
+- Attention, j'ai des divs dupliquées pour une version "SCREEN" et une version "PRINT". (4, 208)
+- J'ai des boucles pour afficher les éléments des listes et j'insère '/' entre les éléments des listes sauf pour le dernier grace à un v-if conditionnel. (25)
+- J'ai une barre de navigation secondaire avec des liens qui affichent du contenu avec des v-if conditionnels et un système de classe active + mode (data = modeActive) + méthodes déclenchées au click. (54). J'ai ajouté la fonction "prevent" à l'événement "click" pour stopper la propagation, ça permet de rester au même niveau de page lorsque l'on navigue d'un lien à l'autre. 
+
+
+
+
+SCRIPT : 
+
+1.// Je crée les méthodes pour changer la valeur du 'modeActive' pour l'affichage conditionnel. 
+
+2.// Récupération des données de l'API : à la création de la page, je dispatch l'appel à API du store concernant les formations à récupérer de l'API. Les infos se chargent dans le store, dans la 'state.formations'. Parce que je souhaite que la page puisse charger les données de façon autonome si l'utilisateur décidait d'enregistrer l'URL et de l'ouvrir plus tard. 
+Pas la peine de dispatcher les appels API pour les informations sur les villes, les catégories et les sessions, elles sont déjà intégrées dans les données de la formation et je n'ai pas besoin de filtrer les recherches. 
+
+3.// Identification de la formation à afficher : l'url de la page a été construite avec un paramètre d'url qui s'appelle "code" (il existe une route dans le router : "path: '/programme/:code', " et le fichier 'CataloguePage.vue' passe la valeur du code lors du click sur le bouton 'programme' de la formation concernée). 
+La computed "maFormation" récupère la valeur du paramètre 'code' puis retourne les données de la formation (du tableau 'store.state.formations') qui a le code dont la valeur correspond à celle du paramètre d'url (j'utilise 'find' pour la trouver). (366)
+
+4.// Affectation dans des computed des infos de la formations identifiée et incarnée par la computed 'maFormation': ici on va utiliser des computed plutôt que des datas parce qu'avec les datas, les notations pointées ne fonctionnaient pas pour les données tableau ! 
+
+5.// Au montage de l'application, j'appelle la méthode 'changeActiveClass' pour styler différemment le lien du menu correspondant à la page actuelle. 
+
+
+CSS : 

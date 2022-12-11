@@ -1,0 +1,21 @@
+TEMPLATE :
+- Formulaire : 
+    - Il y a un champ spécifique (v-if) pour afficher un message d'erreur (data 'loginErrorMessage') si les champs 'email' et 'password' sont vides. 
+    - Le bouton d'envoi est désactivé si la validation du formulaire renvoit false 
+    - Comme la page n'est connectée à aucune API, la fonction 'loginUser' associée au click du bouton n'est pas définie. 
+
+
+
+LOGIQUE SCRIPT : 
+1.// Pour placer la classe 'active' sur le lien correspondant à la page actuelle dans le menu, je créé une fonction 'changeActiveClass' qui utilisera le commit de la mutation 'CHANGE_ACTIVECLASS' du store pour ensuite réécrire la valeur de la data 'activeClass' du store sur "connexion". 
+Au montage de la page, j'appelle cette fonction
+Grace au paramétrage dans le composant 'barnav' le lien "connexion" du menu est stylé différemment pour montrer qu'on est sur cette page. 
+
+2.// Validation des champs du formulaire : La computed 'validatedFields' vérifie les champs du formulaire. Ici elle n'est pas paramétrée car la page est un fake. 
+
+
+
+
+
+SCSS : 
+- Stylage d'astériques rouges pour les champs obligatoires. 

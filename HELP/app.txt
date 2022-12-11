@@ -1,0 +1,18 @@
+TEMPLATE : 
+- On place le router view pour afficher les pages du menu et faire les redirections
+- On place le component 'footer' pour qu'il soit présent sur toutes les pages. 
+- On ne place pas le component 'barnav' car il va s'intégrer dans les différents backgrounds des views. 
+
+
+
+
+LOGIQUE SCRIPT : 
+
+
+
+
+SCCS : 
+- Je déclare les fonts à utiliser dans les différents views et composants. 
+- Je fixe quelques règles générales pour l'ensemble des composants
+- Je redimensionne la taille du rem dans les media queries.
+- Je style le template (1400px)

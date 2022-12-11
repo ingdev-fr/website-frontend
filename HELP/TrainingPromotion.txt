@@ -1,0 +1,13 @@
+TEMPLATE : 
+- C'est ma colonne des infos promotionnelles 
+
+
+
+LOGIQUE SCRIPT : 
+
+1.// Récupérer la liste des formations "onTop" pour les afficher en carte : 
+    - Je crée une variable 'onTop' à laquelle je réaffecte les données du store.state.onTop. Les formations à la une ont été chargées grace au dispatch 'getFormations' lancé à la création de la page/view 'CataloguePage.vue'. 
+
+
+
+SCSS : 

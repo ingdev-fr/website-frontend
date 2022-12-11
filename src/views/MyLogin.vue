@@ -82,7 +82,6 @@
     changeActiveClass : function () {
       this.$store.commit('CHANGE_ACTIVECLASS');
       this.$store.state.activeClass = "connexion";
-      console.log(this.$store.state.activeClass);
     },
     // fonction pour se logger
     loginUser: function () {

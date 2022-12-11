@@ -1,0 +1,9 @@
+LOGIQUE : 
+
+1.// Je créé les routes de mon application. J'ai une route dynamique pour afficher chaque programme de formation à partir du code de la formation qui est transmis par le fichier 'findCatalogue.vue' comme paramètre d'url grace à '$router.push.' Dans le fichier 'programmeFormation.vue' qui affiche la fiche de chaque formation, je récupère le code de la formation (via '$route.params') pour la retrouver dans la liste des formations du store et afficher ses données. 
+
+2. Paramétrage de l'historique : je préfère l'affichage de l'url et des routes sans '#', donc je choisis 'createWebHistory()'.
+
+3. Je passe les routes.
+
+4. Paramétrage de la position des pages à l'affichage quand on naviague : je paramètre 'scroolBehavior' pour que lorsque l'on retourne à la page précédente on revienne à la même hauteur de page. 

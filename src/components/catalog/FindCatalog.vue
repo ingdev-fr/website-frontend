@@ -77,23 +77,23 @@
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
                             <div class="d-flex">
-                                <div class="cat-color me-2" :style="{backgroundColor: item.attributes.category_formation.data.attributes.color}"></div>
+                                <div class="cat-color me-2" :style="{backgroundColor: item.attributes.categoryFormation.data.attributes.color}"></div>
                                 <div class="">
                                     <h2 class="affichage__card__header formationTitle fs-4 mb-0 fw-bold text-light">{{item.attributes.titre}}</h2>
-                                    <div class="domaine text-light">Domaine : <span class="domaine-span" :style="{color: item.attributes.category_formation.data.attributes.color}">{{item.attributes.category_formation.data.attributes.nom}}</span></div>
+                                    <div class="domaine text-light">Domaine : <span class="domaine-span" :style="{color: item.attributes.categoryFormation.data.attributes.color}">{{item.attributes.categoryFormation.data.attributes.nom}}</span></div>
                                 </div>
                             </div>
-                            <!-- Modal Programme de formation -->
+                            <!-- Bouton Programme de formation -->
                             <button type="button" class="btn btn-program mt-1" @click="showProgram(item.attributes.code)">Programme</button>
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
                             <div class="">
-                                <div><span class="fw-bold">Durée : </span>{{item.attributes.duree_en_jour}}<span v-if="item.attributes.duree_en_jour == 1"> jour</span><span v-else> jours</span></div>
+                                <div><span class="fw-bold">Durée : </span>{{item.attributes.dureeEnJour}}<span v-if="item.attributes.dureeEnJour == 1"> jour</span><span v-else> jours</span></div>
                                 <div>
                                     <span class="fw-bold">Modalité : </span>
                                     <ul>
-                                        <li class="me-1" v-for="(mod, idx) in item.attributes.modalite_pedagogiques.data" :key="idx">{{mod.attributes.nom}}</li>
+                                        <li class="me-1" v-for="(mod, idx) in item.attributes.modalitePedagogiques.data" :key="idx">{{mod.attributes.nom}}</li>
                                     </ul>
                                 </div>
                                 <div class="d-flex">
@@ -109,7 +109,7 @@
                                 <div class="" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div>
                             </div>
                             <div :id="'collapsePresentationFind'+item.id" class="collapse">
-                                <p class="card-text card-body">{{item.attributes.presentation_rapide}}</p>
+                                <p class="card-text card-body">{{item.attributes.presentationRapide}}</p>
                             </div>
                             
                         </div>
@@ -145,12 +145,6 @@ export default {
         }
     },
 
-    created: function() {
-        // On ne va charger que les données des formations car elles contiennent toutes les autres !
-    this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
-    this.$store.dispatch('getVilles');
-    this.$store.dispatch('getCategories');
-  },
 }
 </script>
 

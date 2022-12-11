@@ -1,0 +1,13 @@
+TEMPLATE : 
+- j'ai des badges de certification un peu petits. En passant la souris dessus (mousover, mousleave), j'affiche des popovers maison conditionnés à l'événement et positionnés en 'absolute'. 
+
+
+
+
+LOGIQUE SCRIPT : 
+
+1.// J'ai des méthodes pour passer les popovers en display 'none' ou 'block' selon l'événement qui appelle la méthode. 
+
+
+
+SCSS : 

@@ -1,7 +1,6 @@
 <template>
-    <router-view/>
-    <FooterSection/>
-
+  <router-view/>
+  <FooterSection/>
 </template>
 
 <script>

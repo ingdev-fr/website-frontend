@@ -1,0 +1,4 @@
+- import des modules de fonctionnement
+- import module bootstrap ou Tailwind
+- import des fontawesome et ajout à la librairie
+- mise à disposition (use) des modules pour les composants. 

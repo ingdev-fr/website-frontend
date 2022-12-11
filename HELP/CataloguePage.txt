@@ -1,0 +1,25 @@
+TEMPLATE : 
+
+
+
+LOGIQUE SCRIPT : 
+
+1.// Pour placer la classe 'active' sur le lien correspondant à la page actuelle dans le menu, je créé une fonction 'changeActiveClass' qui utilisera le commit de la mutation 'CHANGE_ACTIVECLASS' du store pour ensuite réécrire la valeur de la data 'activeClass' du store sur "showroom". 
+Au montage de la page, j'appelle cette fonction
+Grace au paramétrage dans le composant 'barnav' le lien "showroom" du menu est stylé différemment pour montrer qu'on est sur cette page. 
+
+2.// Affichage alternatif des onglets "promotion" et "recherche" : Je veux qu'en dessous du breakpoint '992px' mes 2 colonnes "promotion" et "recherche" deviennent des onglets sur une seule colonne. La fonction 'resizeWindow' calcule la taille de la fenêtre puis :
+    - en dessous de 992px, elle affiche (v-if) les boutons des onglets (modeButton = 'true') et place en mode invisible les colonnes (visible = 'off). Il y a 2 conditions alternatives pour afficher une colonne (visible = on, modeVisible = ...). Par défaut le mode visible (la data) est sur 'recherche', donc la colonne est seule visible (v-if). En cliquant sur un bouton d'onglet, on change la valeur du modeVisible, donc on affiche soit une colonne soit l'autre (methods 'modeVisibleRecherche' et 'modeVisiblePromotion'). 
+    - Au dessus de 992px, le modeButton = 'false' donc les onglets ne s'affichent pas (v-if) et visible = 'on' donc les 2 colonnes sont affichées en même temps. 
+Je lance la fonction 'resizeWindow' au montage de la page. J'assigne ensuite à la page un écouteur d'événement  du redimensionnement de la page auquel je passe en paramètre la fonction 'resizeWindow'. 
+Enfin, dans le démontage de la page, je supprime l'écouteur. 
+
+
+3.// Récupération des données de l'API : à la création de la page, je dispatch les appels API du store concernant les données à récupérer sur les formation, les villes et les catégories de formation. Comme ça, dès qu'un utilisateur arrive sur la page, les données concernées se chargent. Les infos se chargent dans le store, dans la 'state.formations'.
+Bien que les données sur les villes et les catégories de formation soient intégrées dans celles de la formation, je récupère quand même les données de ces tables car j'en ai besoin pour ensuite paramétrer des filtres de recherche (par exemple : trouve moi les formations qui ont pour catégorie ... ou qui ont lieu dans la ville ...)
+
+
+
+
+
+CSS : 
