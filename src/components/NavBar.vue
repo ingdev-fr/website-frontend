@@ -31,7 +31,7 @@
               <!-- CONTACT -->
               <li class="nav-item  d-flex align-items-center justify-content-center justify-content-lg-center">
                   <!-- BUTTON -->
-                <button class="nav-link btn nav-link__contactButton px-2" data-bs-toggle="modal" data-bs-target="#contactModal" data-bs-whatever="@mdo">Contactez-nous</button>
+                <button class="nav-link btn nav-link__contactButton px-2" data-bs-toggle="modal" data-bs-target="#contactModal">Contactez-nous</button>
                   <!-- MODAL -->
                 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true" data-bs-backdrop="static" >
                   <div class="modal-dialog">

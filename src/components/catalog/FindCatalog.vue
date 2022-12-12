@@ -69,7 +69,7 @@
             </form>
         </div>
         <!-- AFFICHAGE DES FORMATIONS -->
-        <div class="affichage p-4 rounded">
+        <div class="affichage p-4 mt-3 rounded">
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
                     </div>      
@@ -125,7 +125,7 @@
                                 <div class="card-text card-body">Nos sessions sont organisées par dates et par ville.</div>
                                 <div class="session card-text d-flex flex-wrap ps-3 pe-2 pt-2 align-items-center" v-for="(session, idx) in item.attributes.sessions.data" :key="idx">
                                     <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10" ><span class="session-span">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{item.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
-                                    <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" ><a class="nav-link text-light" href="">S'inscrire</a></button>
+                                    <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2"  @click="showInscription(item.attributes.code)">S'inscrire</button>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +142,9 @@ export default {
     methods: {
         showProgram: function(param) {
             this.$router.push({name: 'programme', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
+        },
+        showInscription: function(param) {
+            this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
         }
     },
 
@@ -153,10 +156,16 @@ export default {
 //---------- POUR LA RECHERCHE 
 .recherche {
     border: 1px solid $third-color;
-    &__form {
+    &__card {
         background: $third-color-clear;
     }
 }
+
+.affichage {
+    background: $third-color-clear;
+}
+
+
 
 .form-check {
     &-input {
@@ -218,6 +227,7 @@ export default {
         }
     }  
 }
+
 
 .header-training {
     background: $secondary-color;

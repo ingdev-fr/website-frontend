@@ -10,4 +10,5 @@ Ensuite, via des Mutations, je traite les résultats des Actions correspondantes
 4.// Chargement des données de l'API concernant les listes des formations, des sessions, des villes, des catégories. (actions : 'getFormations', 'getSessions', 'getVilles', 'getCategories').
 - Je respecte le cycle des transformations : action (appel API et récupération des données) puis mutation (réaffectation des données dans des datas ou transformation des données)
 - Pour les formations, dans la mutation, j'ai 2 instructions : d'abord récolter les données dans un tableau général, puis filtrage des données pour récupérer les formations 'à la une' dans le tableau/data 'onTop'. 
-- Je peux donc effectuer plusieurs transformations/réaffectations de donnéées dans une mutation !!!
+- Je peux donc effectuer plusieurs transformations/réaffectations de données dans une mutation !!!
+- Attention à l'enchainement des actions soumises à l'asynchronicité alors que les mutations elles sont immédiates ! Pour être sur qu'une action soit bien traitée après la fin d'une première action, il faut créer une seule action et faire s'enchainer les instructions au sein de la même mutation !!!

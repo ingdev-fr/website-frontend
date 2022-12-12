@@ -6,7 +6,7 @@ TEMPLATE :
 LOGIQUE SCRIPT : 
 
 1.// Récupérer la liste des formations "onTop" pour les afficher en carte : 
-    - Je crée une variable 'onTop' à laquelle je réaffecte les données du store.state.onTop. Les formations à la une ont été chargées grace au dispatch 'getFormations' lancé à la création de la page/view 'CataloguePage.vue'. 
+    - Je crée une boucle avec la data du store 'store.state.onTop'. Il ne faut essayer de la charger dans une variable (une data) du composant car étant une action asynchrone, la data de notre composant sera créée avant la data du store et affichera une valeur vide. 
 
 
 

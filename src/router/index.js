@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import MyLogin from '../views/MyLogin.vue'
 import Catalogue from '../views/CataloguePage.vue'
 import ProgrammeFormation from '../views/ProgrammeFormation.vue'
+import InscriptionPage from '../views/InscriptionPage.vue'
 
 const routes = [
   {
@@ -21,9 +22,14 @@ const routes = [
     component: Catalogue,
   },
   {
-    path: '/programme/:code',
+    path: '/formation/:code',
     name: 'programme',
     component: ProgrammeFormation,
+  },
+  {
+    path: '/inscription/:code',
+    name: 'inscription',
+    component: InscriptionPage,
   },
 ]
 

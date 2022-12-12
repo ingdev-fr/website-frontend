@@ -7,8 +7,8 @@
         </div>
         <!-- ENTETE DE LA FORMATION-->
         <div class="headerTraining mt-3 py-4">
-            <div class="template d-md-flex text-light">
-                <div class="col-lg-8 ps-md-2 mb-3 mb-md-0">
+            <div class="template d-lg-flex text-light">
+                <div class="col-lg-8 ps-md-2 mb-2">
                     <!-- Titre et descriptif -->
                     <div class="cat p-2 mb-3 text-dark rounded">{{categoryFormation}}</div>
                     <h1 class="formationTitle fs-1">{{titreFormation}}</h1>
@@ -20,11 +20,11 @@
                                 <img class="headerTraining__icon" src="../assets/images/icons8-objet-avec-durée.svg" alt="icone de durée">
                                 <div class="ms-2">{{dureeEnHeures}} heures</div>
                             </div>
-                            <div class="duree d-flex align-items-center me-3 me-md-5">
+                            <div class="duree d-flex align-items-center me-3 me-md-5 flex-wrap">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-salle-de-classe.svg" alt="icone de modalité pédagogique">
                                 <div class="ms-2" v-for="(modalite, idx) in modalitePedagogiques" :key="idx">{{modalite.attributes.nom}}<span v-if="(idx + 1) !== modalitePedagogiques.length"> /</span></div>
                             </div>
-                            <div class="duree d-flex align-items-center me-3 me-md-5">
+                            <div class="duree d-flex align-items-center me-3 me-md-5 flex-wrap">
                                 <img class="headerTraining__icon" src="../assets/images/icons8-certification.svg" alt="icone de certification">
                                 <div class="ms-2" v-for="(certif,idx) in certifications" :key="idx" >{{certif.attributes.nom}} <span v-if="(idx + 1) !== certifications.length"> /</span></div>
                             </div>
@@ -34,17 +34,41 @@
                             </div>
                         </div>
                         <!-- Code et prix -->
-                        <div class="codePrix d-flex align-items-center pt-3">
+                        <div class="codePrix d-flex align-items-center pt-3 flex-wrap">
                             <div>Code : <span class="code ms-2 p-2 rounded">{{codeFormation}}</span></div>
                             <div class="tarif ms-3">Tarifs : <span class="price ms-2 p-2 rounded">{{prixFormation}}€ HT</span></div>
                         </div>
                     </div>
-                    
                 </div>
                 <!-- Boutons Sessions et inscriptions-->
-                <div class="inscription col-lg-4 d-flex align-items-end justify-content-lg-end mb-2">
-                    <button class="btn button btn-primary me-3 px-4 fs-5">Sessions</button>
-                    <button class="btn button button-2 btn-primary px-4 fs-5">Inscription</button>
+                <div class="inscription col-lg-4 d-flex align-items-end justify-content-lg-end mt-4 mt-lg-0">
+                    <button class="btn button btn-primary px-4 fs-5" data-bs-toggle="modal" data-bs-target="#sessionModal">Sessions - Inscription</button>
+                </div>
+                  <!-- MODAL -->
+                  <div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true" data-bs-backdrop="static" >
+                  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <!-- MODAL HEADER -->
+                      <div class="modal-header" id="modal-header">
+                        <h5 class="modal-title text-light" id="sessionModalLabel">Sessions</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <!-- MODAL BODY -->
+                      <div class="modal-body">
+                        <div class="card-text card-body text-dark mb-3">Nos sessions sont organisées par dates et par ville: </div>
+                      <div class="session card-text d-flex flex-wrap align-items-center p-2" v-for="(session, idx) in maFormation.attributes.sessions.data" :key="idx">
+                            <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10 text-dark" ><span class="session-span">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{this.maFormation.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
+                            <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" data-bs-dismiss="modal" @click="showInscription(this.maFormation.attributes.code)">S'inscrire</button>
+                        </div>
+                      </div>
+                      <!-- MODAL FOOTER BUTTONS-->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="send-button" data-bs-dismiss="modal">Fermer</button>
+                        </div>
+                        
+                    </div>
+                    </div>
+                       
                 </div>
             </div>
         </div>
@@ -422,14 +446,14 @@ export default {
         modeCertif : function () {
             this.modeActive = 'certif';
             },
-        modeLieu : function () {
-            this.modeActive = 'lieu';
-            },
         // Je créé la méthode qui permet de réécrire la valeur de la donnée "activeClass" du store pour afficher dynamiquement la classe "active" dans la navigation de cette page. 
         changeActiveClass : function () {
             this.$store.commit('CHANGE_ACTIVECLASS');
             this.$store.state.activeClass = "showroom";
-            }
+            },
+        showInscription: function(param) {
+            this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
+        },
 
     },
 
@@ -475,16 +499,27 @@ export default {
         background-color: $secondary-color-dark;
     }
     & .button {
-        width: 160px;
-        &-2 {
-            background-color: $third-color-dark;
-            &:hover {
+        background-color: $third-color-dark;
+        &:hover {
                 background-color: $third-color;
             }
-        }
     }
     &__icon {
         height: 2rem;
+    }
+}
+
+#modal-header {
+  background: $third-color-transp;
+}
+
+.session {
+    border: 1px solid $third-color-clear;
+    &:hover {
+        background: $third-color-clear;
+    }
+    &-span {
+        font-weight: 600;
     }
 }
 
@@ -525,11 +560,6 @@ export default {
         background: $third-color-clear;
         &__img {
             height: 30px;
-        }
-    }
-    &-session {
-        &:hover {
-            background: $clear-color;
         }
     }
 }
