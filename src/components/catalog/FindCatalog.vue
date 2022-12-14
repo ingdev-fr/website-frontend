@@ -8,7 +8,7 @@
             <form class="recherche__form row p-4 mb-3 rounded" role="search" v-on:submit.prevent>
                 <p class="fw-bold">Recherche :</p>
                 <div class="search-bar d-md-flex mb-3">
-                    <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="searchWords" @keyup.enter="setSearch()">
+                    <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="searchWords" >
                 </div>
                 <!-- Filtres Modalités -->
                 <div class="search-filters">
@@ -16,7 +16,7 @@
                     <div class="check">
                         <div class="d-md-flex flex-wrap justify-content-start">
                             <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-cpf">
+                                <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-cpf" @click="setCheckBox(checkCpf)">
                                 <label class="form-check-label" for="form-check-cpf">Eligible CPF
                                 </label>
                             </div>
@@ -64,7 +64,7 @@
                 </div>
                 <!-- Bouton de recherche -->
                 <div class="my-2">
-                    <button class="button btn btn-recherche">Lancer la recherche</button>
+                    <button class="button btn btn-recherche" @click="setSearch()">Lancer la recherche</button>
                 </div>
             </form>
         </div>
@@ -136,8 +136,24 @@
 </template>
 
 <script>
+
 export default {
     name: 'FindCatalog',
+
+    data () {
+        return {
+            searchWords: '',
+            resultWords: [],
+            resultCpf: [],
+            totalResult : [],
+            queryTitreContent: null,
+            checkCpf: false,
+        }
+    },
+
+    computed : {
+
+    },
     
     methods: {
         showProgram: function(param) {
@@ -145,6 +161,34 @@ export default {
         },
         showInscription: function(param) {
             this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
+        },
+        setCheckBox: function()
+        {
+            this.checkCpf = !this.checkCpf;
+            console.log(this.checkCpf);
+        },       
+        setSearch: function() {
+            let searchWordsOptim = this.searchWords.trim().toLowerCase().split(' '); // je transforme la requête string en tableau de mots
+            console.log(searchWordsOptim);
+
+            let result = this.$store.state.formations // je crée un tableau des résultats
+                .filter(function(item) { // je recherche dans le tableau des formations, pour chaque formation (item) si 
+                    let titre = item.attributes.titre.trim().toLowerCase(); // Je transforme le titre de la formation 
+                    let resp = []; // je crée un tableau qui va recevoir les réponses positives (true) du matching
+                    for(let i in searchWordsOptim) { // Pour chaque mot dans la tableau des mots de recherche
+                        if(titre.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
+                            resp.push('true'); // si oui, je pousse une valeur ('true') dans mon tableau de réponses du matching
+                        }
+                    } 
+                    if(resp.length > 0) { // si mon tableau resp contient au moins une valeur, c'est que le titre de la formation contient au moins un mot de recherche
+                        return true; // donc je sélectionne la formation ('return true' car la méthode filter sélectionne tous les items qui ont une réponse 'true') pour qu'elle apparaisse dans le tableau de résultats de mon filter. 
+                    }
+                    // Je vais pouvoir afficher mes résultats de recherche par length décroissante de mon tableau 'resp' : peut-être en attribuant une valeur = à la length comme propriété d'une formation. 
+                        
+                })
+            console.log(result);
+
+            
         }
     },
 

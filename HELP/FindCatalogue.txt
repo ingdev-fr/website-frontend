@@ -16,7 +16,17 @@ LOGIQUE SCRIPT :
 
 1.// Récupération des données des villes et des catégories pour les afficher comme filtres dans la recherche : Ca a déjà été fait dans le composant parent 'CataloguePage'. Donc maitenant, on va les chercher directement dans le store. 
 
-2.// Création d'une page dynamique pour afficher le programme d'une formation spécifique choisie dans la liste des résultats : l'url de la page de la formation à afficher sera construite avec un paramètre d'url qui s'appelle "code" (il existe une route dans le router : "path: '/programme/:code') " et qui sera transmis via notre méthode 'showProgram' lors du click sur le bouton 'programme' de la formation concernée dans la liste des résultats. 
+2.// Paramétrage des recherches : 
+    - Je fais mes recherches dans la store.state.formations que je récupère au lancement de la page du catalogue. Comme ca je ne fais qu'une requête initiale. 
+    - Avec v-model, je récupère la valeur de l'input de recherche. 
+    - Pour récupérer dans $store.state.formations un nouveau tableau "resultSearch" avec le résultats de mes recherches, je crée la fonction "setSearch": 
+        // Elle est la somme de toutes les recherches. 
+        // Je convertis également en lowerCase les valeurs des attributs de mes items de $store.state.formations (en utilisant .toLowerCase), comme ça les données venant du store sont en lowerCase et les valeurs des inputs sont en lowerCase donc plus de problème de ce cotè là !
+        // Je recherche les formations (item) qui matchent avec ma recherche avec .filter et ensuite je donne mes conditions de matching grace à .includes: (titre.includes (...)' ou presentationRapide.includes(...).
+        // J'additionne mes recherches
+
+
+3.// Création d'une page dynamique pour afficher le programme d'une formation spécifique choisie dans la liste des résultats : l'url de la page de la formation à afficher sera construite avec un paramètre d'url qui s'appelle "code" (il existe une route dans le router : "path: '/programme/:code') " et qui sera transmis via notre méthode 'showProgram' lors du click sur le bouton 'programme' de la formation concernée dans la liste des résultats. 
 
 
 SCSS : 
