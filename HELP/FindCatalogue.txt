@@ -19,9 +19,9 @@ LOGIQUE SCRIPT :
 2.// Paramétrage des recherches : 
     - Je fais mes recherches dans la store.state.formations que je récupère au lancement de la page du catalogue. Comme ca je ne fais qu'une requête initiale. 
     - Avec v-model, je récupère la valeur de l'input de recherche. 
-    - Pour récupérer dans $store.state.formations un nouveau tableau "resultSearch" avec le résultats de mes recherches, je crée la fonction "setSearch": 
+    - Pour récupérer depuis $store.state.formations un nouveau tableau "resultSearch" (en utilisant '.filter) avec le résultats de mes recherches, je crée la fonction "setSearch": 
         // Elle est la somme de toutes les recherches. 
-        // Je convertis également en lowerCase les valeurs des attributs de mes items de $store.state.formations (en utilisant .toLowerCase), comme ça les données venant du store sont en lowerCase et les valeurs des inputs sont en lowerCase donc plus de problème de ce cotè là !
+        // Je convertis en lowerCase les valeurs des attributs de mes items de $store.state.formations (en utilisant .toLowerCase), et je supprime les accents grace à une regex, comme ça les données venant du store sont en lowerCase et les valeurs des inputs sont en lowerCase donc plus de problème de ce cotè là !
         // Je recherche les formations (item) qui matchent avec ma recherche avec .filter et ensuite je donne mes conditions de matching grace à .includes: (titre.includes (...)' ou presentationRapide.includes(...).
         // J'additionne mes recherches
 

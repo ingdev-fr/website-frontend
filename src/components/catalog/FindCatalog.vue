@@ -168,15 +168,18 @@ export default {
             console.log(this.checkCpf);
         },       
         setSearch: function() {
-            let searchWordsOptim = this.searchWords.trim().toLowerCase().split(' '); // je transforme la requête string en tableau de mots
+            let searchWordsOptim = this.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
             console.log(searchWordsOptim);
 
             let result = this.$store.state.formations // je crée un tableau des résultats
                 .filter(function(item) { // je recherche dans le tableau des formations, pour chaque formation (item) si 
-                    let titre = item.attributes.titre.trim().toLowerCase(); // Je transforme le titre de la formation 
+                    let titre = item.attributes.titre.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le titre de la formation , avec 'trim' j'enleve les espaces avant et après, avec toLowerCase je mets tout en minuscule, avec normalize je décomposeles lettres et diacritics, avec replace je supprime toutes les diacritics (signe accompagnant une lettre ou un graphème pour en modifier le sens ou la prononciation).
+                    console.log(titre);
+                    let content = item.attributes.presentationRapide.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); //Je transforme le contenu de la présentation de la formation 
+                    let code = item.attributes.code.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le code de la formation
                     let resp = []; // je crée un tableau qui va recevoir les réponses positives (true) du matching
                     for(let i in searchWordsOptim) { // Pour chaque mot dans la tableau des mots de recherche
-                        if(titre.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
+                        if(titre.match(searchWordsOptim[i]) || content.match(searchWordsOptim[i]) || code.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
                             resp.push('true'); // si oui, je pousse une valeur ('true') dans mon tableau de réponses du matching
                         }
                     } 
