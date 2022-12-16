@@ -5,7 +5,7 @@
         <!-- RECHERCHE -->
         <div class="recherche__card px-3 pb-3 rounded">
             <!-- Zone de recherche -->
-            <form class="recherche__form row p-4 mb-3 rounded" role="search" v-on:submit.prevent>
+            <form class="recherche__form row p-4 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
                 <p class="fw-bold">Recherche :</p>
                 <div class="search-bar d-md-flex mb-3">
                     <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="searchWords" >
@@ -16,17 +16,17 @@
                     <div class="check">
                         <div class="d-md-flex flex-wrap justify-content-start">
                             <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-cpf" @click="setCheckBox(checkCpf)">
+                                <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-cpf">
                                 <label class="form-check-label" for="form-check-cpf">Eligible CPF
                                 </label>
                             </div>
                             <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-qualif">
+                                <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-qualif" >
                                 <label class="form-check-label" for="form-check-qualif">Formation qualifiante
                                 </label>
                             </div>
                             <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox" value="" id="form-check-modal">
+                                <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-distance">
                                 <label class="form-check-label" for="form-check-modal">A distance
                                 </label>
                             </div>
@@ -54,7 +54,7 @@
                             <p class="fw-bold">Catégories :</p>
                             <div class="d-md-flex flex-wrap mb-3" >
                                 <div class="form-check form-switch me-5" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">
-                                    <input class="form-check-input" :class="'form-check-input-'+item.id" type="checkbox" value="" :id="'form-check-input-'+item.id">
+                                    <input class="form-check-input" :class="'form-check-input-'+item.id" type="checkbox"  :id="'form-check-input-'+item.id">
                                     <label class="form-check-label" :class="'form-check-label-'+item.id" :for="'form-check-input-'+item.id">
                                         {{item.attributes.nom}}
                                     </label>
@@ -63,8 +63,9 @@
                             </div>
                 </div>
                 <!-- Bouton de recherche -->
-                <div class="my-2">
+                <div class="my-2 d-flex justify-content-between">
                     <button class="button btn btn-recherche" @click="setSearch()">Lancer la recherche</button>
+                    <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
                 </div>
             </form>
         </div>
@@ -73,7 +74,7 @@
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
                     </div>      
-                    <div class="card affichage__card mb-3" v-for="(item, idx) in $store.state.formations" v-bind:key="idx">
+                    <div class="card affichage__card mb-3" v-for="(item, idx) in this.finalResult" v-bind:key="idx">
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
                             <div class="d-flex">
@@ -143,11 +144,9 @@ export default {
     data () {
         return {
             searchWords: '',
+            finalresult: [],
             resultWords: [],
-            resultCpf: [],
-            totalResult : [],
-            queryTitreContent: null,
-            checkCpf: false,
+            finalResult: [],
         }
     },
 
@@ -161,37 +160,70 @@ export default {
         },
         showInscription: function(param) {
             this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
-        },
-        setCheckBox: function()
-        {
-            this.checkCpf = !this.checkCpf;
-            console.log(this.checkCpf);
-        },       
+        },   
+        reinitSearch: function () {
+            // Je réinitialise les filtres
+                // le filtre de recherche par mots clés
+            this.searchWords = '';
+                // les filtres cpf
+            document.getElementById('form-check-cpf').checked = false;
+            document.getElementById('form-check-qualif').checked = false;
+            document.getElementById('form-check-distance').checked = false;
+        },  
         setSearch: function() {
             let searchWordsOptim = this.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
             console.log(searchWordsOptim);
 
-            let result = this.$store.state.formations // je crée un tableau des résultats
+            // Je recherche par mots clés de l'input de recherche
+            this.resultWords = this.$store.state.formations // je crée un tableau des résultats
                 .filter(function(item) { // je recherche dans le tableau des formations, pour chaque formation (item) si 
-                    let titre = item.attributes.titre.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le titre de la formation , avec 'trim' j'enleve les espaces avant et après, avec toLowerCase je mets tout en minuscule, avec normalize je décomposeles lettres et diacritics, avec replace je supprime toutes les diacritics (signe accompagnant une lettre ou un graphème pour en modifier le sens ou la prononciation).
-                    console.log(titre);
+                    let titre = item.attributes.titre.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); 
                     let content = item.attributes.presentationRapide.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); //Je transforme le contenu de la présentation de la formation 
                     let code = item.attributes.code.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le code de la formation
-                    let resp = []; // je crée un tableau qui va recevoir les réponses positives (true) du matching
+
                     for(let i in searchWordsOptim) { // Pour chaque mot dans la tableau des mots de recherche
                         if(titre.match(searchWordsOptim[i]) || content.match(searchWordsOptim[i]) || code.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
-                            resp.push('true'); // si oui, je pousse une valeur ('true') dans mon tableau de réponses du matching
+                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
                         }
-                    } 
-                    if(resp.length > 0) { // si mon tableau resp contient au moins une valeur, c'est que le titre de la formation contient au moins un mot de recherche
-                        return true; // donc je sélectionne la formation ('return true' car la méthode filter sélectionne tous les items qui ont une réponse 'true') pour qu'elle apparaisse dans le tableau de résultats de mon filter. 
-                    }
-                    // Je vais pouvoir afficher mes résultats de recherche par length décroissante de mon tableau 'resp' : peut-être en attribuant une valeur = à la length comme propriété d'une formation. 
-                        
-                })
-            console.log(result);
-
+                    }     
+                });
+            console.log(this.resultWords);
+            this.finalResult = this.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
             
+            // Ensuite, si un filtre est sélectionné, je poursuis la recherche (car si pas de filtres ma function "totalRequest" de la fin est incomplète ) : 
+            if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true) {
+                let restOfRequest = []; // je créé un tableau qui va contenir les parties intérieures de l'instruction de la suite de la requête
+
+                let startOfRequest = 'this.finalResult = this.resultWords.filter(item => ' // début de ma requête
+                let endOfRequest = ');' // fin de ma requête
+                
+                if(document.getElementById('form-check-cpf').checked === true) {
+                    restOfRequest.push('item.attributes.CPF === true');
+                    console.log(restOfRequest);
+                }
+                
+                if(document.getElementById('form-check-qualif').checked === true) {
+                    restOfRequest.push('item.attributes.qualifiante === true');
+                    console.log(restOfRequest);
+                }
+
+                if(document.getElementById('form-check-distance').checked === true) {
+                    restOfRequest.push('item.attributes.distance === true');
+                    console.log(restOfRequest);
+                }
+
+                let restOfRequestString = restOfRequest.join(' && ');
+                console.log(restOfRequestString);
+
+                let totalRequest = startOfRequest.concat(restOfRequestString).concat(endOfRequest); // je recompose ma requête complète avec le début, auquel j'ajoute mes parties de requête + la fin. 
+                console.log(totalRequest); 
+
+                
+                eval(totalRequest); //Je transforme ma requête string en code javascript qui du coup lance ma fonction (this.finalResult = this.resultWords.filter(item => item.attributes.qualifiante === true);) ! 
+                console.log(this.finalResult);
+                
+            }    
+   
         }
     },
 
@@ -246,6 +278,9 @@ export default {
         &:hover {
             background: $text-color;
             color: white;
+        }
+        &__reinit {
+            background: $secondary-color;
         }
     }
     &-program {
