@@ -114,9 +114,6 @@ const store = createStore({
             state.onTop = resultAction.filter(item => item.attributes.onTop === true); // Je récupère dans le tableau 'onTop' les formations qui sont 'à la une' !
             console.log(state.onTop);
         }, 
-        GET_SESSIONS(state, sessions) {
-            state.sessions = sessions;
-        },
         GET_VILLES(state, villes) {
             state.villes = villes;
         },
@@ -172,18 +169,6 @@ const store = createStore({
             // Ensuite je récupère les données des formations et j'attribue aux datas du store les valeurs des données récupérées en passant par la mutation correspondante. 
             .then(response => {
                 commit('GET_FORMATIONS', response.data.data);
-            })
-            .catch((error) =>{
-                console.log(error.message);
-            })
-        },
-        getSessions( {commit} ) {
-            // Je fais un appel à l'API
-            axios
-            .get(`${store.state.urlEndpoints}/sessions?populate=deep`)
-            // Ensuite je récupère les données des sessions et j'attribue aux datas du store les valeurs des données récupérées en passant par la mutation correspondante. 
-            .then((response) => {
-                commit('GET_SESSIONS', response.data.data);
             })
             .catch((error) =>{
                 console.log(error.message);
