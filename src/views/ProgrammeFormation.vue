@@ -41,11 +41,11 @@
                     </div>
                 </div>
                 <!-- Boutons Sessions et inscriptions-->
-                <div class="inscription col-lg-4 d-flex align-items-end justify-content-lg-end mt-4 mt-lg-0">
-                    <button class="btn button btn-primary px-4 fs-5" data-bs-toggle="modal" data-bs-target="#sessionModal">Sessions - Inscription</button>
+                <div class="inscription col-lg-4 d-lg-flex flex-column align-items-end justify-content-end mt-4 mt-lg-0">
+                        <button class="btn button btn-primary px-4 fs-5 mt-5" data-bs-toggle="modal" data-bs-target="#sessionModal">Sessions - Inscription</button>                   
                 </div>
                   <!-- MODAL -->
-                  <div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true" data-bs-backdrop="static" >
+                <div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true" data-bs-backdrop="static" >
                   <div class="modal-dialog modal-xl modal-dialog-scrollable">
                     <div class="modal-content">
                       <!-- MODAL HEADER -->

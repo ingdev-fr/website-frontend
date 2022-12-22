@@ -112,6 +112,7 @@ const store = createStore({
         GET_FORMATIONS(state, resultAction) {
             state.formations = resultAction; // la data array 'formations' du state = la data à modifier en argument dans la mutation qui provient qui est en fait l'argument (et la réponse api) de l'action qui appelle cette mutation donc response.data.data
             state.onTop = resultAction.filter(item => item.attributes.onTop === true); // Je récupère dans le tableau 'onTop' les formations qui sont 'à la une' !
+            console.log(state.onTop);
         }, 
         GET_SESSIONS(state, sessions) {
             state.sessions = sessions;
@@ -167,7 +168,7 @@ const store = createStore({
         getFormations( {commit} ) {
             // Je fais un appel à l'API (attention, 'commit' est entre {})
             axios
-            .get(`${store.state.urlEndpoints}/formations?populate=deep`)
+            .get(`${store.state.urlEndpoints}/formations?fields[0]=titre&fields[1]=presentationRapide&fields[2]=code&&fields[3]=cpf&fields[4]=qualifiante&fields[5]=distance&fields[6]=distance&fields[7]=dureeEnHeures&fields[8]=dureeEnJour&fields[9]=onTop&fields[10]=prix&populate[0]=categoryFormation&populate[1]=sessions&populate[2]=sessions.ville&populate[3]=modalitePedagogiques&populate[4]=certifications&populate[5]=pdf&populate[6]=competences&populate[7]=competences.liste&populate[8]=evaluation&populate[9]=evaluation.epreuves&populate[10]=public&populate[11]=public.prerequis&populate[12]=public.metiers&populate[13]=programme&populate[14]=programme.objectifs&populate[15]=programme.savoirs&populate[16]=programme.activitesApprentissage&populate[17]=programme.activitesEvaluation&populate[18]=formationPhoto&populate[19]=formationPhoto.media&populate[20]=evaluation&populate[21]=evaluation.epreuves`)
             // Ensuite je récupère les données des formations et j'attribue aux datas du store les valeurs des données récupérées en passant par la mutation correspondante. 
             .then(response => {
                 commit('GET_FORMATIONS', response.data.data);

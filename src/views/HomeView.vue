@@ -44,6 +44,7 @@ export default {
 
   mounted: function () {
     this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
+    localStorage.removeItem('Recherche'); //Je supprime les résultats de la recherche du catalogue car le user a quitté la recherche.
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="recherche p-2 rounded bg-light">
         <h2 class="recherche__title fs-4 text-center p-3 rounded">Trouver votre formation</h2>
         <!-- RECHERCHE -->
-        <div class="recherche__card px-3 pb-3 rounded">
+        <div class="recherche__card px-3 rounded">
             <!-- Zone de recherche -->
             <form class="recherche__form row p-4 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
                 <p class="fw-bold">Recherche :</p>
@@ -13,9 +13,9 @@
                 <!-- Filtres Modalités -->
                 <div class="search-filters">
                     <p class="fw-bold">Filtres :</p>
-                    <div class="check">
+                    <div class="check  mb-4">
                         <div class="d-md-flex flex-wrap justify-content-start">
-                            <div class="form-check form-switch me-5">
+                            <div class="form-check form-switch me-5 mb-3">
                                 <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-cpf">
                                 <label class="form-check-label" for="form-check-cpf">Eligible CPF
                                 </label>
@@ -27,43 +27,33 @@
                             </div>
                             <div class="form-check form-switch me-5">
                                 <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-distance">
-                                <label class="form-check-label" for="form-check-modal">A distance
+                                <label class="form-check-label" for="form-check-distance">100% distance
+                                </label>
+                            </div>
+                            <div class="form-check form-switch me-5">
+                                <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-courte">
+                                <label class="form-check-label" for="form-check-courte">Courte (5 jours max)
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="select d-flex flex-wrap my-3">
-                        <div class="me-5 selectDuree">
-                            <select name="duree" class="form-select" aria-label="Durée">
-                                <option selected>Durée</option>
-                                <option value="- de 5 jours">- de 5 jours</option>
-                                <option value="Entre 5 et 15 jours">Entre 5 et 15 jours</option>
-                                <option value="+ de 15 jours">+ de 15 jours</option>
+                    <div class="select d-flex flex-wrap my-4">
+                        <div class="me-5 selectCategorie">
+                            <select id="selectCatégories" name="categorie" class="form-select" aria-label="catégorie" v-model="selectedCategory">
+                                <option value="Catégories" selected>Catégories</option>
+                                <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">{{item.attributes.nom}}</option>
                             </select>
                         </div>
                         <div class="me-5">
-                            <select name="ville" class="form-select" aria-label="Ville" >
-                                <option selected>Villes</option>
+                            <select id="selectVilles" name="ville" class="form-select" aria-label="Ville" v-model="selectedVilles">
+                                <option value="Villes" selected>Villes</option>
                                 <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.villes" v-bind:key="idx">{{item.attributes.nom}}</option>
                             </select>
                         </div>
                     </div>         
                 </div>
-                <!-- Filtres Catégories -->
-                <div class="search-filters">
-                            <p class="fw-bold">Catégories :</p>
-                            <div class="d-md-flex flex-wrap mb-3" >
-                                <div class="form-check form-switch me-5" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">
-                                    <input class="form-check-input" :class="'form-check-input-'+item.id" type="checkbox"  :id="'form-check-input-'+item.id">
-                                    <label class="form-check-label" :class="'form-check-label-'+item.id" :for="'form-check-input-'+item.id">
-                                        {{item.attributes.nom}}
-                                    </label>
-                                </div>
-                                
-                            </div>
-                </div>
                 <!-- Bouton de recherche -->
-                <div class="my-2 d-flex justify-content-between">
+                <div class="mt-2 d-flex justify-content-between">
                     <button class="button btn btn-recherche" @click="setSearch()">Lancer la recherche</button>
                     <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
                 </div>
@@ -73,7 +63,11 @@
         <div class="affichage p-4 mt-3 rounded">
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
-                    </div>      
+                    </div> 
+                    <div class="messages">
+                        <p class="rechercheMatch" v-if="finalResult.length > 0">Il existe {{finalResult.length}} formation(s) pour votre recherche</p> 
+                        <p class="rechercheNoMatch" v-else>Aucun résultat pour votre recherche</p>
+                    </div>    
                     <div class="card affichage__card mb-3" v-for="(item, idx) in this.finalResult" v-bind:key="idx">
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
@@ -144,9 +138,10 @@ export default {
     data () {
         return {
             searchWords: '',
-            finalresult: [],
             resultWords: [],
             finalResult: [],
+            selectedCategory: 'Catégories',
+            selectedVilles: 'Villes',
         }
     },
 
@@ -169,6 +164,11 @@ export default {
             document.getElementById('form-check-cpf').checked = false;
             document.getElementById('form-check-qualif').checked = false;
             document.getElementById('form-check-distance').checked = false;
+            document.getElementById('form-check-courte').checked = false;
+            this.selectedCategory = 'Catégories';
+            this.selectedVilles = 'Villes';
+            localStorage.removeItem('Recherche');
+            this.finalResult = [];
         },  
         setSearch: function() {
             let searchWordsOptim = this.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
@@ -191,11 +191,11 @@ export default {
             this.finalResult = this.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
             
             // Ensuite, si un filtre est sélectionné, je poursuis la recherche (car si pas de filtres ma function "totalRequest" de la fin est incomplète ) : 
-            if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true) {
+            if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true || document.getElementById('form-check-courte').checked === true || this.selectedCategory != 'Catégories' || this.selectedVilles != 'Villes') {
                 let restOfRequest = []; // je créé un tableau qui va contenir les parties intérieures de l'instruction de la suite de la requête
 
-                let startOfRequest = 'this.finalResult = this.resultWords.filter(item => ' // début de ma requête
-                let endOfRequest = ');' // fin de ma requête
+                let startOfRequest = 'this.finalResult = this.resultWords.filter(function(item) { if(' // début de ma requête
+                let endOfRequest = ') {return true} });' // fin de ma requête
                 
                 if(document.getElementById('form-check-cpf').checked === true) {
                     restOfRequest.push('item.attributes.CPF === true');
@@ -212,21 +212,51 @@ export default {
                     console.log(restOfRequest);
                 }
 
+                if(document.getElementById('form-check-courte').checked === true) {
+                    restOfRequest.push('item.attributes.courte === true ');
+                    console.log(restOfRequest);
+                }
+
+                if(this.selectedCategory != 'Catégories') {
+                    restOfRequest.push('item.attributes.categoryFormation.data.attributes.nom === selectedCategory');
+                    console.log(restOfRequest);
+                }
+
+                if(this.selectedVilles != 'Villes') {
+                    restOfRequest.push('item.attributes.sessions.data.some(i => i.attributes.ville.data.attributes.nom === selectedVilles)');
+                    console.log(restOfRequest);
+                }
+
                 let restOfRequestString = restOfRequest.join(' && ');
                 console.log(restOfRequestString);
 
                 let totalRequest = startOfRequest.concat(restOfRequestString).concat(endOfRequest); // je recompose ma requête complète avec le début, auquel j'ajoute mes parties de requête + la fin. 
                 console.log(totalRequest); 
 
+                // Avant de lancer ma fonction finale de recherche et pour bénéficier d'un scope large des variables qui sont dans cette fonction, je les déclare ici ! Car à l'intérieur de ma fonction, je n'arrive pas à récupérer le 'this'. 
+                let selectedCategory = this.selectedCategory;  
+                console.log(selectedCategory);
+                let selectedVilles = this.selectedVilles;
+                console.log(selectedVilles);
+
+                // Je lance ma fonction complémentaire de recherche (si au moins un filtre a été activé)
+                eval(totalRequest); //Je transforme ma requête string en code javascript qui du coup lance ma fonction composée ! 
                 
-                eval(totalRequest); //Je transforme ma requête string en code javascript qui du coup lance ma fonction (this.finalResult = this.resultWords.filter(item => item.attributes.qualifiante === true);) ! 
-                console.log(this.finalResult);
-                
-            }    
+
+            } 
+            console.log(this.finalResult);
+            localStorage.setItem("Recherche", JSON.stringify(this.finalResult));
    
         }
     },
 
+
+    mounted: function ()
+ {
+    if(localStorage.getItem('Recherche')){
+        this.finalResult = JSON.parse(localStorage.getItem(('Recherche')));
+    }
+ }
 }
 </script>
 
@@ -251,21 +281,6 @@ export default {
         &-general {
             border: 1px solid $third-color;
             background-image: url("../../assets/images/round-switch-item-general.svg") !important;
-        }
-        &-1 {
-            background-image: url("../../assets/images/round-switch-item-peda.svg") !important;
-        }
-        &-2 {
-            background-image: url("../../assets/images/round-switch-item-peda-digi.svg") !important;
-        }
-        &-3 {
-            background-image: url("../../assets/images/round-switch-item-ing.svg") !important;
-        }
-        &-4 {
-            background-image: url("../../assets/images/round-switch-item-projet.svg") !important;
-        }
-        &-5 {
-            background-image: url("../../assets/images/round-switch-item-informatique.svg") !important;
         }
     }
  }

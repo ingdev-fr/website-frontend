@@ -20,8 +20,8 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font-awesome-icon icon="fa-solid fa-store" class="nav-link__icon d-block mx-auto mb-1"/>Showroom</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <router-link class="dropdown-item" to="/catalogue">Catalogue formations</router-link>
-                  <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
                   <li><a class="dropdown-item" href="https://www.moodle4.ingdev.fr/" target="_blank">LMS Moodle</a></li>
+                  <li><a class="dropdown-item" >Tableau de bord<span class="text-success ms-2">/ A venir</span></a></li>
                 </ul>
               </li>
               <!-- CONNEXION -->
