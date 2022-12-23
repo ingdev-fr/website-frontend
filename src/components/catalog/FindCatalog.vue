@@ -213,7 +213,7 @@ export default {
                 }
 
                 if(document.getElementById('form-check-courte').checked === true) {
-                    restOfRequest.push('item.attributes.courte === true ');
+                    restOfRequest.push('item.attributes.courte === true');
                     console.log(restOfRequest);
                 }
 

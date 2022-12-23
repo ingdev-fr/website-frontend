@@ -8,7 +8,7 @@
             <img class="card-img-top card__img" :src="(this.$store.state.urlUploads+form.attributes.formationPhoto.media.data.attributes.url)"  :alt="form.attributes.formationPhoto.alt">
             <div class="card-header header-training promotion__card__header">
                 <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">{{form.attributes.titre}}<span class="cat-color ms-2" :style="`background: ${form.attributes.categoryFormation.data.attributes.color};`"></span></h2>
-                <p class="mb-2 text-light">Domaine : <span :style="`color: ${form.attributes.categoryFormation.data.attributes.color};`">Pédagogie digitale</span>
+                <p class="mb-2 text-light">Domaine : <span class="fw-bolder" :style="`color: ${form.attributes.categoryFormation.data.attributes.color};`">{{form.attributes.categoryFormation.data.attributes.nom}}</span>
                 </p>
             </div>
             <div class="card-body">
