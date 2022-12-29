@@ -44,7 +44,8 @@ LOGIQUE SCRIPT :
 3.// Création d'une page dynamique pour afficher le programme d'une formation spécifique choisie dans la liste des résultats : l'url de la page de la formation à afficher sera construite avec un paramètre d'url qui s'appelle "code" (il existe une route dans le router : "path: '/programme/:code') " et qui sera transmis via notre méthode 'showProgram' lors du click sur le bouton 'programme' de la formation concernée dans la liste des résultats. 
 
 4.// Persistance des résultats de la recherche : si l'utilisateur souhaite aller voir une page programme de formation ou se connecter pour s'inscrire à une formation, je fais persister les données de la recherche de formations, pour qu'avec un retour du navigateur, il puisse retomber sur sa recherche effectuée précédemment. Pour faire cela, j'enregistre le [finalResult] de la recherche dans le localStorage et je dis que si il existe un item "recherche" dans le localStorage, alors le [finalResult] à afficher est celui du localStorage. Mais si l'utilisateur retourne sur la page d'accueil (ou d'autres page/views), alors au hook 'mounted' de ces pages, je supprime l'item "recherche" du localStorage. 
+Je fais également persister les données de recherche (mots clés et filtres) en enregistrant les valeurs des paramètres de recherche (inputs, form-check, select) grace à v-model dans un objet "searchDatas" du store, car ce dernier n'est pas altéré par le re-render d'un composant. 
 
-5.// Réinitialisation de la recherche : je créé un bouton associé à une fonction de réinitialisation. Attention à supprimer l'item 'recherche' du localstorage et à remettre FinalResult = []. 
+5.// Réinitialisation de la recherche : je créé un bouton associé à une fonction de réinitialisation. Attention à supprimer l'item 'recherche' du localstorage et à remettre FinalResult = []. Je réinitialise àgalement les valaurs des propriétés de l'obt 'searchDatas' du store. 
 
 SCSS : 

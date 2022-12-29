@@ -65,10 +65,10 @@
                         <p class="fw-bold">Résultats :</p>
                     </div> 
                     <div class="messages">
-                        <p class="rechercheMatch" v-if="finalResult.length > 0">Il existe {{finalResult.length}} formation(s) pour votre recherche</p> 
+                        <p class="rechercheMatch" v-if="this.$store.state.searchDatas.finalResult.length > 0">Il existe {{this.$store.state.searchDatas.finalResult.length}} formation(s) pour votre recherche</p> 
                         <p class="rechercheNoMatch" v-else>Aucun résultat pour votre recherche</p>
                     </div>    
-                    <div class="card affichage__card mb-3" v-for="(item, idx) in this.finalResult" v-bind:key="idx">
+                    <div class="card affichage__card mb-3" v-for="(item, idx) in this.$store.state.searchDatas.finalResult" v-bind:key="idx">
                         <!-- CARD HEADER -->
                         <div class="card-header header-training d-flex justify-content-between">
                             <div class="d-flex">
@@ -137,8 +137,7 @@ export default {
 
     data () {
         return {
-            resultWords: [],
-            finalResult: [],
+
         }
     },
 
@@ -162,10 +161,13 @@ export default {
             document.getElementById('form-check-qualif').checked = false;
             document.getElementById('form-check-distance').checked = false;
             document.getElementById('form-check-courte').checked = false;
+            this.$store.state.searchDatas.cpf = '';
+            this.$store.state.searchDatas.qualif = '';
+            this.$store.state.searchDatas.courte = '';
+            this.$store.state.searchDatas.distance = '';
             this.$store.state.searchDatas.selectedCategory = 'Catégories';
             this.$store.state.searchDatas.selectedVilles = 'Villes';
-            localStorage.removeItem('Recherche');
-            this.finalResult = [];
+            this.$store.state.searchDatas.finalResult = [];
         },  
         setSearch: function() {
             let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
@@ -173,7 +175,7 @@ export default {
             console.log(searchWordsOptim);
 
             // Je recherche par mots clés de l'input de recherche
-            this.resultWords = this.$store.state.formations // je crée un tableau des résultats
+            this.$store.state.searchDatas.resultWords = this.$store.state.formations // j'actualise le tableau des résultats créé dans le store
                 .filter(function(item) { // je recherche dans le tableau des formations, pour chaque formation (item) si 
                     let titre = item.attributes.titre.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); 
                     let content = item.attributes.presentationRapide.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); //Je transforme le contenu de la présentation de la formation 
@@ -185,14 +187,14 @@ export default {
                         }
                     }     
                 });
-            console.log(this.resultWords);
-            this.finalResult = this.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
+            console.log(this.$store.state.searchDatas.resultWords);
+            this.$store.state.searchDatas.finalResult = this.$store.state.searchDatas.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
             
             // Ensuite, si un filtre est sélectionné, je poursuis la recherche (car si pas de filtres ma function "totalRequest" de la fin est incomplète ) : 
             if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true || document.getElementById('form-check-courte').checked === true || this.$store.state.searchDatas.selectedCategory != 'Catégories' || this.$store.state.searchDatas.selectedVilles != 'Villes') {
                 let restOfRequest = []; // je créé un tableau qui va contenir les parties intérieures de l'instruction de la suite de la requête
 
-                let startOfRequest = 'this.finalResult = this.resultWords.filter(function(item) { if(' // début de ma requête
+                let startOfRequest = 'this.$store.state.searchDatas.finalResult = this.$store.state.searchDatas.resultWords.filter(function(item) { if(' // début de ma requête
                 let endOfRequest = ') {return true} });' // fin de ma requête
                 
                 if(document.getElementById('form-check-cpf').checked === true) {
@@ -242,18 +244,14 @@ export default {
                 
 
             } 
-            console.log(this.finalResult);
-            localStorage.setItem("Recherche", JSON.stringify(this.finalResult));
-   
+            console.log(this.$store.state.searchDatas.finalResult);
         }
     },
 
 
     mounted: function ()
  {
-    if(localStorage.getItem('Recherche')){
-        this.finalResult = JSON.parse(localStorage.getItem(('Recherche')));
-    }
+
  }
 }
 </script>

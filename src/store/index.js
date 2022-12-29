@@ -4,10 +4,13 @@ import axios from 'axios'
 // On crée le store de l'application (le container des données de l'appli). Les données sont à l'intérieur du "state".   
 const store = createStore({
     state: {
+        // URL
         urlUploads: "http://localhost:1337",
         urlEndpoints: "http://localhost:1337/api",
         urlFront: 'http://localhost:8080',
+        // Classe active
         activeClass: '',
+        // Données et paramètre de la recherche de formation
         searchDatas: {
             searchWords: '',
             resultWords: [],
@@ -19,6 +22,7 @@ const store = createStore({
             qualif: '',
             distance: '',
         },
+        // Données pour l'affichage des pages
         header: {
             logo: '',
         },
@@ -72,6 +76,7 @@ const store = createStore({
                 }
             }        
         },
+        // Données pour les formations
         formations: [],
         sessions: [],
         villes: [],
