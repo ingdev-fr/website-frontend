@@ -5,59 +5,59 @@
         <!-- RECHERCHE -->
         <div class="recherche__card px-3 rounded">
             <!-- Zone de recherche -->
-            <form class="recherche__form row p-4 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
-                <p class="fw-bold">Recherche :</p>
-                <div class="search-bar d-md-flex mb-3">
-                    <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="searchWords" >
-                </div>
-                <!-- Filtres Modalités -->
-                <div class="search-filters">
-                    <p class="fw-bold">Filtres :</p>
-                    <div class="check  mb-4">
-                        <div class="d-md-flex flex-wrap justify-content-start">
-                            <div class="form-check form-switch me-5 mb-3">
-                                <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-cpf">
-                                <label class="form-check-label" for="form-check-cpf">Eligible CPF
-                                </label>
-                            </div>
-                            <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-qualif" >
-                                <label class="form-check-label" for="form-check-qualif">Formation qualifiante
-                                </label>
-                            </div>
-                            <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-distance">
-                                <label class="form-check-label" for="form-check-distance">100% distance
-                                </label>
-                            </div>
-                            <div class="form-check form-switch me-5">
-                                <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-courte">
-                                <label class="form-check-label" for="form-check-courte">Courte (5 jours max)
-                                </label>
-                            </div>
-                        </div>
+                <form class="recherche__form row p-4 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
+                    <p class="fw-bold">Recherche :</p>
+                    <div class="search-bar d-md-flex mb-3">
+                        <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="this.$store.state.searchDatas.searchWords" >
                     </div>
-                    <div class="select d-flex flex-wrap my-4">
-                        <div class="me-5 selectCategorie">
-                            <select id="selectCatégories" name="categorie" class="form-select" aria-label="catégorie" v-model="selectedCategory">
-                                <option value="Catégories" selected>Catégories</option>
-                                <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">{{item.attributes.nom}}</option>
-                            </select>
+                    <!-- Filtres Modalités -->
+                    <div class="search-filters">
+                        <p class="fw-bold">Filtres :</p>
+                        <div class="check  mb-4">
+                            <div class="d-md-flex flex-wrap justify-content-start">
+                                <div class="form-check form-switch me-5 mb-3">
+                                    <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-cpf" v-model="this.$store.state.searchDatas.cpf">
+                                    <label class="form-check-label" for="form-check-cpf">Eligible CPF
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5">
+                                    <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-qualif" v-model="this.$store.state.searchDatas.qualif">
+                                    <label class="form-check-label" for="form-check-qualif">Formation qualifiante
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5">
+                                    <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-distance" v-model="this.$store.state.searchDatas.distance">
+                                    <label class="form-check-label" for="form-check-distance">100% distance
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch me-5">
+                                    <input class="form-check-input form-check-input-general" type="checkbox"  id="form-check-courte" v-model="this.$store.state.searchDatas.courte">
+                                    <label class="form-check-label" for="form-check-courte">Courte (5 jours max)
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="me-5">
-                            <select id="selectVilles" name="ville" class="form-select" aria-label="Ville" v-model="selectedVilles">
-                                <option value="Villes" selected>Villes</option>
-                                <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.villes" v-bind:key="idx">{{item.attributes.nom}}</option>
-                            </select>
-                        </div>
-                    </div>         
-                </div>
-                <!-- Bouton de recherche -->
-                <div class="mt-2 d-flex justify-content-between">
-                    <button class="button btn btn-recherche" @click="setSearch()">Lancer la recherche</button>
-                    <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
-                </div>
-            </form>
+                        <div class="select d-flex flex-wrap my-4">
+                            <div class="me-5 selectCategorie">
+                                <select id="selectCatégories" name="categorie" class="form-select" aria-label="catégorie" v-model="this.$store.state.searchDatas.selectedCategory">
+                                    <option value="Catégories" selected>Catégories</option>
+                                    <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">{{item.attributes.nom}}</option>
+                                </select>
+                            </div>
+                            <div class="me-5">
+                                <select id="selectVilles" name="ville" class="form-select" aria-label="Ville" v-model="this.$store.state.searchDatas.selectedVilles">
+                                    <option value="Villes" selected>Villes</option>
+                                    <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.villes" v-bind:key="idx">{{item.attributes.nom}}</option>
+                                </select>
+                            </div>
+                        </div>         
+                    </div>
+                    <!-- Bouton de recherche -->
+                    <div class="mt-2 d-flex justify-content-between">
+                        <button class="button btn btn-recherche" @click.stop="setSearch()">Lancer la recherche</button>
+                        <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
+                    </div>
+                </form>
         </div>
         <!-- AFFICHAGE DES FORMATIONS -->
         <div class="affichage p-4 mt-3 rounded">
@@ -137,11 +137,8 @@ export default {
 
     data () {
         return {
-            searchWords: '',
             resultWords: [],
             finalResult: [],
-            selectedCategory: 'Catégories',
-            selectedVilles: 'Villes',
         }
     },
 
@@ -159,19 +156,20 @@ export default {
         reinitSearch: function () {
             // Je réinitialise les filtres
                 // le filtre de recherche par mots clés
-            this.searchWords = '';
+            this.$store.state.searchDatas.searchWords = '';
                 // les filtres cpf
             document.getElementById('form-check-cpf').checked = false;
             document.getElementById('form-check-qualif').checked = false;
             document.getElementById('form-check-distance').checked = false;
             document.getElementById('form-check-courte').checked = false;
-            this.selectedCategory = 'Catégories';
-            this.selectedVilles = 'Villes';
+            this.$store.state.searchDatas.selectedCategory = 'Catégories';
+            this.$store.state.searchDatas.selectedVilles = 'Villes';
             localStorage.removeItem('Recherche');
             this.finalResult = [];
         },  
         setSearch: function() {
-            let searchWordsOptim = this.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
+            let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
+            console.log(this.$store.state.searchDatas.searchWords);
             console.log(searchWordsOptim);
 
             // Je recherche par mots clés de l'input de recherche
@@ -191,7 +189,7 @@ export default {
             this.finalResult = this.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
             
             // Ensuite, si un filtre est sélectionné, je poursuis la recherche (car si pas de filtres ma function "totalRequest" de la fin est incomplète ) : 
-            if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true || document.getElementById('form-check-courte').checked === true || this.selectedCategory != 'Catégories' || this.selectedVilles != 'Villes') {
+            if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true || document.getElementById('form-check-courte').checked === true || this.$store.state.searchDatas.selectedCategory != 'Catégories' || this.$store.state.searchDatas.selectedVilles != 'Villes') {
                 let restOfRequest = []; // je créé un tableau qui va contenir les parties intérieures de l'instruction de la suite de la requête
 
                 let startOfRequest = 'this.finalResult = this.resultWords.filter(function(item) { if(' // début de ma requête
@@ -217,12 +215,12 @@ export default {
                     console.log(restOfRequest);
                 }
 
-                if(this.selectedCategory != 'Catégories') {
+                if(this.$store.state.searchDatas.selectedCategory != 'Catégories') {
                     restOfRequest.push('item.attributes.categoryFormation.data.attributes.nom === selectedCategory');
                     console.log(restOfRequest);
                 }
 
-                if(this.selectedVilles != 'Villes') {
+                if(this.$store.state.searchDatas.selectedVilles != 'Villes') {
                     restOfRequest.push('item.attributes.sessions.data.some(i => i.attributes.ville.data.attributes.nom === selectedVilles)');
                     console.log(restOfRequest);
                 }
@@ -234,9 +232,9 @@ export default {
                 console.log(totalRequest); 
 
                 // Avant de lancer ma fonction finale de recherche et pour bénéficier d'un scope large des variables qui sont dans cette fonction, je les déclare ici ! Car à l'intérieur de ma fonction, je n'arrive pas à récupérer le 'this'. 
-                let selectedCategory = this.selectedCategory;  
+                let selectedCategory = this.$store.state.searchDatas.selectedCategory;  
                 console.log(selectedCategory);
-                let selectedVilles = this.selectedVilles;
+                let selectedVilles = this.$store.state.searchDatas.selectedVilles;
                 console.log(selectedVilles);
 
                 // Je lance ma fonction complémentaire de recherche (si au moins un filtre a été activé)

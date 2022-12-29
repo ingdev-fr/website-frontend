@@ -8,6 +8,17 @@ const store = createStore({
         urlEndpoints: "http://localhost:1337/api",
         urlFront: 'http://localhost:8080',
         activeClass: '',
+        searchDatas: {
+            searchWords: '',
+            resultWords: [],
+            finalResult: [],
+            selectedCategory: 'Catégories',
+            selectedVilles: 'Villes',
+            cpf:'',
+            courte: '',
+            qualif: '',
+            distance: '',
+        },
         header: {
             logo: '',
         },
