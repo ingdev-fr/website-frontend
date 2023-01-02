@@ -54,7 +54,7 @@
                     </div>
                     <!-- Bouton de recherche -->
                     <div class="mt-2 d-flex justify-content-between">
-                        <button class="button btn btn-recherche" @click.stop="setSearch()">Lancer la recherche</button>
+                        <button class="button btn btn-recherche" @click.stop="setSearch(); highlight()">Lancer la recherche</button>
                         <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
                     </div>
                 </form>
@@ -74,12 +74,13 @@
                             <div class="d-flex">
                                 <div class="cat-color me-2" :style="{backgroundColor: item.attributes.categoryFormation.data.attributes.color}"></div>
                                 <div class="">
-                                    <h2 class="affichage__card__header formationTitle fs-4 mb-0 fw-bold text-light">{{item.attributes.titre}}</h2>
+                                    <h2 class="affichage__card__header formationTitle titreFormation fs-4 mb-0 fw-bold text-light">{{item.attributes.titre}}</h2>
                                     <div class="domaine text-light">Domaine : <span class="domaine-span" :style="{color: item.attributes.categoryFormation.data.attributes.color}">{{item.attributes.categoryFormation.data.attributes.nom}}</span></div>
+                                    <p class="code mb-0 text-light">Code: <span class="fw-bold">{{item.attributes.code}}</span></p>
                                 </div>
                             </div>
                             <!-- Bouton Programme de formation -->
-                            <button type="button" class="btn btn-program mt-1" @click="showProgram(item.attributes.code)">Programme</button>
+                            <button type="button" class="btn btn-program mt-auto" @click="showProgram(item.attributes.code)">Programme</button>
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
@@ -104,7 +105,7 @@
                                 <div class="" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div>
                             </div>
                             <div :id="'collapsePresentationFind'+item.id" class="collapse">
-                                <p class="card-text card-body">{{item.attributes.presentationRapide}}</p>
+                                <p class="card-text card-body presentation">{{item.attributes.presentationRapide}}</p>
                             </div>
                             
                         </div>
@@ -180,13 +181,19 @@ export default {
                     let titre = item.attributes.titre.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); 
                     let content = item.attributes.presentationRapide.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); //Je transforme le contenu de la présentation de la formation 
                     let code = item.attributes.code.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le code de la formation
-
                     for(let i in searchWordsOptim) { // Pour chaque mot dans la tableau des mots de recherche
-                        if(titre.match(searchWordsOptim[i]) || content.match(searchWordsOptim[i]) || code.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
+                        if(titre.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
+                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
+                        }
+                        else if(content.match(searchWordsOptim[i])) {// si le mot est contenu dans le contenu de ma formation
+                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
+                        }
+                        else if(code.match(searchWordsOptim[i])) {// si le mot est contenu dans le code de ma formation
                             return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
                         }
                     }     
                 });
+            
             console.log(this.$store.state.searchDatas.resultWords);
             this.$store.state.searchDatas.finalResult = this.$store.state.searchDatas.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
             
@@ -241,20 +248,37 @@ export default {
 
                 // Je lance ma fonction complémentaire de recherche (si au moins un filtre a été activé)
                 eval(totalRequest); //Je transforme ma requête string en code javascript qui du coup lance ma fonction composée ! 
-                
 
             } 
-            console.log(this.$store.state.searchDatas.finalResult);
+        },
+        // Je vais highlighter les contenus des formations matchant avec les mots de ma recherche
+        async highlight() {
+            if(this.$store.state.searchDatas.searchWords.trim() != ''){
+                const result = await this.setSearch();
+                let textToSearch = this.$store.state.searchDatas.searchWords.trim().split(' ');
+                console.log(textToSearch);
+                let pattern = new RegExp(`${textToSearch.join('|')}`, "gi");
+
+                let matchContents = [];
+                let titres = document.querySelectorAll("h2.titreFormation");
+                let contents = document.querySelectorAll("p.presentation");
+                let codes = document.querySelectorAll("p.code");
+                matchContents.push(...titres);
+                matchContents.push(...contents);
+                matchContents.push(...codes);
+                console.log(matchContents);
+                for(let i=0; i<matchContents.length; i++){
+                    matchContents[i].innerHTML = matchContents[i].innerText.replace(pattern, match => `<span class="bg-warning rounded p-1">${match}</span>`);
+                }
+            }
+            
         }
     },
 
 
-    mounted: function ()
- {
-
- }
 }
 </script>
+
 
 <style lang="scss" scoped>
 
@@ -298,6 +322,7 @@ export default {
         background: $third-color;
         color: white;
         width: 130px;
+        height: 45px;
         box-shadow: 5px 4px 3px rgba($text-color, 0.25);
         &:hover {
             background: $text-color;
