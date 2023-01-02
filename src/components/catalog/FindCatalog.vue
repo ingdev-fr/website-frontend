@@ -171,29 +171,19 @@ export default {
             this.$store.state.searchDatas.finalResult = [];
         },  
         setSearch: function() {
-            let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' '); // je transforme la requête string en tableau de mots
+            let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je transforme la requête string en tableau de mots
             console.log(this.$store.state.searchDatas.searchWords);
             console.log(searchWordsOptim);
-
-            // Je recherche par mots clés de l'input de recherche
             this.$store.state.searchDatas.resultWords = this.$store.state.formations // j'actualise le tableau des résultats créé dans le store
-                .filter(function(item) { // je recherche dans le tableau des formations, pour chaque formation (item) si 
-                    let titre = item.attributes.titre.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); 
-                    let content = item.attributes.presentationRapide.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); //Je transforme le contenu de la présentation de la formation 
-                    let code = item.attributes.code.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le code de la formation
-                    for(let i in searchWordsOptim) { // Pour chaque mot dans la tableau des mots de recherche
-                        if(titre.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
-                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
-                        }
-                        else if(content.match(searchWordsOptim[i])) {// si le mot est contenu dans le contenu de ma formation
-                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
-                        }
-                        else if(code.match(searchWordsOptim[i])) {// si le mot est contenu dans le code de ma formation
-                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
-                        }
-                    }     
+                .filter(function(element) { 
+                    let formationTitre = element.attributes.titre.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' ');
+                    console.log(formationTitre);   
+                    console.log(searchWordsOptim); 
+                    for(let i in formationTitre) {
+                        searchWordsOptim.includes(formationTitre[i]);
+                    }             
+                
                 });
-            
             console.log(this.$store.state.searchDatas.resultWords);
             this.$store.state.searchDatas.finalResult = this.$store.state.searchDatas.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
             
@@ -258,7 +248,6 @@ export default {
                 let textToSearch = this.$store.state.searchDatas.searchWords.trim().split(' ');
                 console.log(textToSearch);
                 let pattern = new RegExp(`${textToSearch.join('|')}`, "gi");
-
                 let matchContents = [];
                 let titres = document.querySelectorAll("h2.titreFormation");
                 let contents = document.querySelectorAll("p.presentation");
@@ -270,6 +259,7 @@ export default {
                 for(let i=0; i<matchContents.length; i++){
                     matchContents[i].innerHTML = matchContents[i].innerText.replace(pattern, match => `<span class="bg-warning rounded p-1">${match}</span>`);
                 }
+
             }
             
         }
