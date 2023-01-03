@@ -96,6 +96,8 @@ export default {
   background: radial-gradient(circle at top left, $third-color-clear 30%, $third-color);
 }
 
+
+
 .ongletPromotion {
   border-radius: 10px 10px 0 0;
 }
@@ -117,6 +119,7 @@ export default {
 @media(min-width: 992px) {
   .promotion {
     width: 30%;
+    height: 1680px;
   }
 
   .find {

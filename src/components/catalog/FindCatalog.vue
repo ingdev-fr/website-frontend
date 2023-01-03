@@ -6,13 +6,13 @@
         <div class="recherche__card px-3 rounded">
             <!-- Zone de recherche -->
                 <form class="recherche__form row p-4 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
-                    <p class="fw-bold">Recherche :</p>
+                    <p class="fw-bold">Recherche par mots clés :</p>
                     <div class="search-bar d-md-flex mb-3">
-                        <input class="form-control rounded me-1" type="search" placeholder="Recherche par titre, contenu ou code !" aria-label="Search" v-model="this.$store.state.searchDatas.searchWords" >
+                        <input class="form-control rounded me-1" type="search" placeholder="Recherche par mots clés dans le titre ou code !" aria-label="Search" v-model="this.$store.state.searchDatas.searchWords" >
                     </div>
                     <!-- Filtres Modalités -->
                     <div class="search-filters">
-                        <p class="fw-bold">Filtres :</p>
+                        <p class="fw-bold">Recherche par filtres :</p>
                         <div class="check  mb-4">
                             <div class="d-md-flex flex-wrap justify-content-start">
                                 <div class="form-check form-switch me-5 mb-3">
@@ -76,7 +76,7 @@
                                 <div class="">
                                     <h2 class="affichage__card__header formationTitle titreFormation fs-4 mb-0 fw-bold text-light">{{item.attributes.titre}}</h2>
                                     <div class="domaine text-light">Domaine : <span class="domaine-span" :style="{color: item.attributes.categoryFormation.data.attributes.color}">{{item.attributes.categoryFormation.data.attributes.nom}}</span></div>
-                                    <p class="code mb-0 text-light">Code: <span class="fw-bold">{{item.attributes.code}}</span></p>
+                                    <p class="mb-0 text-light">Code: <span class="code fw-bold">{{item.attributes.code}}</span></p>
                                 </div>
                             </div>
                             <!-- Bouton Programme de formation -->
@@ -92,7 +92,7 @@
                                         <li class="me-1" v-for="(mod, idx) in item.attributes.modalitePedagogiques.data" :key="idx">{{mod.attributes.nom}}</li>
                                     </ul>
                                 </div>
-                                <div class="d-flex">
+                                <div class="d-flex flex-wrap">
                                     <span class="fw-bold">Certification : </span>
                                     <div class="nav-link ms-1" v-for="(certif, idx) in item.attributes.certifications.data" :key="idx">{{certif.attributes.nom}}<span v-if="(idx + 1) !== item.attributes.certifications.data.length"> /</span></div>
                                 </div>
@@ -168,25 +168,47 @@ export default {
             this.$store.state.searchDatas.distance = '';
             this.$store.state.searchDatas.selectedCategory = 'Catégories';
             this.$store.state.searchDatas.selectedVilles = 'Villes';
-            this.$store.state.searchDatas.finalResult = [];
+            this.$store.state.searchDatas.finalResult = this.$store.state.formations;
         },  
         setSearch: function() {
-            let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je transforme la requête string en tableau de mots
+            let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je normalize la requête string 
+            let searchWordsOptimArray = searchWordsOptim.split(' ');
+            let regexSearch = new RegExp(searchWordsOptimArray.join('|'), 'g');
+            console.log(regexSearch);
             console.log(this.$store.state.searchDatas.searchWords);
             console.log(searchWordsOptim);
-            this.$store.state.searchDatas.resultWords = this.$store.state.formations // j'actualise le tableau des résultats créé dans le store
-                .filter(function(element) { 
-                    let formationTitre = element.attributes.titre.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' ');
-                    console.log(formationTitre);   
-                    console.log(searchWordsOptim); 
-                    for(let i in formationTitre) {
-                        searchWordsOptim.includes(formationTitre[i]);
-                    }             
-                
-                });
-            console.log(this.$store.state.searchDatas.resultWords);
-            this.$store.state.searchDatas.finalResult = this.$store.state.searchDatas.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
-            
+            if(searchWordsOptim != ''){
+                this.$store.state.searchDatas.resultWords = this.$store.state.formations // j'actualise le tableau des résultats créé dans le store
+                    .filter(function(element) { 
+                        element.attributes.matchesNumber = 0;
+                        let formationTitre = element.attributes.titre.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+                        let formationTitreArray = formationTitre.split(' ');
+                        let formationCode = element.attributes.code.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+                        let formationCodeArray = formationCode.split(' ');
+                        for(let i = 0; i<searchWordsOptimArray.length; i++){
+                            let matches = [];
+                            if(formationTitreArray.includes(searchWordsOptimArray[i])){
+                                matches = formationTitre.match(regexSearch);
+                                element.attributes.matchesNumber = matches.length;
+                                console.log(matches);
+                                return true
+                            }
+                            else if(formationCodeArray.includes(searchWordsOptimArray[i])){
+                                element.attributes.matchesNumber ++;
+                                return true
+                            }
+                        } 
+                    })
+                    .sort(function(a, b){
+                    return b.attributes.matchesNumber - a.attributes.matchesNumber;
+                })
+                console.log(this.$store.state.searchDatas.resultWords);
+                this.$store.state.searchDatas.finalResult = this.$store.state.searchDatas.resultWords; // J'ai besoin d'une data (finalResult) qui va recevoir la valeur finale (this.resultWords) de la requête par les mots et que je vais pouvoir afficher. Si la requête se poursuit avec des filtres, ma data finalResult pourra recevoir le résultat total de ma recherche (mots +  filtres).
+                console.log(this.$store.state.searchDatas.finalResult);
+            }
+            else {
+                this.$store.state.searchDatas.resultWords = this.$store.state.formations;
+            }
             // Ensuite, si un filtre est sélectionné, je poursuis la recherche (car si pas de filtres ma function "totalRequest" de la fin est incomplète ) : 
             if(document.getElementById('form-check-cpf').checked === true || document.getElementById('form-check-qualif').checked === true || document.getElementById('form-check-distance').checked === true || document.getElementById('form-check-courte').checked === true || this.$store.state.searchDatas.selectedCategory != 'Catégories' || this.$store.state.searchDatas.selectedVilles != 'Villes') {
                 let restOfRequest = []; // je créé un tableau qui va contenir les parties intérieures de l'instruction de la suite de la requête
@@ -251,7 +273,7 @@ export default {
                 let matchContents = [];
                 let titres = document.querySelectorAll("h2.titreFormation");
                 let contents = document.querySelectorAll("p.presentation");
-                let codes = document.querySelectorAll("p.code");
+                let codes = document.querySelectorAll("span.code");
                 matchContents.push(...titres);
                 matchContents.push(...contents);
                 matchContents.push(...codes);
@@ -265,7 +287,9 @@ export default {
         }
     },
 
-
+    created () {
+        this.$store.state.searchDatas.resultWords = this.$store.state.formations;
+    }
 }
 </script>
 
