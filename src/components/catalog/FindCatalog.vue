@@ -183,7 +183,7 @@ export default {
                     let code = item.attributes.code.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // Je transforme le code de la formation
                     for(let i in searchWordsOptim) { // Pour chaque mot dans la tableau des mots de recherche
                         if(titre.match(searchWordsOptim[i])) { // si le mot est contenu dans le titre de ma formation
-                            return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
+                            return true// si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
                         }
                         else if(content.match(searchWordsOptim[i])) {// si le mot est contenu dans le contenu de ma formation
                             return true; // si oui, je retourne true, ce qui pousse mon élément dans mon tableau de réponses du matching.
