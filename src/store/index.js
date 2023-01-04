@@ -15,6 +15,7 @@ const store = createStore({
             searchWords: '',
             resultWords: [],
             finalResult: [],
+            resultSearch: [],
             selectedCategory: 'Catégories',
             selectedVilles: 'Villes',
             cpf:'',
@@ -127,7 +128,6 @@ const store = createStore({
 
         GET_FORMATIONS(state, resultAction) {
             state.formations = resultAction; // la data array 'formations' du state = la data à modifier en argument dans la mutation qui provient qui est en fait l'argument (et la réponse api) de l'action qui appelle cette mutation donc response.data.data
-            state.searchDatas.finalResult = state.formations;
             state.onTop = resultAction.filter(item => item.attributes.onTop === true); // Je récupère dans le tableau 'onTop' les formations qui sont 'à la une' !
             console.log(state.onTop);
         }, 

@@ -8,7 +8,7 @@
               <button class="ongletPromotion buttonRecherche btn text-light" type="button" @click="modeVisibleRecherche()"><div class="exclu my-2 fs-5">Recherche</div></button>
               <button class="ongletPromotion buttonPromotion btn text-light" type="button" @click="modeVisiblePromotion()"><div class="exclu my-2 fs-5">Top formations</div></button>
             </div>
-            <div class="showCatalog d-lg-flex pb-4" id="showCatalog">
+            <div class="showCatalog d-lg-flex align-items-start pb-4" id="showCatalog">
               <TrainingsPromotion class="promotion me-2" id="promotion" v-if="modeVisible == 'promotion' || visible == 'on'"/>
               <FindCatalog class="find" v-if="modeVisible == 'recherche' || visible == 'on'"/>
             </div>
@@ -117,13 +117,13 @@ export default {
 }
 
 @media(min-width: 992px) {
+
   .promotion {
     width: 30%;
-    height: 1680px;
   }
 
   .find {
-    width: 70%;
+    width: 80%;
   }
 }
 

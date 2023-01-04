@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="section">
     <div class="recherche p-2 rounded bg-light">
         <h2 class="recherche__title fs-4 text-center p-3 rounded">Trouver votre formation</h2>
         <!-- RECHERCHE -->
@@ -70,7 +70,7 @@
                     </div>    
                     <div class="card affichage__card mb-3" v-for="(item, idx) in this.$store.state.searchDatas.finalResult" v-bind:key="idx">
                         <!-- CARD HEADER -->
-                        <div class="card-header header-training d-flex justify-content-between">
+                        <div class="card-header header-training d-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 <div class="cat-color me-2" :style="{backgroundColor: item.attributes.categoryFormation.data.attributes.color}"></div>
                                 <div class="">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <!-- Bouton Programme de formation -->
-                            <button type="button" class="btn btn-program mt-auto" @click="showProgram(item.attributes.code)">Programme</button>
+                            <button type="button" class="btn btn-program" @click="showProgram(item.attributes.code)">Programme</button>
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
@@ -100,9 +100,8 @@
                         </div>
                         <!-- CARD BODY PRESENTATION COLLAPSE-->
                         <div class="affichage__card__body-2">
-                            <div class="card-header d-flex">
-                                <img class="ico me-2" src="../../assets/images/icons8-plus-orange.svg" alt="icone plus">
-                                <div class="" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div>
+                            <div class="card-body card-headerCollapse card-headerCollapse-1 d-flex py-2">
+                                <div class="card__collapse text-light" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div>
                             </div>
                             <div :id="'collapsePresentationFind'+item.id" class="collapse">
                                 <p class="card-text card-body presentation">{{item.attributes.presentationRapide}}</p>
@@ -111,10 +110,9 @@
                         </div>
                         <!-- CARD BODY SESSIONS COLLAPSE-->
                         <div class="affichage__card__body-2">
-                            <div class="card-header d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <img class="ico me-2" src="../../assets/images/icons8-plus-orange.svg" alt="icone plus">
-                                    <div class=""  data-bs-toggle="collapse" :href="'#collapseSessionFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapseSessionFind'+item.id">Sessions</div>
+                            <div class="card-body card-headerCollapse card-headerCollapse-2 d-flex justify-content-between py-2">
+                                <div class="d-flex ">
+                                    <div class="card__collapse text-light"  data-bs-toggle="collapse" :href="'#collapseSessionFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapseSessionFind'+item.id">Sessions</div>
                                 </div>
                             </div>
                             <div :id="'collapseSessionFind'+item.id" class="collapse mb-3">
@@ -168,7 +166,7 @@ export default {
             this.$store.state.searchDatas.distance = '';
             this.$store.state.searchDatas.selectedCategory = 'Catégories';
             this.$store.state.searchDatas.selectedVilles = 'Villes';
-            this.$store.state.searchDatas.finalResult = this.$store.state.formations;
+            this.$store.state.searchDatas.finalResult = [];
         },  
         setSearch: function() {
             let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je normalize la requête string 
@@ -287,8 +285,9 @@ export default {
         }
     },
 
-    created () {
-        this.$store.state.searchDatas.resultWords = this.$store.state.formations;
+    mounted () {
+        this.setSearch();
+        this.highlight();
     }
 }
 </script>
@@ -361,6 +360,7 @@ export default {
 }
 
 
+
 .header-training {
     background: $secondary-color;
 }
@@ -400,6 +400,19 @@ export default {
     font-weight: 600;
  }
 
+ .card {
+    &-headerCollapse{
+            font-weight: 600;
+            &-1{
+                background: $dark-color ;
+            }
+            &-2{
+                background: $third-color;
+                border-radius: 0 0 5px 5px;
+            }
+        }
+ }
+
 // ------------------- MEDIA QUERIES -------------------
 
     // ------- Max = 767px 
@@ -407,6 +420,9 @@ export default {
     .recherche {
         border-radius: 0 10px 10px 10px !important;
     }
+}
+
+@media(min-width: 992px) {
 }
 
 </style>
