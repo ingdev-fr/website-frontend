@@ -29,6 +29,7 @@
                 <!-- CARD BODY PRESENTATION COLLAPSE-->
                 <div class="affichage__card__body-2">
                     <div class="card-body card-headerCollapse card-headerCollapse-1 d-flex py-2">
+                        <img src="@/assets/images/icons8-plus-1.svg" alt="flèche vers le bas" class="arrow-down me-2">
                         <div class="card__collapse text-light" data-bs-toggle="collapse" :href="'#collapsePresentationPromotion'+form.id" role="button" aria-expanded="false" :aria-controls="'#collapsePresentationPromotion'+form.id">Présentation</div>
                     </div>
                     <div :id="'collapsePresentationPromotion'+form.id" class="collapse ">
@@ -41,6 +42,7 @@
                 <div class="affichage__card__body-2">
                     <div class="card-body text-light card-headerCollapse card-headerCollapse-2 d-flex justify-content-between py-2">
                         <div class="d-flex  ">
+                            <img src="@/assets/images/icons8-plus-1.svg" alt="flèche vers le bas" class="arrow-down me-2">
                             <div class="card__collapse"  data-bs-toggle="collapse" :href="`#collapseSessionsPromotion`+form.id" role="button" aria-expanded="false" :aria-controls="`collapseSessionsPromotion`+form.id">Sessions</div>
                         </div>
                     </div>

@@ -55,7 +55,10 @@
                     <!-- Bouton de recherche -->
                     <div class="mt-2 d-flex justify-content-between">
                         <button class="button btn btn-recherche" @click.stop="setSearch(); highlight()">Lancer la recherche</button>
+                        <button class="button btn btn-recherche btn-recherche__all me-3" @click="seeAll()">Toutes les formations</button>
                         <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
+
+                        
                     </div>
                 </form>
         </div>
@@ -101,7 +104,8 @@
                         <!-- CARD BODY PRESENTATION COLLAPSE-->
                         <div class="affichage__card__body-2">
                             <div class="card-body card-headerCollapse card-headerCollapse-1 d-flex py-2">
-                                <div class="card__collapse text-light" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div>
+                                <img src="@/assets/images/icons8-plus-1.svg" alt="flèche vers le bas" class="arrow-down me-2">
+                                <div class="card__collapse text-light" data-bs-toggle="collapse" :href="'#collapsePresentationFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapsePresentationFind'+item.id">Présentation</div> 
                             </div>
                             <div :id="'collapsePresentationFind'+item.id" class="collapse">
                                 <p class="card-text card-body presentation">{{item.attributes.presentationRapide}}</p>
@@ -112,6 +116,7 @@
                         <div class="affichage__card__body-2">
                             <div class="card-body card-headerCollapse card-headerCollapse-2 d-flex justify-content-between py-2">
                                 <div class="d-flex ">
+                                    <img src="@/assets/images/icons8-plus-1.svg" alt="flèche vers le bas" class="arrow-down me-2">
                                     <div class="card__collapse text-light"  data-bs-toggle="collapse" :href="'#collapseSessionFind'+item.id" role="button" aria-expanded="false" :aria-controls="'collapseSessionFind'+item.id">Sessions</div>
                                 </div>
                             </div>
@@ -168,6 +173,10 @@ export default {
             this.$store.state.searchDatas.selectedVilles = 'Villes';
             this.$store.state.searchDatas.finalResult = [];
         },  
+        seeAll() {
+            this.reinitSearch;
+            this.$store.state.searchDatas.finalResult = this.$store.state.formations;
+        },
         setSearch: function() {
             let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je normalize la requête string 
             let searchWordsOptimArray = searchWordsOptim.split(' ');
@@ -330,6 +339,9 @@ export default {
         &__reinit {
             background: $secondary-color;
         }
+        &__all {
+            background: $fifth-color;
+        }
     }
     &-program {
         background: $third-color;
@@ -358,9 +370,6 @@ export default {
         }
     }  
 }
-
-
-
 .header-training {
     background: $secondary-color;
 }
@@ -371,9 +380,6 @@ export default {
         background: $third-color-clear;
     }
 }
-
-
-
 .cat-color {
     width: 20px;
     min-width: 20px;
@@ -389,6 +395,10 @@ export default {
  .ico {
     height: 1rem;
     margin-top: 3px;
+ }
+
+ .arrow-down {
+    height: 1.3rem;
  }
 
  .sessionList-logo {

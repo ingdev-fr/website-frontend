@@ -99,104 +99,95 @@
                     <div class="public" v-if="modeActive == 'public'">
                         <div class="row">
                             <div class="profils col-lg-8">
-                                <h3 class="fs-4">Les métiers et profils visés :</h3>
-                                <p>{{publicDescriptif.descriptif}}</p>
-                                <h3 class="fs-4">Pré-requis :</h3>
-                                <ul>
-                                    <li v-for="(prereq,idx) in publicDescriptif.prerequis" :key="idx">{{prereq.nom}}</li>
-                                </ul>
-                            </div>
-                            <div class="listProfils col-lg-4">
-                                <div class="d-flex justify-content-lg-center align-items-lg-center">
-                                    <div class="">
-                                        <div class="metier px-lg-3 py-1 fs-5" v-for="(metier,idx) in publicDescriptif.metiers" :key="idx"><img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{metier.nom}}</div>
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header promotion__card__header">
+                                        <h3 class="fs-5 fw-bold formationTitle text-light">Les métiers et profils visés :</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{publicDescriptif.descriptif}}</p>
                                     </div>
                                 </div>
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header promotion__card__header-2">
+                                        <h3 class="fs-5 fw-bold formationTitle text-light">Pré-requis :</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul >
+                                            <li v-for="(prereq,idx) in publicDescriptif.prerequis" :key="idx">{{prereq.nom}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listProfils col-lg-4">
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header promotion__card__header">
+                                        <h3 class="fs-5 fw-bold formationTitle text-light">Liste des profils</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="metier px-lg-1 py-1" v-for="(metier,idx) in publicDescriptif.metiers" :key="idx">
+                                            <img class="iconMetier me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{metier.nom}}
+                                        </div>
+                                    </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
                 <!-- Compétences -->
                 <h2 class="print__title fs-3 p-2">Compétences</h2>
                 <div class="template">
                     <div class="comp" v-if="modeActive == 'comp'">
                         <div class="row">
                             <div class="profils col-lg-8">
-                                <h3 class="fs-4">Les compétences visées :</h3>
-                                <div class="mb-3">{{competences.visees}}</div>
-                                <h3 class="fs-4">Compétences :</h3>
-                                <ul>
-                                    <li v-for="(comp, idx) in competences.liste" :key="idx">{{comp.nom}}</li>
-                                </ul>
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header formationTitle promotion__card__header">
+                                        <h3 class="fs-5 fw-bold text-light">Ce que vous apprendrez :</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">{{competences.visees}}</div>
+                                    </div>
+                                </div>
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header formationTitle promotion__card__header-2">
+                                        <h3 class="fs-5 fw-bold text-light">Les compétences :</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="">
+                                            <li v-for="(comp, idx) in competences.liste" :key="idx">{{comp.nom}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Image -->
                             <div class="col-lg-4 portfolioPicture"></div>
                         </div>
                     </div>
                 </div>
-                <!-- Modules -->
+                <!-- Programme -->
                 <h2 class="print__title fs-3 p-2">Modules</h2>
                 <div class="template">
                     <div class="programme" v-if="modeActive == 'prog'">
-                        <!--  Module 1 de formation -->
-                        <div class="card promotion__card mb-3" v-for="(mod, idx) in modulesFormation" :key="idx">
+                        <div class="card promotion__card mb-3">
                             <div class="card-header promotion__card__header">
-                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Module {{mod.numeroModule}}: {{mod.titre}}</h2>
+                                <h3 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Activités d'apprentissage</h3>
                             </div>
                             <div class="card-body">
-                                <div class="">
-                                    <div class="d-flex">
-                                        <span class="fw-bold">Objectif(s) :</span>
-                                        <div class="ms-1" v-for="(obj, idx) in mod.objectifs" :key="idx">{{obj.nom}}</div>
-                                    </div>
-                                    <div><span class="fw-bold">Durée : </span>{{mod.dureeModuleHeures}} heures</div>
-                                    <div class="d-flex">
-                                        <span class="fw-bold">Modalités pédagogiques : </span>
-                                        <div class="ms-1" v-for="(modal, idx) in mod.modalitePedagogiques.data" :key="idx">{{modal.attributes.nom}}<span v-if="(idx + 1) !== mod.modalitePedagogiques.data.length"> /</span></div>
-                                    </div>
-                                </div>
+                                <ul class="">
+                                    <li v-for="(mod, idx) in modulesFormation.activitesApprentissage" :key="idx">{{mod.nom}}</li>
+                                </ul>
                             </div>
-                            <!-- Collapse Contenus-->
-                            <div class="affichage__card__body-2">
-                                <div class="card-header d-flex">
-                                    <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                    <div class="" data-bs-toggle="collapse" :href="'#collapseContenus'+mod.id" role="button" aria-expanded="false" :aria-controls="'#collapseContenus'+mod.id">Contenus théoriques et méthodologiques</div>
-                                </div>
-                                <div :id="'collapseContenus'+mod.id" class="collapse.show">
-                                    <div class="px-5 py-3">
-                                        <div class="ms-" v-for="(content, idx) in mod.savoirs" :key="idx">           <img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{ content.nom}}</div>
-                                    </div>
-                                </div>                           
+                        </div> 
+                        <div class="card promotion__card mb-3">
+                            <div class="card-header  promotion__card__header-2">
+                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light">Savoirs utiles à transmettre</h2>
                             </div>
-                            <!-- Collapse Activités d'apprentissage-->
-                            <div class="affichage__card__body-2">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="d-flex">
-                                        <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                        <div class=""  data-bs-toggle="collapse" :href="'#collapseApprentissage'+mod.id" role="button" aria-expanded="false" :aria-controls="'#collapseApprentissage'+mod.id">Activités d'apprentissage</div>
-                                    </div>
-                                </div>
-                                <div :id="'collapseApprentissage'+mod.id" class="collapse.show">
-                                    <div class="px-5 py-3">
-                                        <div class="ms-" v-for="(actiapp, idx) in mod.activitesApprentissage" :key="idx"><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{ actiapp.nom}}</div>
-                                    </div>
-                                </div>
+                            <div class="card-body">
+                                <ul class="">
+                                    <li v-for="(mod, idx) in modulesFormation.savoirs" :key="idx">{{mod.nom}}</li>
+                                </ul>
                             </div>
-                            <!-- Collapse Activités d'évaluation-->
-                            <div class="affichage__card__body-2">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="d-flex">
-                                        <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                        <div class=""  data-bs-toggle="collapse" :href="'#collapseEvaluation'+mod.id" role="button" aria-expanded="false" :aria-controls="'#collapseEvaluation'+mod.id">Activités d'évaluation</div>
-                                    </div>
-                                </div>
-                                <div :id="'collapseEvaluation'+mod.id" class="collapse.show">
-                                    <div class="px-5 py-3">
-                                        <div class="ms-" v-for="(actieval, idx) in mod.activitesEvaluation" :key="idx"><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">{{ actieval.nom}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
                 <!-- Certification -->
@@ -204,26 +195,26 @@
                 <div class="template">
                     <div class="certif" v-if="modeActive == 'certif'">
                         <div class="row">
-                            <div class="profils col-md-8">
-                                <h3 class="fs-4">Type de certification :</h3>
-                                <p>En cas de réussite aux épreuves certificatives, le candidat se verra remettre un certificat de réussite. Dans le cas contraire, le candidat se verra remettre un certificat de participation.</p>
-                                <h3 class="fs-4">Epreuves certificatives :</h3>
-                                <ul>
-                                    <li>Evaluation des connaissances : Quiz général en fin de formation</li>
-                                    <li>Evaluation des compétences : Lors d'un exercice final, le candidat devra implémenter un cours déjà réalisé dans Moodle et paramétrer les inscriptions.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Lieu -->
-                <h2 class="print__title fs-3 p-2">Lieu de formation</h2>
-                <div class="template">
-                    <div class="lieu" v-if="modeActive == 'lieu'">
-                        <div class="row">
-                            <div class="profils col-md-8">
-                                <h3 class="fs-4">Lieu de formation :</h3>
-                                <p>La formation se déroule entièrement en ligne sur la plateforme pédagogique de la société Ingdev.</p>
+                            <div class="profils col-xl-8">
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header promotion__card__header">
+                                        <h3 class="fs-5 fw-bold formationTitle text-light">Type de certification :</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>En cas de réussite aux épreuves certificatives, le candidat se verra remettre un certificat de réussite. Dans le cas contraire, le candidat se verra remettre un certificat de participation.</p>
+                                    </div>
+                                </div>
+                                <div class="card promotion__card mb-3">
+                                    <div class="card-header promotion__card__header-2">
+                                        <h3 class="fs-5 fw-bold formationTitle text-light">Epreuves certificatives :</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Evaluation des connaissances : Quiz général en fin de formation</li>
+                                            <li>Evaluation des compétences : Lors d'un exercice final, le candidat devra implémenter un cours déjà réalisé dans Moodle et paramétrer les inscriptions.</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -288,45 +279,14 @@
                 <div class="template">
                     <div class="programme">
                         <!--  Module 1 de formation -->
-                        <div class="card promotion__card mb-3" v-for="(mod, idx) in programme" :key="idx">
+                        <div class="card promotion__card mb-3">
                             <div class="card-header promotion__card__header" >
-                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light" >Module 4: test</h2>
+                                <h2 class="d-inline-flex formationTitle fs-5 fw-bold mb-0 text-light" >Activités d'apprentissage</h2>
                             </div>
                             <div class="card-body">
-                                <div class="">
-                                    <div><span class="fw-bold">Objectif(s) :</span> {{mod.objectifs}}</div>
-                                    <div><span class="fw-bold">Durée : </span>{{mod.dureeModuleHeures}}</div>
-                                    <div><span class="fw-bold">Modalités pédagogiques : </span>{{mod.modalitePedagogiques}}</div>
-                                </div>
-                            </div>
-                            <!-- Collapse Contenus-->
-                            <div class="affichage__card__body-2">
-                                <div class="card-header d-flex">
-                                    <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                    <div class="" data-bs-toggle="collapse" href="#collapseContenus" role="button" aria-expanded="false" aria-controls="collapseContenus">Contenus théoriques et méthodologiques</div>
-                                </div>
-                                <div id="collapseContenus" class="collapse.show">
-                                    <div class="px-5 py-3">
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Les différentes pages de Moodle (accueil, tableau de bord, cours, profil, administration)</div>
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Les fonctionnalités de base de Moodle</div>
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Ergonomie et expérience utilisateur</div>
-                                    </div>
-                                </div>                           
-                            </div>
-                            <!-- Collapse Activités d'apprentissage-->
-                            <div class="affichage__card__body-2">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="d-flex">
-                                        <img class="ico me-2" src="../assets/images/icons8-plus.svg" alt="icone plus">
-                                        <div class=""  data-bs-toggle="collapse" href="#collapseApprentissage" role="button" aria-expanded="false" aria-controls="collapseApprentissage">Activités d'apprentissage</div>
-                                    </div>
-                                </div>
-                                <div id="collapseApprentissage" class="collapse.show">
-                                    <div class="px-5 py-3">
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Tutoriel de démonstration</div>
-                                        <div><img class="iconeContenu me-2" src="../assets/images/icons8-coche.svg" alt="icone de coche">Exercices pratiques de navigation</div>
-                                    </div>
-                                </div>
+                                <ul class="">
+                                    <li v-for="(mod, idx) in modulesFormation.activitesApprentissage" :key="idx">{{modulesFormation.activitesApprentissage.nom}}</li>
+                                </ul>
                             </div>
                             <!-- Collapse Activités d'évaluation-->
                             <div class="affichage__card__body-2">
@@ -427,7 +387,7 @@ export default {
         return this.maFormation.attributes.competences;
        },
        modulesFormation () {
-        return this.maFormation.attributes.modules;
+        return this.maFormation.attributes.programme;
        },
 
 
@@ -541,7 +501,7 @@ export default {
         background: $third-color-clear;
     }
     & .iconMetier {
-        height: 1.3rem;
+        height: 1rem;
     }
     & .iconeContenu {
         height: 1rem;
@@ -566,6 +526,9 @@ export default {
 
 .promotion__card__header {
     background: $secondary-color;
+    &-2 {
+        background: $third-color-dark;
+    }
 }
 
 .ico {
