@@ -137,6 +137,9 @@ const store = createStore({
         GET_CATEGORIES(state, categories) {
             state.categories = categories;
         },
+        GET_SESSIONS(state, sessions) {
+            state.sessions = sessions;
+        },
     },
     // Les actions permettent de réaliser des actions asynchrones comme la récupération d'une API. 
     actions: {
@@ -210,6 +213,18 @@ const store = createStore({
             // Ensuite je récupère les données des catégories de formation et j'attribue aux datas du store les valeurs des données récupérées, par ordre alphabétique, en passant par la mutation correspondante. 
             .then((response) => {
                 commit('GET_CATEGORIES', response.data.data);
+            })
+            .catch((error) =>{
+                console.log(error.message);
+            })
+        },
+        getSessions( {commit} ) {
+            // Je fais un appel à l'API
+            axios
+            .get(`${store.state.urlEndpoints}/sessions?populate=formation&populate[1]=ville`)
+            // Ensuite je récupère les données des sessions et j'attribue aux datas du store les valeurs des données récupérées, en passant par la mutation correspondante. 
+            .then((response) => {
+                commit('GET_SESSIONS', response.data.data);
             })
             .catch((error) =>{
                 console.log(error.message);

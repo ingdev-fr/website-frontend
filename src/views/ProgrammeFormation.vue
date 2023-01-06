@@ -58,7 +58,7 @@
                         <div class="card-text card-body text-dark mb-3">Nos sessions sont organisées par dates et par ville: </div>
                       <div class="session card-text d-flex flex-wrap align-items-center p-2" v-for="(session, idx) in maFormation.attributes.sessions.data" :key="idx">
                             <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10 text-dark" ><span class="session-span">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{this.maFormation.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
-                            <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" data-bs-dismiss="modal" @click="showInscription(this.maFormation.attributes.code)">S'inscrire</button>
+                            <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" data-bs-dismiss="modal" @click="showInscription(session.id)">S'inscrire</button>
                         </div>
                       </div>
                       <!-- MODAL FOOTER BUTTONS-->

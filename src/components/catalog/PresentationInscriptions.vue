@@ -5,7 +5,7 @@
             <div class="row pt-lg-5">
                 <div class="col-md-8 mx-auto">
                     <h1 class="mb-5">Les inscriptions en ligne</h1>
-                    <p class="lead fs-5">Retrouvez sur cette page un exemple d'inscriptions en ligne ou vous aurez la possibilité d'inscrire une ou plusieurs personnes selon la nécessité de vous inscrire individuellement ou d'inscrire des collaborateurs de votre entreprise. 
+                    <p class="lead fs-5">Retrouvez sur cette page un exemple d'inscription en ligne ou vous aurez la possibilité de vous inscrire individuellement à une session de formation ou d'inscrire en une fois plusieurs collaborateurs de votre entreprise. 
                     </p>
                 </div>
                 <div class="col-md-4">
