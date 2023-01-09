@@ -83,6 +83,13 @@ const store = createStore({
         villes: [],
         categories: [],
         onTop: [],
+
+        // Méthodes partagées
+            // Une méthode pour convertir les dates en format français
+        dateFormated(param) {
+            let debut = new Date(param); //Je transforme ma string date venant de l'API (mon param ici) en une date 
+            return debut.toLocaleDateString("fr"); // puis je la convertis au format français. 
+        },
     },
 
     // les mutations permettent de modifier de manière synchrone les datas. Elles prennent toujours en 1er argument le state, puis occasionnellement d'autres arguments (comme la donnée à modifier). 
@@ -139,7 +146,7 @@ const store = createStore({
         },
         GET_SESSIONS(state, sessions) {
             state.sessions = sessions;
-        },
+        }
     },
     // Les actions permettent de réaliser des actions asynchrones comme la récupération d'une API. 
     actions: {
@@ -234,7 +241,6 @@ const store = createStore({
 
     // Les getters permettent de modifier ou de filtrer les données avant qu'elles ne soient mises à disposition des composants
     getters: {
-
 
     },
 

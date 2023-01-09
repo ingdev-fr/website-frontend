@@ -189,7 +189,6 @@ export default {
        dateDebutSession () {
         this.dateDebut = this.maSession.attributes.date_debut.split("-");
         return `${this.dateDebut[2]}-${this.dateDebut[1]}-${this.dateDebut[0]}`;
-
        },
        dateFinSession () {
         this.dateFin = this.maSession.attributes.date_fin.split("-");

@@ -42,7 +42,7 @@
                 </div>
                 <!-- Boutons Sessions et inscriptions-->
                 <div class="inscription col-lg-4 d-lg-flex flex-column align-items-end justify-content-end mt-4 mt-lg-0">
-                        <button class="btn button btn-primary px-4 fs-5 mt-5" data-bs-toggle="modal" data-bs-target="#sessionModal">Sessions - Inscription</button>                   
+                        <button class="btn button btn-primary px-4 fs-5" data-bs-toggle="modal" data-bs-target="#sessionModal">Sessions - Inscription</button>                   
                 </div>
                   <!-- MODAL -->
                 <div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true" data-bs-backdrop="static" >
@@ -57,7 +57,7 @@
                       <div class="modal-body">
                         <div class="card-text card-body text-dark mb-3">Nos sessions sont organisées par dates et par ville: </div>
                       <div class="session card-text d-flex flex-wrap align-items-center p-2" v-for="(session, idx) in maFormation.attributes.sessions.data" :key="idx">
-                            <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10 text-dark" ><span class="session-span">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{this.maFormation.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
+                            <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10 text-dark" ><span class="session-span">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{this.maFormation.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
                             <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" data-bs-dismiss="modal" @click="showInscription(session.id)">S'inscrire</button>
                         </div>
                       </div>
@@ -76,7 +76,7 @@
         <div class="contentTraining">
             <!-- Menu navigation programme -->
             <div class="template">
-                <ul class="nav navTraining">
+                <ul class="nav navTraining py-2 py-lg-0">
                     <li id="public" class="nav-item" :class="this.modeActive == 'public' ? 'active' : '' " @click.prevent="modePublic()">
                         <a class="nav-link py-lg-3 px-4" aria-current="page" href="#">Public</a>
                     </li>

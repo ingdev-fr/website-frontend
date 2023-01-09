@@ -71,11 +71,11 @@ export default {
 
   // FONT-SIZE REM 
   :root {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 
   .template{
-    padding: 1rem 2rem;
+    padding: 0rem 1rem !important;
   }
 } 
 

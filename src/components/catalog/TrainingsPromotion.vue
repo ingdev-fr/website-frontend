@@ -50,9 +50,9 @@
                         <div class="card-text card-body">Nos sessions sont organisées par dates et par ville.
                         </div>
                         <div class="session card-text px-2 py-2" v-for="(session, idx) in form.attributes.sessions.data" :key="idx">
-                            <div class="card-session px-2 mb-1"><span class="fw-bolder">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span> {{session.attributes.ville.data.attributes.nom}} - {{form.attributes.prix}} € HT - {{session.attributes.nombre_places}} Places disponibles
+                            <div class="card-session px-2 mb-1"><span class="fw-bolder">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span> {{session.attributes.ville.data.attributes.nom}} - {{form.attributes.prix}} € HT - {{session.attributes.nombre_places}} Places disponibles
                             </div>
-                            <button class="inscription-button btn btn-primary mb-2" @click="showInscription(form.attributes.code)">S'inscrire</button>
+                            <button class="inscription-button btn btn-primary mb-2" @click="showInscription(session.id)">S'inscrire</button>
                         </div>
                     </div>
                 </div>

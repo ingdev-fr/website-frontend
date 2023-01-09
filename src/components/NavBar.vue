@@ -201,6 +201,7 @@ export default {
   }
   & .dropdown-menu {
     background: $third-color-clear;
+    border-radius: 0;
   }
   & .dropdown-item {
     &:hover {

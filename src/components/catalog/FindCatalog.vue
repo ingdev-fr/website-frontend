@@ -3,9 +3,9 @@
     <div class="recherche p-2 rounded bg-light">
         <h2 class="recherche__title fs-4 text-center p-3 rounded">Trouver votre formation</h2>
         <!-- RECHERCHE -->
-        <div class="recherche__card px-3 rounded">
+        <div class="recherche__card px-2 rounded">
             <!-- Zone de recherche -->
-                <form class="recherche__form row p-4 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
+                <form class="recherche__form row px-2 px-md-4 py-2 py-md-4 pb-1 mb-3 rounded" name="recherche__form" role="search" v-on:submit.prevent>
                     <p class="fw-bold">Recherche par mots clés :</p>
                     <div class="search-bar d-md-flex mb-3">
                         <input class="form-control rounded me-1" type="search" placeholder="Recherche par mots clés dans le titre ou code !" aria-label="Search" v-model="this.$store.state.searchDatas.searchWords" >
@@ -15,7 +15,7 @@
                         <p class="fw-bold">Recherche par filtres :</p>
                         <div class="check  mb-4">
                             <div class="d-md-flex flex-wrap justify-content-start">
-                                <div class="form-check form-switch me-5 mb-3">
+                                <div class="form-check form-switch me-5 mb-md-3">
                                     <input class="form-check-input form-check-input-general" type="checkbox" id="form-check-cpf" v-model="this.$store.state.searchDatas.cpf">
                                     <label class="form-check-label" for="form-check-cpf">Eligible CPF
                                     </label>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="select d-flex flex-wrap my-4">
-                            <div class="me-5 selectCategorie">
+                            <div class="me-5 selectCategorie mb-3 mb-sm-0">
                                 <select id="selectCatégories" name="categorie" class="form-select" aria-label="catégorie" v-model="this.$store.state.searchDatas.selectedCategory">
                                     <option value="Catégories" selected>Catégories</option>
                                     <option :value="item.attributes.nom" v-for="(item, idx) in $store.state.categories" v-bind:key="idx">{{item.attributes.nom}}</option>
@@ -53,17 +53,17 @@
                         </div>         
                     </div>
                     <!-- Bouton de recherche -->
-                    <div class="mt-2 d-flex justify-content-between">
-                        <button class="button btn btn-recherche" @click.stop="setSearch(); highlight()">Lancer la recherche</button>
-                        <button class="button btn btn-recherche btn-recherche__all me-3" @click="seeAll()">Toutes les formations</button>
-                        <button class="button btn btn-recherche btn-recherche__reinit" @click="reinitSearch()">Réinitialiser</button>
+                    <div class="mt-2 d-flex justify-content-between flex-wrap">
+                        <button class="button btn btn-recherche mb-3 me-2" @click.stop="setSearch(); highlight()">Lancer la recherche</button>
+                        <button class="button btn btn-recherche btn-recherche__all mb-3 me-1" @click="seeAll()">Toutes les formations</button>
+                        <button class="button btn btn-recherche btn-recherche__reinit mb-3 me-1" @click="reinitSearch()">Réinitialiser</button>
 
                         
                     </div>
                 </form>
         </div>
         <!-- AFFICHAGE DES FORMATIONS -->
-        <div class="affichage p-4 mt-3 rounded">
+        <div class="affichage p-2 p-md-4 mt-3 rounded">
                     <div class="d-flex affichage__resultats">
                         <p class="fw-bold">Résultats :</p>
                     </div> 
@@ -73,7 +73,7 @@
                     </div>    
                     <div class="card affichage__card mb-3" v-for="(item, idx) in this.$store.state.searchDatas.finalResult" v-bind:key="idx">
                         <!-- CARD HEADER -->
-                        <div class="card-header header-training d-flex justify-content-between align-items-center">
+                        <div class="card-header header-training d-sm-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 <div class="cat-color me-2" :style="{backgroundColor: item.attributes.categoryFormation.data.attributes.color}"></div>
                                 <div class="">
@@ -83,7 +83,10 @@
                                 </div>
                             </div>
                             <!-- Bouton Programme de formation -->
-                            <button type="button" class="btn btn-program" @click="showProgram(item.attributes.code)">Programme</button>
+                            <div class="text-end my-2 mt-md-0">
+                                <button type="button" class="btn btn-program p-1" @click="showProgram(item.attributes.code)">Programme</button>
+                            </div>
+
                         </div>
                         <!-- CARD BODY MODALITES -->
                         <div class="card-body affichage__card__body">
@@ -123,8 +126,8 @@
                             <div :id="'collapseSessionFind'+item.id" class="collapse mb-3">
                                 <div class="card-text card-body">Nos sessions sont organisées par dates et par ville.</div>
                                 <div class="session card-text d-flex flex-wrap ps-3 pe-2 pt-2 align-items-center" v-for="(session, idx) in item.attributes.sessions.data" :key="idx">
-                                    <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10" ><span class="session-span">Du {{session.attributes.date_debut}} au {{session.attributes.date_fin}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{item.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
-                                    <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2"  @click="showInscription(item.attributes.code)">S'inscrire</button>
+                                    <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10" ><span class="session-span">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{item.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
+                                    <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2"  @click="showInscription(session.id)">S'inscrire</button>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +144,8 @@ export default {
 
     data () {
         return {
-
+            dateDebut: '',
+            dateFin: '',
         }
     },
 
@@ -155,7 +159,8 @@ export default {
         },
         showInscription: function(param) {
             this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
-        },   
+        }, 
+
         reinitSearch: function () {
             // Je réinitialise les filtres
                 // le filtre de recherche par mots clés
@@ -173,10 +178,12 @@ export default {
             this.$store.state.searchDatas.selectedVilles = 'Villes';
             this.$store.state.searchDatas.finalResult = [];
         },  
+        // Pour voir toutes les formations
         seeAll() {
             this.reinitSearch;
             this.$store.state.searchDatas.finalResult = this.$store.state.formations;
         },
+        // Méthode pour la recherche et les filtres
         setSearch: function() {
             let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je normalize la requête string 
             let searchWordsOptimArray = searchWordsOptim.split(' ');
@@ -286,7 +293,7 @@ export default {
                 matchContents.push(...codes);
                 console.log(matchContents);
                 for(let i=0; i<matchContents.length; i++){
-                    matchContents[i].innerHTML = matchContents[i].innerText.replace(pattern, match => `<span class="bg-warning rounded p-1">${match}</span>`);
+                    matchContents[i].innerHTML = matchContents[i].innerText.replace(pattern, match => `<span class="bg-warning rounded p-md-1">${match}</span>`);
                 }
 
             }
@@ -347,7 +354,6 @@ export default {
         background: $third-color;
         color: white;
         width: 130px;
-        height: 45px;
         box-shadow: 5px 4px 3px rgba($text-color, 0.25);
         &:hover {
             background: $text-color;
