@@ -110,6 +110,13 @@
       }
     },
 
+    created: function() {
+    // SEO
+    document.title = "La page de login site web Ingdev";
+    document.querySelector('meta[name="description"]').setAttribute('content', '');
+    document.querySelector('meta[name="robots"]').setAttribute('content', 'noindex');
+    },
+
     mounted: function () {
     this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page
   }

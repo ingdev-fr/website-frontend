@@ -58,7 +58,6 @@ export default {
     },
     resizeWindow: function () {
       this.largeur = window.innerWidth;
-      console.log(this.largeur);
       if(this.largeur < 992) {
         this.modeButton = 'true';
         this.visible = 'off'
@@ -75,8 +74,13 @@ export default {
     this.$store.dispatch('getVilles');
     this.$store.dispatch('getCategories');
     this.$store.dispatch('getSessions');
-    this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+    this.$store.dispatch('getFormations'); 
+    // SEO
+    document.title = "Modèle ou exemple de catalogue des formations";
+    document.querySelector('meta[name="description"]').setAttribute('content', "Un exemple ou modèle de catalogue des formations permettant aux utilisateurs de rechercher par mots clés, par filtres, par catégories, des formations. Les utilisateurs peuvent également s'inscrire en ligne directement à la formation souhaitée.");
+    document.querySelector('meta[name="robots"]').setAttribute('content', 'index');
     },
+    
 
   mounted () {
     this.changeActiveClass(); //j'appelle la mutation qui me permet d'attribuer la classe "active" à la page

@@ -8,8 +8,8 @@ import VueAxios from 'vue-axios'
 // Tailwind
 
 // Bootstrap
-import "bootstrap/dist/css/bootstrap.css"
-import "bootstrap"
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap";
 
 
 // Fontawesome
@@ -21,7 +21,7 @@ import "bootstrap"
     import { faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 
     /* add icons to the library */
-    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress, faMicrochip)
+    library.add(faHouseUser, faStore, faLightbulb, faRightToBracket, faChevronRight, faComputer, faBookOpen, faCertificate, faBarsProgress, faMicrochip);
 
 
 createApp(App)

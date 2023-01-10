@@ -188,9 +188,6 @@ export default {
             let searchWordsOptim = this.$store.state.searchDatas.searchWords.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""); // je normalize la requête string 
             let searchWordsOptimArray = searchWordsOptim.split(' ');
             let regexSearch = new RegExp(searchWordsOptimArray.join('|'), 'g');
-            console.log(regexSearch);
-            console.log(this.$store.state.searchDatas.searchWords);
-            console.log(searchWordsOptim);
             if(searchWordsOptim != ''){
                 this.$store.state.searchDatas.resultWords = this.$store.state.formations // j'actualise le tableau des résultats créé dans le store
                     .filter(function(element) { 
@@ -281,6 +278,7 @@ export default {
         async highlight() {
             if(this.$store.state.searchDatas.searchWords.trim() != ''){
                 const result = await this.setSearch();
+                console.log(result);
                 let textToSearch = this.$store.state.searchDatas.searchWords.trim().split(' ');
                 console.log(textToSearch);
                 let pattern = new RegExp(`${textToSearch.join('|')}`, "gi");

@@ -12,9 +12,10 @@ import HeaderSection from '@/components/homepage/HeaderSection.vue'
 import ProcessDetails from '@/components/homepage/ProcessDetails.vue'
 import AddedValues from '@/components/homepage/AddedValues.vue'
 
+
+
 export default {
   name: 'HomeView',
-
   data() {
     return {
 
@@ -40,7 +41,11 @@ export default {
     this.$store.dispatch('getHeader');
     this.$store.dispatch('getHomepageHero');
     this.$store.dispatch('getHomepageAbout');
-    }, // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+    // SEO 
+    document.title = "Accueil du site web Ingdev";
+    document.querySelector('meta[name="description"]').setAttribute('content', "Le site web de la société Ingdev, spécialiste du développment web, de l'ingénierie de formation et du e-learning. Nous accompagnons les organismes de formation dans la mise en place de leur processus de gestion des formations.");
+    document.querySelector('meta[name="robots"]').setAttribute('content', 'index');
+    }, 
 
   mounted: function () {
     this.changeActiveClass(); //j'appelle la méthode qui me permet d'attribuer la classe "active" à la page

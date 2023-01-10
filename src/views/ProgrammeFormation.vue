@@ -349,7 +349,6 @@ export default {
         // je récupère la formation pour laquelle je vais afficher les informations en récupérant le paramètre d'url qui est son code. 
        maFormation () {
         const code = this.$route.params.code;
-        console.log(code);
         return this.$store.state.formations.find(training => training.attributes.code == code);
        },
        // J'attribue les différentes valeurs aux données que je vais afficher dans le html
@@ -419,6 +418,10 @@ export default {
 
     created: function () {
         this.$store.dispatch('getFormations'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+        // SEO
+        document.title = "Exemple de programme de formation INGDEV";
+        document.querySelector('meta[name="description"]').setAttribute('content', '');
+        document.querySelector('meta[name="robots"]').setAttribute('content', 'noindex');
     },
 
     mounted: function () {

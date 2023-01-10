@@ -276,8 +276,14 @@ export default {
 
     components: {
         NavBar,
-    }
+    },
 
+    created: function () {
+    // SEO
+    document.title = "La page 404 Ingdev";
+    document.querySelector('meta[name="description"]').setAttribute('content', '');
+    document.querySelector('meta[name="robots"]').setAttribute('content', 'noindex');
+    }
 }
 </script>
 

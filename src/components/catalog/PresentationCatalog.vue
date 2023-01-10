@@ -5,7 +5,7 @@
             <div class="row pt-lg-5">
                 <div class="col-md-8 mx-auto">
                     <h1 class="text-center mb-5">Nos formations</h1>
-                    <p class="lead fs-5">Retrouvez dans notre exemple de catalogue les informations essentielles permettant à vos clients de sélectionner la formation adaptée à leurs besoins : Recherche par mots clés dans le titre, par catégorie, par code, cpf ... Retrouvez, pour chaque formation, son programme détaillé avec les modalités pédagogiques, le tarif et le nombre de places restantes, la possibilité de s'inscrire en ligne, individuellement ou par entreprise. 
+                    <p class="lead fs-5">Retrouvez dans notre exemple de catalogue les informations essentielles permettant à vos clients de sélectionner la formation adaptée à leurs besoins : Recherche par mots clés dans le titre, par catégorie, par code, cpf ... Retrouvez, pour chaque formation, son programme détaillé avec les modalités pédagogiques, le tarif et le nombre de places restantes, la possibilité de s'inscrire en ligne individuellement ou par entreprise. 
                     </p>
                 </div>
                 <div class="col-md-4">

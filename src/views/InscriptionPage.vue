@@ -172,8 +172,6 @@ export default {
         // je récupère la formation pour laquelle je vais afficher les informations en récupérant le paramètre d'url qui est son code. 
        maSession () {
         const id = this.$route.params.code;
-        console.log(id);
-        console.log(this.$store.state.sessions);
         return this.$store.state.sessions.find(session => session.id == id);
        },
        // J'attribue les différentes valeurs aux données que je vais afficher dans le html
@@ -187,12 +185,12 @@ export default {
         return this.maSession.attributes.formation.data.attributes.dureeEnHeures;
        },
        dateDebutSession () {
-        this.dateDebut = this.maSession.attributes.date_debut.split("-");
-        return `${this.dateDebut[2]}-${this.dateDebut[1]}-${this.dateDebut[0]}`;
+        this.splitDateDebut(); // J'utilise une méthode car il n'est pas recommandé d'utiliser une variable dans une computed (ESlint).
+        return `${this.date[2]}-${this.date[1]}-${this.date[0]}`;
        },
        dateFinSession () {
-        this.dateFin = this.maSession.attributes.date_fin.split("-");
-        return `${this.dateFin[2]}-${this.dateFin[1]}-${this.dateFin[0]}`;
+        this.splitDateFin(); // J'utilise une méthode car il n'est pas recommandé d'utiliser une variable dans une computed (ESlint). 
+        return `${this.date[2]}-${this.date[1]}-${this.date[0]}`;
        },
        joursSession () {
         return this.maSession.attributes.jours_formation;
@@ -213,10 +211,20 @@ export default {
         modeEntreprise: function() {
         this.modeVisible = 'entreprise';
         },
+        splitDateDebut() {
+            this.date = this.maSession.attributes.date_debut.split("-");
+        },
+        splitDateFin() {
+            this.date = this.maSession.attributes.date_fin.split("-");
+        }
     },
 
     created: function () {
         this.$store.dispatch('getSessions'); // on exécute la fonction à la création de la page : connexion à l'API puis réécriture des datas du store en fonction de la valeur des données récupérées de l'API du backend. 
+        // SEO
+        document.title = "La page des inscriptions aux formations INGDEV";
+        document.querySelector('meta[name="description"]').setAttribute('content', '');
+        document.querySelector('meta[name="robots"]').setAttribute('content', 'noindex');
     },
 
 

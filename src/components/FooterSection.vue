@@ -70,7 +70,7 @@
             <!-- CONCEPTION -->
             <h3 class="fw-bold mb-2 fs-6">Conception :</h3>
             <div class="mb-2">Site web conçu "from scratch" par <img class="logo-v" src="../assets/images/logo-v.svg"> Ingdev</div>
-            <div class="mb-2">Copyright Ingdev @2022</div>
+            <div class="mb-2">Copyright Ingdev @2023</div>
           </div>
         </div>
       </div>
