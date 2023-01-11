@@ -35,7 +35,9 @@
                     <div :id="'collapsePresentationPromotion'+form.id" class="collapse ">
                         <p class="card-text card-body mb-0">{{form.attributes.presentationRapide}}</p>
                         <!-- Bouton Programme de formation -->
-                        <button type="button" class="btn btn-program mt-1 ms-3 mb-3"  @click="showProgram(form.attributes.code)">Programme</button>
+                        <router-link :to="{name: 'programme', params: {code : form.attributes.code}}">
+                            <button type="button" class="btn btn-program mt-1 ms-3 mb-3">Programme</button>
+                        </router-link>
                     </div>                           
                 </div>
                 <!-- CARD BODY SESSIONS COLLAPSE-->
@@ -49,10 +51,12 @@
                     <div :id="`collapseSessionsPromotion`+form.id" class="collapse">
                         <div class="card-text card-body">Nos sessions sont organisées par dates et par ville.
                         </div>
-                        <div class="session card-text px-2 py-2" v-for="(session, idx) in form.attributes.sessions.data" :key="idx">
-                            <div class="card-session px-2 mb-1"><span class="fw-bolder">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span> {{session.attributes.ville.data.attributes.nom}} - {{form.attributes.prix}} € HT - {{session.attributes.nombre_places}} Places disponibles
+                        <div class="session card-text d-flex flex-wrap px-2 py-2" v-for="(session, idx) in form.attributes.sessions.data" :key="idx">
+                            <div class="card-session px-2 mb-1 col-9 col-md-10 col-lg-12"><span class="fw-bolder">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span> {{session.attributes.ville.data.attributes.nom}} - {{form.attributes.prix}} € HT - {{session.attributes.nombre_places}} Places disponibles
                             </div>
-                            <button class="inscription-button btn btn-primary mb-2" @click="showInscription(session.id)">S'inscrire</button>
+                            <router-link :to="{name: 'inscription', params: {code : session.id}}" class="col-3 col-md-2 col-lg-12 text-end text-lg-start">
+                                <button class="inscription-button btn btn-primary mb-2" >S'inscrire</button>
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -82,12 +86,6 @@ export default {
     },
 
     methods: {
-        showProgram: function(param) {
-            this.$router.push({name: 'programme', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
-        },
-        showInscription: function(param) {
-            this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
-        },
         show (arg) {
             this.prom = arg;
         }

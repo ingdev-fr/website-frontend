@@ -13,20 +13,20 @@
             <ul class="navbar-nav">
               <!-- ACCUEIL -->
               <li class="nav-item mx-2" id="nav-item-1" :class="this.$store.state.activeClass == 'accueil' ? 'active' : '' ">
-                <router-link class="nav-link" to="/"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1" />Accueil</router-link>
+                <router-link class="nav-link" :to="{ name: 'home'}"><font-awesome-icon icon="fa-solid fa-house-user" class="nav-link__icon d-block mx-auto mb-1" />Accueil</router-link>
               </li>
               <!-- SHOWROOM -->
               <li class="nav-item dropdown mx-2" id="nav-item-2" :class="this.$store.state.activeClass == 'showroom' ? 'active' : '' ">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font-awesome-icon icon="fa-solid fa-store" class="nav-link__icon d-block mx-auto mb-1"/>Showroom</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <router-link class="dropdown-item" to="/catalogue">Catalogue formations</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'catalogue'}">Catalogue formations</router-link>
                   <li><a class="dropdown-item" href="https://www.moodle4.ingdev.fr/" target="_blank">LMS Moodle</a></li>
                   <li><a class="dropdown-item" href="#">Tableau de bord<span class="text-success ms-2">/ A venir</span></a></li>
                 </ul>
               </li>
               <!-- CONNEXION -->
               <li class="nav-item mx-2 mx-lg-5" id="nav-item-3" :class="this.$store.state.activeClass == 'connexion' ? 'active' : '' ">
-                <router-link class="nav-link connexion-link" to="/login"><font-awesome-icon icon="fa-solid fa-right-to-bracket" class="nav-link__icon d-block mx-auto mb-1"/>Connexion</router-link>
+                <router-link class="nav-link connexion-link" :to="{ name: 'login'}"><font-awesome-icon icon="fa-solid fa-right-to-bracket" class="nav-link__icon d-block mx-auto mb-1"/>Connexion</router-link>
               </li>
               <!-- CONTACT -->
               <li class="nav-item  d-flex align-items-center justify-content-center justify-content-lg-center">

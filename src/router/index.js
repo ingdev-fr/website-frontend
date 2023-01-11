@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import MyLogin from '../views/MyLogin.vue'
-import Catalogue from '../views/CataloguePage.vue'
-import ProgrammeFormation from '../views/ProgrammeFormation.vue'
-import InscriptionPage from '../views/InscriptionPage.vue'
-import NotFoundPage from '../views/NotFoundPage.vue'
 
 // Déclaration des routes
 const routes = [
@@ -16,27 +11,27 @@ const routes = [
   {
     path: '/:pathMatch(.*)',
     name: 'notFound',
-    component: NotFoundPage,
+    component: () => import('../views/NotFoundPage.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: MyLogin,
+    component: () => import('../views/MyLogin.vue')
   },
   {
     path: '/catalogue',
     name: 'catalogue',
-    component: Catalogue,
+    component: () => import('../views/CataloguePage.vue')
   },
   {
     path: '/formation/:code',
     name: 'programme',
-    component: ProgrammeFormation,
+    component: () => import('../views/ProgrammeFormation.vue')
   },
   {
     path: '/inscription/:code',
     name: 'inscription',
-    component: InscriptionPage,
+    component: () => import('../views/InscriptionPage.vue')
   },
 ]
 

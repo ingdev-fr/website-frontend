@@ -46,7 +46,7 @@
                 </div>
                   <!-- MODAL -->
                 <div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true" data-bs-backdrop="static" >
-                  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                  <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                       <!-- MODAL HEADER -->
                       <div class="modal-header" id="modal-header">
@@ -57,8 +57,10 @@
                       <div class="modal-body">
                         <div class="card-text card-body text-dark mb-3">Nos sessions sont organisées par dates et par ville: </div>
                       <div class="session card-text d-flex flex-wrap align-items-center p-2" v-for="(session, idx) in maFormation.attributes.sessions.data" :key="idx">
-                            <div class="card-session px-2 mb-1 rounded col-8 col-sd-9 col-lg-10 text-dark" ><span class="session-span">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{this.maFormation.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
-                            <button class="inscription-button col-4 col-sd-3 col-lg-2 btn btn-primary mb-2" data-bs-dismiss="modal" @click="showInscription(session.id)">S'inscrire</button>
+                            <div class="card-session px-2 mb-1 rounded col-9 col-lg-10 text-dark" ><span class="session-span">Du {{this.$store.state.dateFormated(session.attributes.date_debut)}} au {{this.$store.state.dateFormated(session.attributes.date_fin)}}</span>  - {{session.attributes.ville.data.attributes.nom}} - {{this.maFormation.attributes.prix}} € HT - {{session.attributes.nombre_places}} places disponibles</div>
+                            <router-link :to="{name: 'inscription', params: {code : session.id}}" class="col-3  col-lg-2 text-end">
+                                <button class="inscription-button btn btn-primary mb-2" data-bs-dismiss="modal">S'inscrire</button>
+                            </router-link>
                         </div>
                       </div>
                       <!-- MODAL FOOTER BUTTONS-->
@@ -410,10 +412,6 @@ export default {
             this.$store.commit('CHANGE_ACTIVECLASS');
             this.$store.state.activeClass = "showroom";
             },
-        showInscription: function(param) {
-            this.$router.push({name: 'inscription', params: {code: `${param}`}}); // En 1er paramètre, je renvoie vers la route définie dans l'index.js de Vrouter qui a pour name : programme (et qui représente mon composant spécifique à l'affichage de ma fiche formation). En 2ème paramètre, j'attribue une valeur à ma propriété "name" définie comme paramètre de ma route dans index.js et je lui attribue une valeur qui est le paramètre de ma fonction. 
-        },
-
     },
 
     created: function () {
