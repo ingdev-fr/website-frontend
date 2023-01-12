@@ -9,11 +9,6 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '*',
-    name: 'notFound',
-    component: () => import('../views/NotFoundPage.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('../views/MyLogin.vue')
@@ -38,7 +33,11 @@ const routes = [
 // Je déclare mon router et ses paramètres
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes : [
+    { path: '*', 
+      component: () => import('../views/NotFoundPage.vue')
+    }
+  ],
   
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
