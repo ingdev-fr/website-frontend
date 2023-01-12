@@ -17,7 +17,7 @@
                     <div class="modalites">
                         <div class="d-md-flex flex-wrap my-3">
                             <div class="duree d-flex align-items-center me-3 me-md-5">
-                                <img class="headerTraining__icon" src="../assets/images/icons8-objet-avec-durée.svg" alt="icone de durée">
+                                <img class="headerTraining__icon" src="../assets/images/icons8-objet-avec-duree.svg" alt="icone de durée">
                                 <div class="ms-2">{{dureeEnHeures}} heures</div>
                             </div>
                             <div class="duree d-flex align-items-center me-3 me-md-5 flex-wrap">
